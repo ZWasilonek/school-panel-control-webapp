@@ -1,0 +1,107 @@
+/*------------------------------*/
+/*---- Main style ----*/
+/*------------------------------*/
+:root {
+    font-size: 16px;
+}
+
+/** {*/
+/*    margin: 0;*/
+/*    padding: 0;*/
+/*    box-sizing: border-box;*/
+/*}*/
+
+html {
+    min-height: 100%;
+}
+
+/*------------------------------*/
+/*---- Main table - solutions ----*/
+/*------------------------------*/
+table {
+    margin: 300px auto;
+}
+
+table {
+    margin: 150px auto;
+    border: 1px solid #1C6EA4;
+    background-color: #EEEEEE;
+    width: 100%;
+    text-align: left;
+    border-collapse: collapse;
+}
+table td, table.solutionTable th {
+    border: 1px solid #AAAAAA;
+    padding: 3px 2px;
+}
+
+table tr:nth-child(even) {
+    background: #D0E4F5;
+}
+
+table thead {
+    background: #1C6EA4;
+    background: -moz-linear-gradient(top, #5592bb 0%, #327cad 66%, #1C6EA4 100%);
+    background: -webkit-linear-gradient(top, #5592bb 0%, #327cad 66%, #1C6EA4 100%);
+    background: linear-gradient(to bottom, #5592bb 0%, #327cad 66%, #1C6EA4 100%);
+    border-bottom: 2px solid #444444;
+}
+
+table thead th {
+    font-size: 15px;
+    font-weight: bold;
+    color: #FFFFFF;
+    border-left: 2px solid #D0E4F5;
+}
+table thead th:first-child {
+    border-left: none;
+}
+
+/*------------------------------*/
+/*---- Main navigation ----*/
+/*------------------------------*/
+
+ul.nav {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+}
+
+ul.nav li {
+    float: left;
+}
+
+ul.nav li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+ul.nav li a:hover:not(.active) {
+    background-color: #111;
+}
+
+.active {
+    background-color: #4CAF50;
+}
+
+/*!*TABLE*!*/
+/*table {*/
+/*    border: 1px solid black;*/
+/*    border-collapse: collapse;*/
+/*    width: 100%;*/
+/*}*/
+
+/*td, th {*/
+/*    background-color: black;*/
+/*    text-align: left;*/
+/*    padding: 8px;*/
+/*}*/
+
+/*tr:nth-child(even) {*/
+/*    background-color: black;*/
+/*}*/
