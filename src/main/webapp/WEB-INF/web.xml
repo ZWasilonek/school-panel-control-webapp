@@ -19,21 +19,3 @@
     </servlet-mapping>
 
 </web-app>
-
-<!--Marcin Cieślak  [11:54 AM]-->
-<!--Spróbuj to dodać do web.xml-->
-<!--Problem jest taki, że HomeServlet wyłapuje wszystko, co nie jest zmapowane.
- Więc jak wołasz css/style.css, to zgłasza się HomeServet. Można zmienić mapowanie w HomeServlet na mniej ogólne,
- ale przecież chcemy taki ogólny, powitalny servet.-->
-<!--Tym kodem wymuszamy na serwerze, żeby domyślny, "wbudowany" servlet obsługiwał te pliki statyczne.
- Jak dodamy takie mapowanie, to ono bardziej pasuje do style.css niż bardzo ogólne mapowanie HomeServet
-  i dostaje priorytet.-->
-<!--Jak wejdzie Spring MVC to będziemy to konfigurować inaczej, odrobinę łatwiej.-->
-<!--<servlet-mapping>-->
-<!--<servlet-name>default</servlet-name>-->
-<!--<url-pattern>*.js</url-pattern>-->
-<!--<url-pattern>*.css</url-pattern>-->
-<!--<url-pattern>*.png</url-pattern>-->
-<!--<url-pattern>*.jpg</url-pattern>-->
-<!--<url-pattern>*.gif</url-pattern>-->
-<!--</servlet-mapping>-->

@@ -1,6 +1,7 @@
 package pl.codeschool.dao;
 
 import pl.codeschool.model.Solution;
+import pl.codeschool.util.DBUtil;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

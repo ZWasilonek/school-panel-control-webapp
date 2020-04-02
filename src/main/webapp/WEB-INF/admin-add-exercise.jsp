@@ -9,7 +9,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Admin add exercise</title>
-    <link href="<c:url value="/css/style.css"/>" rel="stylesheet" type="text/css">
+    <link href='<c:url value="/css/style.css"/>' rel="stylesheet" type="text/css">
 </head>
 
 <body>

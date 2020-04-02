@@ -1,4 +1,4 @@
-package pl.codeschool.dao;
+package pl.codeschool.util;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
