@@ -70,6 +70,17 @@ a:hover {
     margin-bottom: 3em;
 }
 
+
+/*EXERCISE*/
+.addButton {
+    margin-top: 1em;
+    padding: 5px;
+}
+
+.addButton:hover {
+    background-color: #1C6EA4;
+    color: white;
+}
 /** {*/
 /*    margin: 0;*/
 /*    padding: 0;*/

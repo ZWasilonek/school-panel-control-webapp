@@ -16,25 +16,28 @@
 
     <%@ include file="/WEB-INF/fragment/navbar.jsp" %>
 
-    <table>
-        <thead>
-        <tr>
-            <th>Exercise name</th>
-            <th>Actions</th>
-        </tr>
-        </thead>
-        <c:forEach items="${exercises}" var="exercise">
+    <div class="container-group">
+        <table>
+            <thead>
             <tr>
-                <td><c:out value="${exercise.title}"/></td>
-                <td>
-                    <a href="${contextPath}/adminEditExercise?exerciseId=${exercise.id}">Edit</a>
-                    <a href="${contextPath}/adminDeleteExercise?exerciseId=${exercise.id}">Delete</a>
-                </td>
+                <th>Exercise name</th>
+                <th>Actions</th>
             </tr>
-        </c:forEach>
-    </table>
+            </thead>
+            <c:forEach items="${exercises}" var="exercise">
+                <tr>
+                    <td><c:out value="${exercise.title}"/></td>
+                    <td>
+                        <a href="${contextPath}/adminEditExercise?exerciseId=${exercise.id}">Edit</a>
+                        <a href="${contextPath}/adminDeleteExercise?exerciseId=${exercise.id}">Delete</a>
+                    </td>
+                </tr>
+            </c:forEach>
+        </table>
 
-    <a href="${contextPath}/adminAddExercise">Add new</a><br>
+        <button class="addButton"><a class="addButton" href="${contextPath}/adminAddExercise">Add new</a></button>
+
+    </div>
 
     <%@ include file="/WEB-INF/fragment/footer.jsp" %>
 
