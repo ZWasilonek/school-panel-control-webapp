@@ -14,8 +14,10 @@
 <body>
 <%@ include file="/WEB-INF/fragment/navbar.jsp" %>
 
-    <h1><c:out value="${solution.exercise.title}"/> solution details:</h1>
-    <p><c:out value="${solution.description}"/></p>
+    <div class="solution">
+        <h1><c:out value="${solution.exercise.title}"/> solution details:</h1>
+        <p><c:out value="${solution.description}"/></p>
+    </div>
 
 </body>
 </html>

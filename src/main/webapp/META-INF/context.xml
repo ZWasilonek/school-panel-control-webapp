@@ -12,5 +12,3 @@
               maxIdle="30"
               maxWaitMillis="10000" />
 </Context>
-
-        <!--              connectionProperties="?useSSL=false;useUnicode=true;useJDBCCompliantTimezoneShift=true;useLegacyDatetimeCode=false;serverTimezone=UTC;"-->
