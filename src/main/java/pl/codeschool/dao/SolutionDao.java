@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,7 +21,7 @@ public class SolutionDao {
     private static final String READ_USER_SOLUTION_QUERY =
         "SELECT * FROM solutions WHERE id = ? user_id = ?";
     private static final String READ_SOLUTION_QUERY =
-            "SELECT * FROM solutions WHERE id = ?;";
+        "SELECT * FROM solutions WHERE id = ?;";
     private static final String UPDATE_SOLUTION_QUERY =
         "UPDATE solutions SET updated = ?, description = ? where id = ?";
     private static final String DELETE_SOLUTION_QUERY =

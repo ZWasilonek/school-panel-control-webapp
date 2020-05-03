@@ -1,9 +1,6 @@
 package pl.codeschool.controller;
 
-import pl.codeschool.dao.GroupDao;
-import pl.codeschool.dao.SolutionDao;
 import pl.codeschool.dao.UserDao;
-import pl.codeschool.model.Solution;
 import pl.codeschool.model.User;
 
 import javax.servlet.ServletException;

@@ -1,8 +1,10 @@
 package pl.codeschool.model;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Solution {
+
     private int id;
     private LocalDateTime created;
     private LocalDateTime updated;
@@ -26,20 +28,26 @@ public class Solution {
         this.id = id;
     }
 
-    public LocalDateTime getCreated() {
-        return created;
+    public String getCreated() {
+        return formatTime(created);
     }
 
     public void setCreated(LocalDateTime created) {
         this.created = created;
     }
 
-    public LocalDateTime getUpdated() {
-        return updated;
+    public String getUpdated() {
+        return formatTime(updated);
     }
 
     public void setUpdated(LocalDateTime updated) {
         this.updated = updated;
+    }
+
+    private String formatTime(LocalDateTime dateTime) {
+        String date = (DateTimeFormatter.ISO_DATE).format(dateTime);
+        String time = (DateTimeFormatter.ISO_LOCAL_TIME).format(dateTime);
+        return date + " " + time;
     }
 
     public String getDescription() {
