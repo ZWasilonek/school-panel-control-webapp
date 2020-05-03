@@ -13,21 +13,24 @@
 
 <body>
 
-<body>
-<%@ include file="/WEB-INF/fragment/navbar.jsp" %>
+    <%@ include file="/WEB-INF/fragment/navbar.jsp" %>
 
-    <h1><c:out value="${user.userName}"/> user details:</h1>
-    <p>Email: <c:out value="${user.email}"/></p>
-    <p>Group: <c:out value="${user.group.name}"/></p>
-    <p><strong>Added tasks solutions:</strong></p>
+    <div class="container-user">
+
+    <div class="user-details-content">
+        <h1><c:out value="${user.userName}"/> user details:</h1>
+        <p>Email: <c:out value="${user.email}"/></p>
+        <p>Group: <c:out value="${user.group.name}"/></p>
+        <p><strong>Added tasks solutions:</strong></p>
+    </div>
 
     <table>
         <thead>
-        <tr>
-            <th>Exercise name</th>
-            <th>Date</th>
-            <th>Actions</th>
-        </tr>
+            <tr>
+                <th>Exercise name</th>
+                <th>Date</th>
+                <th>Actions</th>
+            </tr>
         </thead>
         <c:forEach items="${userSolutions}" var="solution">
             <tr>
@@ -39,6 +42,7 @@
                 </td>
             </tr>
         </c:forEach>
-    </table>
+        </table>
+    </div>
 </body>
 </html>

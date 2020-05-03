@@ -44,13 +44,30 @@
     padding: 1em;
 }
 
-.container-group a {
+a {
     text-decoration: none;
     color: black;
 }
 
-.container-group a:hover {
+a:hover {
     color: #1C6EA4;
+}
+
+
+/*USER*/
+.container-user {
+    margin: 4em auto;
+    width: 40%;
+}
+
+.user-details-content * {
+    text-align: left;
+    margin: 10px 0 10px 0;
+    padding: 0;
+}
+
+.user-details-content {
+    margin-bottom: 3em;
 }
 
 /** {*/
