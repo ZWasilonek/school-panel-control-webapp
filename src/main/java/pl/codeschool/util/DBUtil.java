@@ -5,11 +5,15 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 
 public class DBUtil {
     private static DataSource dataSource;
+
+//    private static final Logger LOGGER = LoggerFactory.getLogger(DBUtil.class);
 
     public static Connection getConnection() throws SQLException {
         return getInstance().getConnection();
@@ -20,7 +24,7 @@ public class DBUtil {
             try {
                 Context initContext = new InitialContext();
                 Context envContext = (Context) initContext.lookup("java:/comp/env");
-                dataSource = (DataSource) envContext.lookup("jdbc/school");
+                dataSource = (DataSource) envContext.lookup("jdbc/codeschool");
             } catch (NamingException e) {
                 e.printStackTrace();
             }

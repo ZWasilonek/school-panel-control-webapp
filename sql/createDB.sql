@@ -21,7 +21,7 @@ CREATE TABLE users(
 );
 
 INSERT INTO users (username, email, user_group_id) VALUES
-('mcieslak', 'marcin.cieslak@coderslab.pl', 1),
+('zjanicka', 'zosia.janicka@coderslab.pl', 1),
 ('jkowalski', 'jan.kowalski@coderslab.pl', 1),
 ('anowak', 'anna.nowak@coderslab.pl', 2);
 
@@ -60,4 +60,3 @@ SELECT * FROM users;
 SELECT * FROM users_groups;
 SELECT * FROM exercises;
 SELECT * FROM users u join users_groups ug on u.user_group_id = ug.id where ug.id = ?
-

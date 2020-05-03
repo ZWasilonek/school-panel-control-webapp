@@ -17,27 +17,30 @@
 
 <%@ include file="/WEB-INF/fragment/navbar.jsp" %>
 
-<table>
-    <thead>
-    <tr>
-        <th>Exercise name</th>
-        <th>Solution author</th>
-        <th>Date</th>
-        <th>Actions</th>
-    </tr>
-    </thead>
-    <c:forEach items="${solutions}" var="solution">
+<div class="container">
+    <table>
+        <thead>
         <tr>
-<%--            <td>${solution.updated}</td>--%>
-            <td><c:out value="${solution.exercise.title}"/></td>
-            <td><c:out value="${solution.user.userName}"/></td>
-            <td><c:out value="${solution.created}" /></td>
-            <td>
-                <a href="${contextPath}/infoSolution?solutionId=${solution.id}">Details</a>
-            </td>
+            <th>Exercise name</th>
+            <th>Solution author</th>
+            <th>Date</th>
+            <th>Actions</th>
         </tr>
-    </c:forEach>
+        </thead>
+        <c:forEach items="${solutions}" var="solution">
+            <tr>
+                    <%--            <td>${solution.updated}</td>--%>
+                <td><c:out value="${solution.exercise.title}"/></td>
+                <td><c:out value="${solution.user.userName}"/></td>
+                <td><c:out value="${solution.created}"/></td>
+                <td>
+                    <a href="${contextPath}/infoSolution?solutionId=${solution.id}">Details</a>
+                </td>
+            </tr>
+        </c:forEach>
     </table>
-    <%@ include file="/WEB-INF/fragment/footer.jsp" %>
+</div>
+
+<%@ include file="/WEB-INF/fragment/footer.jsp" %>
 </body>
 </html>
