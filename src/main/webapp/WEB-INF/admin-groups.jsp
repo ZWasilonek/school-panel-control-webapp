@@ -16,31 +16,33 @@
 
     <%@ include file="/WEB-INF/fragment/navbar.jsp" %>
 
-    <h1>Groups</h1>
+    <div class="container">
+        <h1>Groups</h1>
 
-    <table>
-        <thead>
-        <tr>
-            <th>Group name</th>
-            <th>Actions</th>
-        </tr>
-        </thead>
-        <c:forEach items="${groups}" var="group">
+        <table>
+            <thead>
             <tr>
-                <td>
-                    <c:out value="${group.name}"/>
-                </td>
-                <td>
-                    <a href="${contextPath}/adminEditGroup?groupId=${group.id}">Edit</a>
-                    <a href="${contextPath}/adminDeleteGroup?groupId=${group.id}">Delete</a>
-                </td>
+                <th>Group name</th>
+                <th>Actions</th>
             </tr>
-        </c:forEach>
-    </table>
+            </thead>
+            <c:forEach items="${groups}" var="group">
+                <tr>
+                    <td>
+                        <c:out value="${group.name}"/>
+                    </td>
+                    <td>
+                        <a href="${contextPath}/adminEditGroup?groupId=${group.id}">Edit</a>
+                        <a href="${contextPath}/adminDeleteGroup?groupId=${group.id}">Delete</a>
+                    </td>
+                </tr>
+            </c:forEach>
+        </table>
+    </div>
 
     <a href="${contextPath}/adminAddGroup">Add new</a>
 
-    <%--    //GRZESIEK???--%>
+<%--    FIX IT--%>
     <c:if test="${not empty isEmpty and !isEmpty}">
         <p>You can delete only empty group</p>
     </c:if>
