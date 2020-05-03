@@ -26,7 +26,11 @@
             </thead>
             <c:forEach items="${exercises}" var="exercise">
                 <tr>
-                    <td><c:out value="${exercise.title}"/></td>
+                    <td>
+                        <a href="${contextPath}/infoSolutions?exerciseId=${exercise.id}">
+                            <c:out value="${exercise.title}"/>
+                        </a>
+                    </td>
                     <td>
                         <a href="${contextPath}/adminEditExercise?exerciseId=${exercise.id}">Edit</a>
                         <a href="${contextPath}/adminDeleteExercise?exerciseId=${exercise.id}">Delete</a>
