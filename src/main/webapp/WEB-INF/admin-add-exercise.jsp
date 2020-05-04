@@ -16,13 +16,19 @@
 
     <%@ include file="/WEB-INF/fragment/navbar.jsp" %>
 
-    <h1>Add Exercise</h1>
-
-    <form action="/adminAddExercise" method="post">
-        Exercise name <input type="text" name="title"></br>
-        Exercise description <input type="text" name="description"></br>
-        <input type="submit" value="Save">
-    </form>
+    <div class="container-add-exc">
+        <h1>Add Exercise</h1>
+        <div class="content-add-exc">
+            <form action="${contextPath}/adminAddExercise" method="post">
+                Exercise name:<br>
+                <label><input type="text" name="title"></label><br>
+                <br>
+                Exercise description:<br>
+                <label><input type="text" name="description"></label><br><br>
+                <input type="submit" value="Save">
+            </form>
+        </div>
+    </div>
 
     <c:if test="${not empty exerciseCreated and exerciseCreated==true}">
         <p>New exercise created.</p>
