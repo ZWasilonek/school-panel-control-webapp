@@ -43,7 +43,7 @@
     </div>
 
     <c:if test="${not empty exerciseCreated and exerciseCreated==true}">
-        <p>New exercise created.</p>
+        <p class="feedback-text-submitted">New exercise created.</p>
     </c:if>
 
 </body>

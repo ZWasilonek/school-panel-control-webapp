@@ -41,8 +41,12 @@
         </div>
     </div>
 
-    <c:if test="${not empty isUpdated and isUpdated == true}">
-        <p>Exercise updated.</p>
+    <div class="backButton">
+        <button class="addButton"><a class="addButton" href="${contextPath}/adminExercises">Back</a></button>
+    </div>
+
+    <c:if test="${isUpdated eq true}">
+        <p class="feedback-text-submitted">Exercise updated.</p>
     </c:if>
 
 </body>

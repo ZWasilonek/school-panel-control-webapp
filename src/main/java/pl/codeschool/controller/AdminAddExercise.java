@@ -25,7 +25,6 @@ public class AdminAddExercise extends HttpServlet {
             Exercise newExercise = new Exercise(title, description);
             ExerciseDao.create(newExercise);
 
-            //nie wyświetla się info o dodaniu użytkownika
             request.setAttribute("exerciseCreated", true);
             request.getRequestDispatcher("/WEB-INF/admin-add-exercise.jsp")
                     .forward(request, response);

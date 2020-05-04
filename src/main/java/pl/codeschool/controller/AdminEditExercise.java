@@ -40,8 +40,20 @@ public class AdminEditExercise extends HttpServlet {
             request.setAttribute("isUpdated", true);
             request.getRequestDispatcher("/WEB-INF/admin-edit-exercise.jsp")
                     .forward(request, response);
-
-        } else doGet(request, response);
+        }  else {
+            String isBlank = "this field cannot be empty";
+            if ("".equals(title) && "".equals(description)) {
+                request.setAttribute("blankTitle", isBlank);
+                request.setAttribute("blankDescription", isBlank);
+                doGet(request, response);
+            } else if ("".equals(title)) {
+                request.setAttribute("blankTitle", isBlank);
+                doGet(request, response);
+            } else {
+                request.setAttribute("blankDescription", isBlank);
+                doGet(request, response);
+            }
+        }
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

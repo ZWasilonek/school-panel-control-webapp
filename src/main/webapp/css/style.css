@@ -241,3 +241,9 @@ td, th {
 tr:nth-child(even) {
     background-color: #c7dffb;
 }
+
+.feedback-text-submitted {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
