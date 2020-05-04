@@ -16,11 +16,26 @@
 
 <%@ include file="/WEB-INF/fragment/navbar.jsp" %>
 
-    <ul>
-        <li><a href="${contextPath}/adminExercises">Exercises</a></li>
-        <li><a href="${contextPath}/adminGroups">Groups</a></li>
-        <li><a href="${contextPath}/adminUsers">Users</a></li>
-    </ul>
+    <div class="container-group">
+        <table>
+            <thead>
+                <tr>
+                    <th>Manage</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><a href="${contextPath}/adminExercises">Exercises</a></td>
+                </tr>
+                <tr>
+                    <td><a href="${contextPath}/adminGroups">Groups</a></td>
+                </tr>
+                <tr>
+                    <td><a href="${contextPath}/adminUsers">Users</a></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 
 </body>
 </html>
