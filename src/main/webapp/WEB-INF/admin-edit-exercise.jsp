@@ -16,14 +16,30 @@
 
     <%@ include file="/WEB-INF/fragment/navbar.jsp" %>
 
-    <h1>Edit exercise ${exercise.title}</h1>
+    <div class="container-add-exc">
+        <h1>Edit exercise ${exercise.title}</h1>
 
-<%--    //DODAJ FUNKCJONALNOŚĆ ZAPISYWANIA SIĘ POPRZEDNIEGO TYTUŁU I OPISU--%>
-    <form action="${contextPath}/adminEditExercise" method="post">
-        Exercise title <input type="text" name="title" placeholder="new exercise title"></br>
-        Exercise description <input type="text" name="description" placeholder="new exercise description"></br>
-        <input type="submit" value="Save">
-    </form>
+        <div class="content-add-exc">
+    <%--    //DODAJ FUNKCJONALNOŚĆ ZAPISYWANIA SIĘ POPRZEDNIEGO TYTUŁU I OPISU--%>
+            <form action="${contextPath}/adminEditExercise" method="post">
+                <label>
+                    <input type="text" name="title" placeholder="Exercise name">
+                    <c:if test="${not empty blankTitle}">
+                        <br><label class="hasError"><c:out value="${blankTitle}"/></label>
+                    </c:if>
+                </label>
+                <br>
+
+                <label>
+                    <input type="text" name="description" placeholder="Exercise description">
+                    <c:if test="${not empty blankDescription}">
+                        <br><label class="hasError"><c:out value="${blankDescription}"/></label>
+                    </c:if>
+                </label><br>
+                <input class="addButton" type="submit" value="Save">
+            </form>
+        </div>
+    </div>
 
     <c:if test="${not empty isUpdated and isUpdated == true}">
         <p>Exercise updated.</p>

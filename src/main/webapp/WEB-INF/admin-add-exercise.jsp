@@ -20,8 +20,7 @@
         <div class="content-add-exc">
             <form action="${contextPath}/adminAddExercise" method="post" accept-charset="UTF-8">
                 <label>
-                    Exercise name:<br>
-                    <input type="text" name="title">
+                    <input type="text" name="title" placeholder="title">
                     <c:if test="${not empty blankTitle}">
                         <br><label class="hasError"><c:out value="${blankTitle}"/></label>
                     </c:if>
@@ -29,8 +28,7 @@
                 <br>
 
                 <label>
-                    Exercise description:<br>
-                    <input type="text" name="description">
+                    <input type="text" name="description" placeholder="Description">
                     <c:if test="${not empty blankDescription}">
                         <br><label class="hasError"><c:out value="${blankDescription}"/></label>
                     </c:if>

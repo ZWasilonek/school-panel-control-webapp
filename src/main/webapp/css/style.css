@@ -126,10 +126,11 @@ a:hover {
 
 .content-add-exc input:not([type=submit]) {
     padding: 8px;
-    margin: 3px 0 3px 0;
+    margin-top: 1em;
 }
 
 .content-add-exc input[type=submit] {
+    margin-top: 3em;
     padding: 4px 5px 4px 5px;
 }
 
