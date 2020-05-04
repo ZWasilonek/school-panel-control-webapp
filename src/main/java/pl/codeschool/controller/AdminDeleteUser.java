@@ -13,6 +13,9 @@ import java.io.IOException;
 public class AdminDeleteUser extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        response.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html; charset=UTF-8");
+
         String paramUserId = request.getParameter("userId");
 
         if (paramUserId != null && !"".equals(paramUserId)) {

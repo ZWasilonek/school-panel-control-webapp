@@ -14,15 +14,15 @@ import java.util.List;
 public class UserDao {
 
     private static final String CREATE_USER_QUERY =
-        "INSERT INTO users(username, email, password, user_group_id) VALUES (?, ?, ?, ?)";
+        "INSERT INTO users(username, email, password, user_group_id) VALUES (?, ?, ?, ?);";
     private static final String READ_USER_QUERY =
-        "SELECT * FROM users WHERE id = ?";
+        "SELECT * FROM users WHERE id = ?;";
     private static final String UPDATE_USER_QUERY =
-        "UPDATE users SET username = ?, email = ?, password = ?, user_group_id = ? WHERE id = ?";
+        "UPDATE users SET username = ?, email = ?, password = ?, user_group_id = ? WHERE id = ?;";
     private static final String DELETE_USER_QUERY =
-        "DELETE FROM users WHERE id = ?";
+        "DELETE FROM users WHERE id = ?;";
     private static final String FIND_ALL_USERS_QUERY =
-        "SELECT * FROM users";
+        "SELECT * FROM users;";
     private static final String FIND_ALL_USERS_BY_GROUP_QUERY =
         "SELECT * FROM users u JOIN users_groups ug ON u.user_group_id = ug.id WHERE ug.id = ?;";
 

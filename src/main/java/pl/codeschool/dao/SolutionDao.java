@@ -23,17 +23,17 @@ public class SolutionDao {
     private static final String READ_SOLUTION_QUERY =
         "SELECT * FROM solutions WHERE id = ?;";
     private static final String UPDATE_SOLUTION_QUERY =
-        "UPDATE solutions SET updated = ?, description = ? where id = ?";
+        "UPDATE solutions SET updated = ?, description = ? where id = ?;";
     private static final String DELETE_SOLUTION_QUERY =
-        "DELETE FROM solutions WHERE id = ?";
+        "DELETE FROM solutions WHERE id = ?;";
     private static final String FIND_ALL_SOLUTIONS_QUERY =
-        "SELECT * FROM solutions";
+        "SELECT * FROM solutions;";
     private static final String FIND_ALL_SOLUTIONS_BY_USER_QUERY =
-        "SELECT s.* FROM solutions s join users u on s.user_id = u.id where u.id = ?";
+        "SELECT s.* FROM solutions s join users u on s.user_id = u.id where u.id = ?;";
     private static final String FIND_ALL_SOLUTIONS_BY_EXERCISE_QUERY =
-        "SELECT s.* FROM solutions s join exercises e on s.exercise_id = e.id where e.id = ?";
+        "SELECT s.* FROM solutions s join exercises e on s.exercise_id = e.id where e.id = ?;";
     private static final String FIND_RECENT_SOLUTIONS =
-        "SELECT * FROM solutions WHERE updated IS NOT NULL ORDER BY updated DESC LIMIT ?";
+        "SELECT * FROM solutions WHERE updated IS NOT NULL ORDER BY updated DESC LIMIT ?;";
 
     public static Solution create(Solution solution) {
         try (Connection conn = DBUtil.getConnection()) {

@@ -6,9 +6,11 @@
               username="root"
               password="coderslab"
               driverClassName="com.mysql.jdbc.Driver"
-              connectionProperties="?useUnicode=true;characterEncoding=utf8;useSSL=false;useLegacyDatetimeCode=false;serverTimezone=UTC;"
+              connectionProperties="?useSSL=false;useLegacyDatetimeCode=false;serverTimezone=UTC;useUnicode=true;characterEncoding=utf8;"
               url="jdbc:mysql://localhost:3306/codeschool"
               maxTotal="100"
               maxIdle="30"
-              maxWaitMillis="10000" />
+              maxWaitMillis="10000"
+              URIEncoding="UTF-8"
+    />
 </Context>

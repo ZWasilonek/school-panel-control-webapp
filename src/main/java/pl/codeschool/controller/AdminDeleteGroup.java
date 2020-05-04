@@ -16,6 +16,9 @@ import java.util.List;
 public class AdminDeleteGroup extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        response.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html; charset=UTF-8");
+
         String paramGroupId = request.getParameter("groupId");
 
         if (paramGroupId != null && !"".equals(paramGroupId)) {

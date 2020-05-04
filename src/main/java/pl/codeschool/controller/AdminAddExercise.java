@@ -15,7 +15,7 @@ public class AdminAddExercise extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setCharacterEncoding("UTF-8");
-        response.setContentType("text/html");
+        response.setContentType("text/html; charset=UTF-8");
 
         String title = request.getParameter("title");
         String description = request.getParameter("description");
@@ -43,20 +43,12 @@ public class AdminAddExercise extends HttpServlet {
                 doGet(request, response);
             }
         }
-//        doGet(request, response);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setCharacterEncoding("UTF-8");
-        response.setContentType("text/html");
+        response.setContentType("text/html; charset=UTF-8");
 
-//        String incorrectData = "incorrect title or description";
-//        request.setAttribute("errorData",incorrectData);
-//        String hasError = request.getParameter("hasError");
-//        if (hasError.equals("true")) {
-//            String incorrectData = "incorrect title or description";
-//            request.setAttribute("errorTitle",incorrectData);
-//        }
         request.getRequestDispatcher("/WEB-INF/admin-add-exercise.jsp")
                 .forward(request, response);
     }

@@ -16,7 +16,7 @@ public class infoGroupUsers extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setCharacterEncoding("UTF-8");
-        response.setContentType("text/html");
+        response.setContentType("text/html; charset=UTF-8");
 
         String paramGroupName = request.getParameter("group");
         String paramGroupId = request.getParameter("groupId");

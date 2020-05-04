@@ -17,7 +17,7 @@ import java.util.List;
 public class AdminAddUser extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setCharacterEncoding("UTF-8");
-        response.setContentType("text/html");
+        response.setContentType("text/html; charset=UTF-8");
 
         String userName = request.getParameter("userName");
         String email = request.getParameter("userEmail");
@@ -44,7 +44,7 @@ public class AdminAddUser extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setCharacterEncoding("UTF-8");
-        response.setContentType("text/html");
+        response.setContentType("text/html; charset=UTF-8");
 
         List<Group> groups = GroupDao.findAll();
         if (groups != null) {

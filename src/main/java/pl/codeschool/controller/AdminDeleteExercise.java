@@ -1,6 +1,6 @@
 package pl.codeschool.controller;
 
-import pl.codeschool.dao.UserDao;
+import pl.codeschool.dao.ExerciseDao;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,20 +13,22 @@ import java.io.IOException;
 public class AdminDeleteExercise extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        response.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html; charset=UTF-8");
+
         String paramExerciseId = request.getParameter("exerciseId");
 
         if (paramExerciseId != null && !"".equals(paramExerciseId)) {
             try {
                 int exerciseId = Integer.parseInt(paramExerciseId);
-                UserDao.delete(exerciseId);
-                request.getRequestDispatcher("/adminExercises")
-                        .forward(request, response);
-
+                ExerciseDao.delete(exerciseId);
+//                response.sendRedirect("/adminExercises");
+                request.getRequestDispatcher("/adminExercises").forward(request, response);
             } catch (NumberFormatException e) {
                 e.printStackTrace();
             }
         }
-        request.getRequestDispatcher("/adminExercises")
-                .forward(request, response);
+//        request.getRequestDispatcher("/adminExercises")
+//                .forward(request, response);
     }
 }

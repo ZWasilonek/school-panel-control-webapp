@@ -1,40 +1,41 @@
-CREATE DATABASE codeschool CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+# CREATE DATABASE codeschool CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+CREATE DATABASE `codeschool` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
-CREATE TABLE users_groups(
+CREATE TABLE `groups`(
     id INT AUTO_INCREMENT,
     name VARCHAR(256),
     PRIMARY KEY (id)
 );
 
-INSERT INTO users_groups (name) VALUES
-('Grupa A'),
-('Grupa B');
+INSERT INTO `groups` (name) VALUES
+    ('Grupa A'),
+    ('Grupa B');
 
 CREATE TABLE users(
-    id INT AUTO_INCREMENT,
-    username VARCHAR(256),
-    email VARCHAR(256) UNIQUE,
-    password VARCHAR(256),
-    user_group_id INT NOT NULL,
-    PRIMARY KEY (id),
-    FOREIGN KEY (user_group_id) REFERENCES users_groups(id)
+      id INT AUTO_INCREMENT,
+      username VARCHAR(256),
+      email VARCHAR(256) UNIQUE,
+      password VARCHAR(256),
+      user_group_id INT NOT NULL,
+      PRIMARY KEY (id)
 );
 
 INSERT INTO users (username, email, user_group_id) VALUES
-('zjanicka', 'zosia.janicka@coderslab.pl', 1),
-('jkowalski', 'jan.kowalski@coderslab.pl', 1),
-('anowak', 'anna.nowak@coderslab.pl', 2);
+    ('zjanicka', 'zosia.janicka@coderslab.pl', 1),
+    ('jkowalski', 'jan.kowalski@coderslab.pl', 1),
+    ('anowak', 'anna.nowak@coderslab.pl', 2);
 
-CREATE TABLE exercises(
-    id INT AUTO_INCREMENT,
-    title VARCHAR(256),
-    description TEXT,
-    PRIMARY KEY (id)
+CREATE TABLE users_groups(
+    group_id INT NOT NULL,
+    user_id INT NOT NULL,
+    FOREIGN KEY (group_id) REFERENCES `groups`(id),
+    FOREIGN KEY (user_id) REFERENCES users(id)
 );
 
-INSERT INTO exercises (title, description) VALUES
-('Zadanie 1', 'proste'),
-('Zadanie 2', 'trudne');
+INSERT INTO users_groups (group_id, user_id) VALUES
+    (1,1),
+    (2,2),
+    (2,3);
 
 CREATE TABLE solutions(
     id INT AUTO_INCREMENT,
@@ -44,8 +45,7 @@ CREATE TABLE solutions(
     updated DATETIME,
     description TEXT,
     PRIMARY KEY (id),
-    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
-    FOREIGN KEY (exercise_id) REFERENCES exercises(id) ON DELETE CASCADE
+    FOREIGN KEY (user_id) REFERENCES users(id)
 );
 
 INSERT INTO solutions (user_id, exercise_id, created, updated, description) VALUES
@@ -55,8 +55,22 @@ INSERT INTO solutions (user_id, exercise_id, created, updated, description) VALU
 (2, 2, '2020-03-09', NOW() - INTERVAL 2 DAY, 'Ciężko!'),
 (3, 1, '2020-03-08', NOW() - INTERVAL 1 DAY, 'Nie mam pojęcia o co chodzi');
 
+CREATE TABLE exercises(
+      id INT AUTO_INCREMENT,
+      title VARCHAR(256),
+      description TEXT,
+      solution_id INT,
+      PRIMARY KEY (id),
+      FOREIGN KEY (solution_id) REFERENCES solutions(id) ON DELETE CASCADE
+);
+
+INSERT INTO exercises (title, description) VALUES
+    ('Zadanie 1', 'proste'),
+    ('Zadanie 2', 'trudne'),
+    ('Oblicz pole trójkąta', 'Łatwe zadanie dla początkujących');
+
 SELECT * FROM solutions;
 SELECT * FROM users;
 SELECT * FROM users_groups;
 SELECT * FROM exercises;
-SELECT * FROM users u join users_groups ug on u.user_group_id = ug.id where ug.id = ?
+SELECT * FROM users u join users_groups ug on u.user_group_id = ug.id where ug.id = ?;

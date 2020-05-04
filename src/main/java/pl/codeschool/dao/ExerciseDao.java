@@ -14,15 +14,15 @@ import java.util.List;
 public class ExerciseDao {
 
     private static final String CREATE_EXERCISE_QUERY =
-        "INSERT INTO exercises(title, description) VALUES (?,?)";
+        "INSERT INTO exercises(title, description) VALUES (?,?);";
     private static final String READ_EXERCISE_QUERY =
-        "SELECT * FROM exercises where id = ?";
+        "SELECT * FROM exercises where id = ?;";
     private static final String UPDATE_EXERCISE_QUERY =
-        "UPDATE exercises SET title = ?, description = ? where id = ?";
+        "UPDATE exercises SET title = ?, description = ? where id = ?;";
     private static final String DELETE_EXERCISE_QUERY =
-        "DELETE FROM exercises WHERE id = ?";
+        "DELETE FROM exercises WHERE id = ?;";
     private static final String FIND_ALL_EXERCISES_QUERY =
-        "SELECT * FROM exercises";
+        "SELECT * FROM exercises;";
 
     public static Exercise create(Exercise exercise) {
         try (Connection conn = DBUtil.getConnection()) {

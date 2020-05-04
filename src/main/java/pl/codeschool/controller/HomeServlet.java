@@ -15,7 +15,8 @@ import java.util.List;
 public class HomeServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setCharacterEncoding("UTF-8");
-        response.setContentType("text/html");
+        response.setContentType("text/html; charset=UTF-8");
+
         int numberOfRows = Integer.parseInt(getServletContext().getInitParameter("numberOfRows"));
 
         List<Solution> recentSolutions = SolutionDao.findRecent(numberOfRows);

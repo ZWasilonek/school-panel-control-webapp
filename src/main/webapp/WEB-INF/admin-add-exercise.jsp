@@ -1,12 +1,11 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
-
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Admin add exercise</title>
     <link href='<c:url value="/css/style.css"/>' rel="stylesheet" type="text/css">
@@ -19,7 +18,7 @@
     <div class="container-add-exc">
         <h1>Add Exercise</h1>
         <div class="content-add-exc">
-            <form action="${contextPath}/adminAddExercise" method="post">
+            <form action="${contextPath}/adminAddExercise" method="post" accept-charset="UTF-8">
                 <label>
                     Exercise name:<br>
                     <input type="text" name="title">
