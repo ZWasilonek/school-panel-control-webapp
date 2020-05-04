@@ -22,9 +22,9 @@
         <thead>
         <tr>
             <th>Exercise name</th>
-            <th>Solution author</th>
-            <th>Date</th>
-            <th>Actions</th>
+            <th>Author's solution</th>
+            <th>Created</th>
+            <th>Action</th>
         </tr>
         </thead>
         <c:forEach items="${solutions}" var="solution">
