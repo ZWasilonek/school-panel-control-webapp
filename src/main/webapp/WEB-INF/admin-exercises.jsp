@@ -21,19 +21,22 @@
             <thead>
             <tr>
                 <th>Exercise name</th>
-                <th>Actions</th>
+                <th colspan="3">Actions</th>
             </tr>
             </thead>
             <c:forEach items="${exercises}" var="exercise">
                 <tr>
-                    <td>
-                        <a href="${contextPath}/infoSolutions?exerciseId=${exercise.id}">
-                            <c:out value="${exercise.title}"/>
-                        </a>
+                    <td class="exercise-text">
+                        <c:out value="${exercise.title}"/>
                     </td>
                     <td>
                         <a href="${contextPath}/adminEditExercise?exerciseId=${exercise.id}">Edit</a>
+                    </td>
+                    <td>
                         <a href="${contextPath}/adminDeleteExercise?exerciseId=${exercise.id}">Delete</a>
+                    </td>
+                    <td>
+                        <a href="${contextPath}/infoSolutions?exerciseId=${exercise.id}">Solutions</a>
                     </td>
                 </tr>
             </c:forEach>

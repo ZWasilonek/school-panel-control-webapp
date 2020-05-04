@@ -37,11 +37,15 @@
 /*GROUP*/
 .container-group {
     margin: 4em auto;
-    width: 40%;
+    width: 50%;
 }
 
 .container-group * {
     padding: 1em;
+}
+
+.exercise-text {
+    word-break: break-word;
 }
 
 a {
@@ -165,7 +169,7 @@ ul.nav li a:hover:not(.active) {
 
 /*TABLE*/
 table {
-    border: 1px solid #c7dffb;
+    /*border: 1px solid #c7dffb;*/
     border-collapse: collapse;
     width: 100%;
 }
