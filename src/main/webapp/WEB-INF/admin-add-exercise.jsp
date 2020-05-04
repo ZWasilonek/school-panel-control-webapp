@@ -20,14 +20,29 @@
         <h1>Add Exercise</h1>
         <div class="content-add-exc">
             <form action="${contextPath}/adminAddExercise" method="post">
-                Exercise name:<br>
-                <label><input type="text" name="title"></label><br>
+                <label>
+                    Exercise name:<br>
+                    <input type="text" name="title">
+                    <c:if test="${not empty blankTitle}">
+                        <br><label class="hasError"><c:out value="${blankTitle}"/></label>
+                    </c:if>
+                </label>
                 <br>
-                Exercise description:<br>
-                <label><input type="text" name="description"></label><br><br>
+
+                <label>
+                    Exercise description:<br>
+                    <input type="text" name="description">
+                    <c:if test="${not empty blankDescription}">
+                        <br><label class="hasError"><c:out value="${blankDescription}"/></label>
+                    </c:if>
+                </label><br>
                 <input type="submit" value="Save">
             </form>
         </div>
+    </div>
+
+    <div class="backButton">
+        <button class="addButton"><a class="addButton" href="${contextPath}/adminExercises">Back</a></button>
     </div>
 
     <c:if test="${not empty exerciseCreated and exerciseCreated==true}">

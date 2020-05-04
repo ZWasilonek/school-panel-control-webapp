@@ -30,14 +30,33 @@ public class AdminAddExercise extends HttpServlet {
             request.getRequestDispatcher("/WEB-INF/admin-add-exercise.jsp")
                     .forward(request, response);
         } else {
-            doGet(request, response);
+            String isBlank = "this field cannot be empty";
+            if ("".equals(title) && "".equals(description)) {
+                request.setAttribute("blankTitle", isBlank);
+                request.setAttribute("blankDescription", isBlank);
+                doGet(request, response);
+            } else if ("".equals(title)) {
+                request.setAttribute("blankTitle", isBlank);
+                doGet(request, response);
+            } else {
+                request.setAttribute("blankDescription", isBlank);
+                doGet(request, response);
+            }
         }
+//        doGet(request, response);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setCharacterEncoding("UTF-8");
         response.setContentType("text/html");
 
+//        String incorrectData = "incorrect title or description";
+//        request.setAttribute("errorData",incorrectData);
+//        String hasError = request.getParameter("hasError");
+//        if (hasError.equals("true")) {
+//            String incorrectData = "incorrect title or description";
+//            request.setAttribute("errorTitle",incorrectData);
+//        }
         request.getRequestDispatcher("/WEB-INF/admin-add-exercise.jsp")
                 .forward(request, response);
     }
