@@ -56,7 +56,7 @@ INSERT INTO solutions (user_id, exercise_id, created, updated, description) VALU
     (2, 2, '2020-03-09', NOW() - INTERVAL 2 DAY, 'Ciężko!'),
     (3, 1, '2020-03-08', NOW() - INTERVAL 1 DAY, 'Nie mam pojęcia o co chodzi');
 
-
+INSERT INTO exercises VALUES (null, 'trójkąt', 'c');
 
 
 # CREATE TABLE users(

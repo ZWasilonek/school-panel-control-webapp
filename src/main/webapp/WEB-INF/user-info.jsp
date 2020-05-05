@@ -34,9 +34,9 @@
         </thead>
         <c:forEach items="${userSolutions}" var="solution">
             <tr>
-                    <%--            <td>${solution.updated}</td>--%>
                 <td><c:out value="${solution.exercise.title}"/></td>
                 <td><c:out value="${solution.created}"/></td>
+                <td><c:out value="${solution.updated}"/></td>
                 <td>
                     <a href="${pageContext.request.contextPath}/infoSolution?solutionId=${solution.id}">Details</a>
                 </td>

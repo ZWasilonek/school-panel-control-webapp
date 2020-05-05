@@ -17,7 +17,7 @@
 .solution {
     margin: 4em auto;
     width: 50%;
-    min-height: 300px;
+    min-height: auto;
     background-color: #c7dffb;
     border: 1px solid #1C6EA4;
 }

@@ -14,11 +14,21 @@
 <body>
     <%@ include file="/WEB-INF/fragment/navbar.jsp" %>
 
-    <div class="solutions-container">
-        <h2><c:out value="${exerciseTitle}"/> solution details:</h2>
-        <c:forEach var="solution" items="${solutions}">
-            <p><c:out value="${solution.description}"/></p>
-        </c:forEach>
+    <div class="container-group">
+        <table>
+            <thead>
+                <tr>
+                    <th><c:out value="${exerciseTitle}"/> solution details:</th>
+                </tr>
+            </thead>
+            <tbody>
+            <c:forEach var="solution" items="${solutions}">
+                <tr>
+                    <td><c:out value="${solution.description}"/></td>
+                </tr>
+            </c:forEach>
+            </tbody>
+        </table>
     </div>
 
 </body>
