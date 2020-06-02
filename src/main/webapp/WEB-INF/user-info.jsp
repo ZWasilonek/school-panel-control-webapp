@@ -1,6 +1,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
+<style>
+    <%@ include file="/resources/css/styles.css"%>
+</style>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -8,7 +11,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>User Details</title>
-    <link href='<c:url value="/css/style.css"/>' rel="stylesheet" type="text/css">
+    <link href='<c:url value="/resources/css/styles.css"/>' rel="stylesheet" type="text/css">
 </head>
 
 <body>
@@ -28,7 +31,8 @@
         <thead>
             <tr>
                 <th>Exercise name</th>
-                <th>Date</th>
+                <th>Creation date</th>
+                <th>Update date</th>
                 <th>Actions</th>
             </tr>
         </thead>
