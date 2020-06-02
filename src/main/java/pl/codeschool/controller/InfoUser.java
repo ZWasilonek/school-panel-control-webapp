@@ -31,11 +31,7 @@ public class InfoUser extends HttpServlet {
                     request.setAttribute("user", user);
 
                     List<Solution> userSolutions = SolutionDao.findAllByUserId(userId);
-                    if (userSolutions != null) {
-                        request.setAttribute("userSolutions", userSolutions);
-                        request.getRequestDispatcher("/WEB-INF/user-info.jsp")
-                                .forward(request, response);
-                    }
+                    request.setAttribute("userSolutions", userSolutions);
                     request.getRequestDispatcher("/WEB-INF/user-info.jsp")
                             .forward(request, response);
                 }

@@ -16,9 +16,9 @@
 
 <body>
 
-    <%@ include file="/WEB-INF/fragment/navbar.jsp" %>
+<%@ include file="/WEB-INF/fragment/navbar.jsp" %>
 
-    <div class="container-user">
+<div class="container-user">
 
     <div class="user-details-content">
         <h1><c:out value="${user.userName}"/> user details:</h1>
@@ -29,24 +29,35 @@
 
     <table>
         <thead>
-            <tr>
-                <th>Exercise name</th>
-                <th>Creation date</th>
-                <th>Update date</th>
-                <th>Actions</th>
-            </tr>
+        <tr>
+            <th>Exercise name</th>
+            <th>Creation date</th>
+            <th>Update date</th>
+            <th>Actions</th>
+        </tr>
         </thead>
-        <c:forEach items="${userSolutions}" var="solution">
-            <tr>
-                <td><c:out value="${solution.exercise.title}"/></td>
-                <td><c:out value="${solution.created}"/></td>
-                <td><c:out value="${solution.updated}"/></td>
-                <td>
-                    <a href="${pageContext.request.contextPath}/infoSolution?solutionId=${solution.id}">Details</a>
-                </td>
-            </tr>
-        </c:forEach>
-        </table>
-    </div>
+        <c:choose>
+            <c:when test="${userSolutions.size() ne 0}">
+                <c:forEach items="${userSolutions}" var="solution">
+                    <tr>
+                        <td><c:out value="${solution.exercise.title}"/></td>
+                        <td><c:out value="${solution.created}"/></td>
+                        <td><c:out value="${solution.updated}"/></td>
+                        <td>
+                            <a href="${pageContext.request.contextPath}/infoSolution?solutionId=${solution.id}">Details</a>
+                        </td>
+                    </tr>
+                </c:forEach>
+            </c:when>
+
+            <c:otherwise>
+                <tr>
+                    <td colspan="4" class="has-solution-response">The user has not solved any exercise yet</td>
+                </tr>
+            </c:otherwise>
+        </c:choose>
+    </table>
+
+</div>
 </body>
 </html>

@@ -247,3 +247,10 @@ tr:nth-child(even) {
     justify-content: center;
     align-items: center;
 }
+
+.has-solution-response {
+    text-align: center;
+    font-size: larger;
+    padding-top: 2em;
+    padding-bottom: 2em;
+}
