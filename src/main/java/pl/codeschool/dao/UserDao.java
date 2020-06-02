@@ -14,7 +14,7 @@ import java.util.List;
 public class UserDao {
 
     private static final String CREATE_USER_QUERY =
-        "INSERT INTO users(username, email, password, user_group_id) VALUES (?, ?, ?, ?)";
+        "INSERT INTO users(username, email, password, group_id) VALUES (?, ?, ?, ?)";
     private static final String READ_USER_QUERY =
         "SELECT * FROM users WHERE id = ?";
     private static final String UPDATE_USER_QUERY =

@@ -1,6 +1,6 @@
 package pl.codeschool.model;
 
-import pl.codeschool.bcrypt.BCrypt;
+import org.mindrot.jbcrypt.BCrypt;
 
 public class User {
     private int id;
