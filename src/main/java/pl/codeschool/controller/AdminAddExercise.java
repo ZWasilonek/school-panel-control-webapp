@@ -20,27 +20,14 @@ public class AdminAddExercise extends HttpServlet {
         String title = request.getParameter("title");
         String description = request.getParameter("description");
 
-        if (title != null && !"".equals(title) && description != null && !"".equals(description)) {
+        validateParams(title, description ,request, response);
 
+        if (!"".equals(title) && !"".equals(description)) {
             Exercise newExercise = new Exercise(title, description);
             ExerciseDao.create(newExercise);
-
             request.setAttribute("exerciseCreated", true);
             request.getRequestDispatcher("/WEB-INF/admin-add-exercise.jsp")
                     .forward(request, response);
-        } else {
-            String isBlank = "this field cannot be empty";
-            if ("".equals(title) && "".equals(description)) {
-                request.setAttribute("blankTitle", isBlank);
-                request.setAttribute("blankDescription", isBlank);
-                doGet(request, response);
-            } else if ("".equals(title)) {
-                request.setAttribute("blankTitle", isBlank);
-                doGet(request, response);
-            } else {
-                request.setAttribute("blankDescription", isBlank);
-                doGet(request, response);
-            }
         }
     }
 
@@ -48,7 +35,55 @@ public class AdminAddExercise extends HttpServlet {
         response.setCharacterEncoding("UTF-8");
         response.setContentType("text/html; charset=UTF-8");
 
+        String title = request.getParameter("title");
+        String description = request.getParameter("description");
+
+        fillTheFormWithLatestData(title, description, request);
+
         request.getRequestDispatcher("/WEB-INF/admin-add-exercise.jsp")
-                .forward(request, response);
+            .forward(request,response);
+    }
+
+    private void validateParams(String title, String description, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        final String EMPTY_FIELD = "this field cannot be empty";
+        final String CHARS_CAPACITY_EXCEEDED = "allowed number of characters exceeded";
+
+        int titleLength = title.length();
+        int descriptionLength = description.length();
+
+        if ("".equals(title) && "".equals(description)) {
+            request.setAttribute("blankTitle", EMPTY_FIELD);
+            request.setAttribute("blankDescription", EMPTY_FIELD);
+            doGet(request, response);
+        } else if ("".equals(title)) {
+            request.setAttribute("blankTitle", EMPTY_FIELD);
+            doGet(request, response);
+        } else if ("".equals(description)) {
+            request.setAttribute("blankDescription", EMPTY_FIELD);
+            doGet(request, response);
+        } else if (titleLength > 256 && descriptionLength > 65535) {
+            request.setAttribute("tooManyCharsTitle", CHARS_CAPACITY_EXCEEDED);
+            request.setAttribute("tooManyCharsDesc", CHARS_CAPACITY_EXCEEDED);
+            doGet(request, response);
+        } else if (titleLength > 256) {
+            request.setAttribute("tooManyCharsTitle", CHARS_CAPACITY_EXCEEDED);
+            doGet(request, response);
+        } else if (descriptionLength > 65535) {
+            request.setAttribute("tooManyCharsDesc", CHARS_CAPACITY_EXCEEDED);
+            doGet(request, response);
+        }
+    }
+
+    private void fillTheFormWithLatestData(String title, String description, HttpServletRequest request) {
+        if (title != null && description != null) {
+            if (!"".equals(title) && !"".equals(description)) {
+                request.setAttribute("titleVal", title);
+                request.setAttribute("descriptionVal", description);
+            } else if (!"".equals(title)) {
+                request.setAttribute("titleVal", title);
+            } else if (!"".equals(description)) {
+                request.setAttribute("descriptionVal", description);
+            }
+        }
     }
 }
