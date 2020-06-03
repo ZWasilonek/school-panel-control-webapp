@@ -18,13 +18,13 @@
 
     <%@ include file="/WEB-INF/fragment/navbar.jsp" %>
 
-    <div class="main-container-add-exc">
-        <div class="container-add-exc">
+    <div class="main-container-exc">
+        <div class="container-exc">
             <h1>Add Exercise</h1>
-            <div class="content-add-exc">
+            <div class="content-exc">
                 <form action="${contextPath}/adminAddExercise" method="post" accept-charset="UTF-8">
                     <label>
-                        <input type="text" name="title" placeholder="title" value="${titleVal}">
+                        <input type="text" name="title" placeholder="title" value="<c:out value='${titleVal}'/>">
                         <c:if test="${not empty blankTitle}">
                             <label class="hasError"><c:out value="${blankTitle}"/></label>
                         </c:if>
