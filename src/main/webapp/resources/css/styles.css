@@ -244,7 +244,7 @@ tr:nth-child(even) {
     align-items: center;
 }
 
-.has-solution-response {
+.empty-content-info {
     text-align: center;
     font-size: larger;
     padding-top: 2em;
