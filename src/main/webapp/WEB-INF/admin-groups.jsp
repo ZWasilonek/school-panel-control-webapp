@@ -25,7 +25,7 @@
             <thead>
             <tr>
                 <th>Group name</th>
-                <th colspan="2">Actions</th>
+                <th colspan="3">Actions</th>
             </tr>
             </thead>
             <c:forEach items="${groups}" var="group">
@@ -38,6 +38,9 @@
                     </td>
                     <td>
                         <a href="${contextPath}/adminDeleteGroup?groupId=${group.id}">Delete</a>
+                    </td>
+                    <td>
+                        <a href="${contextPath}/infoGroupUsers?group=${group.name}&groupId=${group.id}">Show members</a>
                     </td>
                 </tr>
             </c:forEach>
