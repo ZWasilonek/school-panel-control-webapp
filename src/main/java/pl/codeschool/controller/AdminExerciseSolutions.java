@@ -2,6 +2,7 @@ package pl.codeschool.controller;
 
 import pl.codeschool.dao.ExerciseDao;
 import pl.codeschool.dao.SolutionDao;
+import pl.codeschool.model.Exercise;
 import pl.codeschool.model.Solution;
 
 import javax.servlet.ServletException;
@@ -30,8 +31,8 @@ public class AdminExerciseSolutions extends HttpServlet {
                 if (solutionsByExerciseId != null) {
                     request.setAttribute("solutions", solutionsByExerciseId);
                 }
-                String exerciseTitle = Objects.requireNonNull(ExerciseDao.read(exerciseId)).getTitle();
-                request.setAttribute("exerciseTitle", exerciseTitle);
+                Exercise exercise = ExerciseDao.read(exerciseId);
+                request.setAttribute("exercise", exercise);
             } catch (NumberFormatException e) {
                 e.printStackTrace();
             }
