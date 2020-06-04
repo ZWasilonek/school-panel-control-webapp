@@ -1,7 +1,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
-
+<style>
+    <%@ include file="/resources/css/styles.css"%>
+</style>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,7 +11,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Admin edit user</title>
-    <link href='<c:url value="/css/style.css"/>' rel="stylesheet" type="text/css">
+    <link href='<c:url value="/resources/css/styles.css"/>' rel="stylesheet" type="text/css">
 </head>
 
 <body>
@@ -36,11 +38,11 @@
     </form>
 
     <c:if test="${not empty hasGroup and !hasGroup}">
-        <p>You need to create some group first</p>
+        <p class="feedback-text-submitted">You need to create some group first</p>
     </c:if>
 
     <c:if test="${not empty isUpdated and isUpdated}">
-        <p>User updated.</p>
+        <p class="feedback-text-submitted">User updated.</p>
     </c:if>
 
 </body>
