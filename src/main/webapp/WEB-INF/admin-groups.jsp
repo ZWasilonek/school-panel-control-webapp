@@ -25,16 +25,19 @@
             <thead>
             <tr>
                 <th>Group name</th>
-                <th colspan="3" class="action-th">Actions</th>
+                <th colspan="4" class="action-th">Actions</th>
             </tr>
             </thead>
             <c:forEach items="${groups}" var="group">
                 <tr>
-                    <td>
+                    <td class="text-breaker">
                         <c:out value="${group.name}"/>
                     </td>
                     <td>
                         <a href="${contextPath}/infoGroupUsers?group=${group.name}&groupId=${group.id}">Show members</a>
+                    </td>
+                    <td>
+                        <a href="${contextPath}/adminAddUserToGroup?groupId=${group.id}">Assign member</a>
                     </td>
                     <td>
                         <a href="${contextPath}/adminEditGroup?groupId=${group.id}">Edit</a>
