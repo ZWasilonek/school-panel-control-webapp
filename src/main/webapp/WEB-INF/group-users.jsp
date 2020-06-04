@@ -26,16 +26,25 @@
                 <th class="action-th">Actions</th>
             </tr>
             </thead>
-            <c:forEach items="${users}" var="user">
-                <tr>
-                    <td>
-                        <c:out value="${user.userName}"/>
-                    </td>
-                    <td>
-                        <a href="${contextPath}/infoUser?userId=${user.id}">Details</a>
-                    </td>
-                </tr>
-            </c:forEach>
+            <c:choose>
+                <c:when test="${users.size() ne 0}">
+                    <c:forEach items="${users}" var="user">
+                        <tr>
+                            <td>
+                                <c:out value="${user.userName}"/>
+                            </td>
+                            <td>
+                                <a href="${contextPath}/infoUser?userId=${user.id}">Details</a>
+                            </td>
+                        </tr>
+                    </c:forEach>
+                </c:when>
+                <c:otherwise>
+                    <tr>
+                        <td colspan="2" class="feedback-text-submitted">This group has no members yet</td>
+                    </tr>
+                </c:otherwise>
+            </c:choose>
         </table>
     </div>
 
