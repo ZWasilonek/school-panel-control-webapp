@@ -24,7 +24,7 @@
             <h1><c:out value="${user.userName}"/> user details:</h1>
             <p>Email: <c:out value="${user.email}"/></p>
             <p>Group: <c:out value="${user.group.name}"/></p>
-            <p><strong>Added tasks solutions:</strong></p>
+            <p><strong>Added exercise solutions:</strong></p>
         </div>
 
         <table>
