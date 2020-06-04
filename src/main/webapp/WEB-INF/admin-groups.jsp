@@ -25,7 +25,7 @@
             <thead>
             <tr>
                 <th>Group name</th>
-                <th colspan="3">Actions</th>
+                <th colspan="3" style="width: 25%">Actions</th>
             </tr>
             </thead>
             <c:forEach items="${groups}" var="group">
@@ -34,13 +34,13 @@
                         <c:out value="${group.name}"/>
                     </td>
                     <td>
+                        <a href="${contextPath}/infoGroupUsers?group=${group.name}&groupId=${group.id}">Show members</a>
+                    </td>
+                    <td>
                         <a href="${contextPath}/adminEditGroup?groupId=${group.id}">Edit</a>
                     </td>
                     <td>
                         <a href="${contextPath}/adminDeleteGroup?groupId=${group.id}">Delete</a>
-                    </td>
-                    <td>
-                        <a href="${contextPath}/infoGroupUsers?group=${group.name}&groupId=${group.id}">Show members</a>
                     </td>
                 </tr>
             </c:forEach>
@@ -48,11 +48,11 @@
 
         <button class="addButton"><a class="addButton" href="${contextPath}/adminAddGroup">Add new</a></button>
 
-    </div>
+        <c:if test="${not empty isEmpty and !isEmpty}">
+            <p class="feedback-text-submitted">You can delete only empty group</p>
+        </c:if>
 
-    <c:if test="${not empty isEmpty and !isEmpty}">
-        <p>You can delete only empty group</p>
-    </c:if>
+    </div>
 
 </body>
 </html>
