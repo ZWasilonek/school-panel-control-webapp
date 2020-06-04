@@ -18,11 +18,11 @@
 
     <%@ include file="/WEB-INF/fragment/navbar.jsp" %>
 
-    <div class="main-container-exc">
-        <div class="container-exc">
+    <div class="main-container-add">
+        <div class="container-add">
             <h2>Edit exercise ${exercise.title}</h2>
 
-            <div class="content-exc">
+            <div class="content-add">
                 <form action="${contextPath}/adminEditExercise" method="post">
                     <input type="hidden" value="${exercise.id}" name="exerciseId">
                     <label>
@@ -30,8 +30,8 @@
                         <c:if test="${not empty blankTitle}">
                             <label class="hasError"><c:out value="${blankTitle}"/></label>
                         </c:if>
-                        <c:if test="${not empty tooManyCharsTitle}">
-                            <label class="hasError"><c:out value="${tooManyCharsTitle}"/></label>
+                        <c:if test="${not empty capacityExceededTitle}">
+                            <label class="hasError"><c:out value="${capacityExceededTitle}"/></label>
                         </c:if>
                     </label>
 
@@ -42,8 +42,8 @@
                         <c:if test="${not empty blankDescription}">
                             <label class="hasError"><c:out value="${blankDescription}"/></label>
                         </c:if>
-                        <c:if test="${not empty tooManyCharsDesc}">
-                            <label class="hasError"><c:out value="${tooManyCharsDesc}"/></label>
+                        <c:if test="${not empty capacityExceededDescription}">
+                            <label class="hasError"><c:out value="${capacityExceededDescription}"/></label>
                         </c:if>
                     </label>
 
@@ -56,7 +56,7 @@
         </div>
 
         <div class="backButton">
-            <button class="addButton"><a class="addButton" href="${contextPath}/adminExercises">Back</a></button>
+            <button><a href="${contextPath}/adminExercises">Back</a></button>
         </div>
     </div>
 
