@@ -25,7 +25,7 @@
             <thead>
             <tr>
                 <th>Group name</th>
-                <th colspan="3" style="width: 25%">Actions</th>
+                <th colspan="3" class="action-th">Actions</th>
             </tr>
             </thead>
             <c:forEach items="${groups}" var="group">
