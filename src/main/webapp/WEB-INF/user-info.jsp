@@ -44,7 +44,7 @@
                             <td><c:out value="${solution.created}"/></td>
                             <td><c:out value="${solution.updated}"/></td>
                             <td>
-                                <a href="${pageContext.request.contextPath}/infoSolution?solutionId=${solution.id}">Details</a>
+                                <a href="${contextPath}/infoSolution?solutionId=${solution.id}">Details</a>
                             </td>
                         </tr>
                     </c:forEach>
