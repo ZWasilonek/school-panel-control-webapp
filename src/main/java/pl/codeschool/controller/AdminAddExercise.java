@@ -1,7 +1,10 @@
 package pl.codeschool.controller;
 
 import pl.codeschool.dao.ExerciseDao;
+import pl.codeschool.mapper.DataFiller;
 import pl.codeschool.model.Exercise;
+import pl.codeschool.validation.BlankValidation;
+import pl.codeschool.validation.CapacityValidation;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,6 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Map;
 
 @WebServlet("/adminAddExercise")
 public class AdminAddExercise extends HttpServlet {
@@ -20,15 +24,19 @@ public class AdminAddExercise extends HttpServlet {
         String title = request.getParameter("title");
         String description = request.getParameter("description");
 
-        validateParams(title, description ,request, response);
+        Map<String, String> fieldNames = Map.of("title", title, "description", description);
+        boolean hasBlankFields = BlankValidation.hasBlankErrorsAttributes(fieldNames, request);
 
-        if (!"".equals(title) && !"".equals(description)) {
+        Map<String,Map<Integer, String>> capacitiesOfFields = Map.of("title",Map.of(256,title), "description", Map.of(65535,description));
+        boolean hasCapacityExceededFields = CapacityValidation.hasCapacityErrorAttributes(capacitiesOfFields, request);
+
+        if (!hasBlankFields && !hasCapacityExceededFields) {
             Exercise newExercise = new Exercise(title, description);
             ExerciseDao.create(newExercise);
             request.setAttribute("exerciseCreated", true);
             request.getRequestDispatcher("/WEB-INF/admin-add-exercise.jsp")
                     .forward(request, response);
-        }
+        } else doGet(request, response);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -38,52 +46,12 @@ public class AdminAddExercise extends HttpServlet {
         String title = request.getParameter("title");
         String description = request.getParameter("description");
 
-        fillTheFormWithLatestData(title, description, request);
+        if (title != null && description != null) {
+            Map<String, String> fieldNames = Map.of("title", title, "description", description);
+            DataFiller.modelAttributesFiller(fieldNames, request);
+        }
 
         request.getRequestDispatcher("/WEB-INF/admin-add-exercise.jsp")
             .forward(request,response);
-    }
-
-    private void validateParams(String title, String description, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        final String EMPTY_FIELD = "this field cannot be empty";
-        final String CHARS_CAPACITY_EXCEEDED = "allowed number of characters exceeded";
-
-        int titleLength = title.length();
-        int descriptionLength = description.length();
-
-        if ("".equals(title) && "".equals(description)) {
-            request.setAttribute("blankTitle", EMPTY_FIELD);
-            request.setAttribute("blankDescription", EMPTY_FIELD);
-            doGet(request, response);
-        } else if ("".equals(title)) {
-            request.setAttribute("blankTitle", EMPTY_FIELD);
-            doGet(request, response);
-        } else if ("".equals(description)) {
-            request.setAttribute("blankDescription", EMPTY_FIELD);
-            doGet(request, response);
-        } else if (titleLength > 256 && descriptionLength > 65535) {
-            request.setAttribute("tooManyCharsTitle", CHARS_CAPACITY_EXCEEDED);
-            request.setAttribute("tooManyCharsDesc", CHARS_CAPACITY_EXCEEDED);
-            doGet(request, response);
-        } else if (titleLength > 256) {
-            request.setAttribute("tooManyCharsTitle", CHARS_CAPACITY_EXCEEDED);
-            doGet(request, response);
-        } else if (descriptionLength > 65535) {
-            request.setAttribute("tooManyCharsDesc", CHARS_CAPACITY_EXCEEDED);
-            doGet(request, response);
-        }
-    }
-
-    private void fillTheFormWithLatestData(String title, String description, HttpServletRequest request) {
-        if (title != null && description != null) {
-            if (!"".equals(title) && !"".equals(description)) {
-                request.setAttribute("titleVal", title);
-                request.setAttribute("descriptionVal", description);
-            } else if (!"".equals(title)) {
-                request.setAttribute("titleVal", title);
-            } else if (!"".equals(description)) {
-                request.setAttribute("descriptionVal", description);
-            }
-        }
     }
 }
