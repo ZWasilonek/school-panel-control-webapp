@@ -1,7 +1,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
-
+<style>
+    <%@ include file="/resources/css/styles.css"%>
+</style>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,7 +11,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Admin add user</title>
-    <link href='<c:url value="/css/style.css"/>' rel="stylesheet" type="text/css">
+    <link href='<c:url value="/resources/css/styles.css"/>' rel="stylesheet" type="text/css">
 </head>
 
 <body>
@@ -32,8 +34,8 @@
         <input type="submit" value="Save"><br>
     </form>
 
-    <c:if test="${not empty userCreated and userCreated==true}">
-        <p>New user created.</p>
+    <c:if test="${userCreated eq true}">
+        <p class="feedback-text-submitted">New user created.</p>
     </c:if>
 
 </body>
