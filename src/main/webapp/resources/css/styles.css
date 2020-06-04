@@ -44,7 +44,7 @@
     padding: 1em;
 }
 
-.exercise-text {
+.text-breaker {
     word-break: break-word;
 }
 
@@ -57,6 +57,9 @@ a:hover {
     color: #1C6EA4;
 }
 
+.container-group tbody td a {
+    padding: 0;
+}
 
 /*USER*/
 .container-user {
@@ -87,19 +90,20 @@ a:hover {
 }
 
 /*ADD EXERCISE*/
-.main-container-exc {
+.main-container-add {
     margin: 4em auto 0 auto;
     width: 30%;
 }
 
-.container-exc {
+.container-add {
     width: 100%;
     min-height: 300px;
     background-color: #c7dffb;
     border: 1px solid #1C6EA4;
+    margin: -1px;
 }
 
-.container-exc h1, .container-exc h2 {
+.container-add h1, .container-add h2 {
     background: linear-gradient(to bottom, #5592bb 0%, #327cad 66%, #1C6EA4 100%);
     padding: 0.3em;
     margin-top: 0;
@@ -107,46 +111,46 @@ a:hover {
     text-align: center;
 }
 
-.content-exc {
+.content-add {
     display: flex;
     justify-content: center;
     margin-top: 1em;
     font-size: 20px;
 }
 
-.content-exc textarea {
+.content-add textarea {
     min-width: 80%;
     font-family: Arial;
 }
 
-.content-exc form {
+.content-add form {
     width: 100%;
 }
 
-.content-exc form label {
+.content-add form label {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
-.content-exc input:not([type=submit]) {
+.content-add input:not([type=submit]) {
     padding: 8px;
     margin-top: 1em;
     min-width: 80%;
 }
 
-.content-exc input[type=submit] {
+.content-add input[type=submit] {
     margin-top: 3em;
     padding: 4px 5px 4px 5px;
 }
 
-.content-exc input[type=submit]:hover {
+.content-add input[type=submit]:hover {
     background-color: #1C6EA4;
     color: white;
 }
 
-.main-container-exc .backButton button {
+.backButton button {
     display: inline-block;
     align-items: center;
     margin-top: 2em;
@@ -155,12 +159,12 @@ a:hover {
     border-radius: 13%;
 }
 
-.main-container-exc .backButton {
+.backButton {
     margin: 0;
     padding: 0;
 }
 
-.main-container-exc .backButton button a {
+.backButton button a {
     color: white;
     background: #1C6EA4;
 }
@@ -211,6 +215,10 @@ table thead th {
 }
 table thead th:first-child {
     border-left: none;
+}
+
+.action-th {
+    width: 25%;
 }
 
 /*------------------------------*/
