@@ -18,18 +18,18 @@
 
     <%@ include file="/WEB-INF/fragment/navbar.jsp" %>
 
-    <div class="main-container-exc">
-        <div class="container-exc">
+    <div class="main-container-add">
+        <div class="container-add">
             <h1>Add Exercise</h1>
-            <div class="content-exc">
+            <div class="content-add">
                 <form action="${contextPath}/adminAddExercise" method="post" accept-charset="UTF-8">
                     <label>
                         <input type="text" name="title" placeholder="title" value="<c:out value='${titleVal}'/>">
                         <c:if test="${not empty blankTitle}">
                             <label class="hasError"><c:out value="${blankTitle}"/></label>
                         </c:if>
-                        <c:if test="${not empty tooManyCharsTitle}">
-                            <label class="hasError"><c:out value="${tooManyCharsTitle}"/></label>
+                        <c:if test="${not empty capacityExceededTitle}">
+                            <label class="hasError"><c:out value="${capacityExceededTitle}"/></label>
                         </c:if>
                     </label>
                     <br>
@@ -38,8 +38,8 @@
                         <c:if test="${not empty blankDescription}">
                             <label class="hasError"><c:out value="${blankDescription}"/></label>
                         </c:if>
-                        <c:if test="${not empty tooManyCharsDesc}">
-                            <label class="hasError"><c:out value="${tooManyCharsDesc}"/></label>
+                        <c:if test="${not empty capacityExceededDescription}">
+                            <label class="hasError"><c:out value="${capacityExceededDescription}"/></label>
                         </c:if>
                     </label>
                     <label>
