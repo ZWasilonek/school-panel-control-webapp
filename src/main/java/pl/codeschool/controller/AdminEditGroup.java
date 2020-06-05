@@ -21,24 +21,18 @@ public class AdminEditGroup extends HttpServlet {
         response.setCharacterEncoding("UTF-8");
         response.setContentType("text/html; charset=UTF-8");
 
-        String groupName = request.getParameter("groupName");
+        String paramGroupName = request.getParameter("groupName");
+        int groupId = (int) request.getSession().getAttribute("groupId");
 
-        Group group = (Group) request.getSession().getAttribute("group");
-        int groupId = 0;
-        if (group != null) {
-            groupId = group.getId();
-        }
-
-        Map<String, String> fieldNames = Map.of("groupName", groupName);
+        Map<String, String> fieldNames = Map.of("groupName", paramGroupName);
         boolean hasBlankFields = BlankValidation.hasBlankErrorsAttributes(fieldNames, request);
-        boolean isUniqueGroupName = checkUniqueGroupName(groupName, groupId, request);
+        boolean isUniqueGroupName = checkUniqueGroupName(paramGroupName, groupId, request);
 
-        Map<String,Map<Integer, String>> capacitiesOfFields = Map.of("groupName",Map.of(256,groupName));
+        Map<String,Map<Integer, String>> capacitiesOfFields = Map.of("groupName",Map.of(256,paramGroupName));
         boolean hasCapacityExceededFields = CapacityValidation.hasCapacityErrorAttributes(capacitiesOfFields, request);
 
         if (!hasBlankFields && isUniqueGroupName && !hasCapacityExceededFields) {
-
-            Group updatedGroup = new Group(groupId, groupName);
+            Group updatedGroup = new Group(groupId, paramGroupName);
             GroupDao.update(updatedGroup);
 
             request.setAttribute("isUpdated", true);
@@ -52,20 +46,26 @@ public class AdminEditGroup extends HttpServlet {
         response.setCharacterEncoding("UTF-8");
         response.setContentType("text/html; charset=UTF-8");
 
-        String paramGroupId = request.getParameter("groupId");
         String paramGroupName = request.getParameter("groupName");
 
-        if (paramGroupId != null && !"".equals(paramGroupId)) {
+        String paramGroupId = request.getParameter("groupId");
+        if (paramGroupId == null || paramGroupId.equals("")) {
+            int groupId = (int) request.getSession().getAttribute("exerciseId");
+            paramGroupId = String.valueOf(groupId);
+        }
+
+        if (!"".equals(paramGroupId)) {
             try {
                 int groupId = Integer.parseInt(paramGroupId);
                 Group founded = GroupDao.read(groupId);
-                request.getSession().setAttribute("group", founded);
-                if (founded != null) {
-                    DataFiller.modelAttributesFiller(Map.of("groupName",founded.getName()), request);
-                }
-                if (paramGroupName != null) {
+                request.setAttribute("group", founded);
+                if (founded == null) {
+                    request.setAttribute("groupNotExists", true);
+                } else if (paramGroupName == null) {
+                    request.getSession().setAttribute("groupId", groupId);
+                    DataFiller.modelAttributesFiller(Map.of("groupName", founded.getName()), request);
+                } else
                     DataFiller.modelAttributesFiller(Map.of("groupName", paramGroupName), request);
-                }
             } catch (NumberFormatException e) {
                 e.printStackTrace();
             }
@@ -85,4 +85,5 @@ public class AdminEditGroup extends HttpServlet {
         }
         return true;
     }
+
 }

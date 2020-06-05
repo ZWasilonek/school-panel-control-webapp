@@ -7,54 +7,61 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Admin edit group</title>
-    <link href='<c:url value="/resources/css/styles.css"/>' rel="stylesheet" type="text/css">
-</head>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Admin edit group</title>
+        <link href='<c:url value="/resources/css/styles.css"/>' rel="stylesheet" type="text/css">
+    </head>
 
-<body>
+    <body>
 
-    <%@ include file="/WEB-INF/fragment/navbar.jsp" %>
+        <%@ include file="/WEB-INF/fragment/navbar.jsp" %>
 
-    <div class="main-container-add">
-        <div class="container-add">
+        <div class="main-container-add">
+            <div class="container-add">
 
-            <h2 class="text-breaker">EDIT GROUP ${group.name}</h2>
+                <h2 class="text-breaker">EDIT GROUP ${group.name}</h2>
 
-            <div class="content-add">
-                <form action="${contextPath}/adminEditGroup" method="post">
-                    <input type="hidden" value="${group.id}" name="groupId">
-                    <label>
-                        <input type="text" name="groupName" placeholder="Group name" value="<c:out value='${groupNameVal}'/>"/>
-                        <c:if test="${not empty blankGroupName}">
-                            <label class="hasError"><c:out value="${blankGroupName}"/></label>
-                        </c:if>
-                        <c:if test="${not empty notUniqueGroupName}">
-                            <label class="hasError"><c:out value="${notUniqueGroupName}"/></label>
-                        </c:if>
-                        <c:if test="${not empty capacityExceededGroupName}">
-                            <label class="hasError"><c:out value="${capacityExceededGroupName}"/></label>
-                        </c:if>
-                    </label>
+                <div class="content-add">
+                    <c:choose>
 
-                    <label>
-                        <input type="submit" value="Save">
-                    </label>
-                </form>
+                        <c:when test="${groupNotExists eq true}">
+                            <p class="feedback-text-submitted">Such group is not registered.</p>
+                        </c:when>
+
+                        <c:otherwise>
+                            <form action="${contextPath}/adminEditGroup" method="post">
+                                <input type="hidden" value="${group.id}" name="groupId">
+                                <label>
+                                    <input type="text" name="groupName" placeholder="Group name" value="<c:out value='${groupNameVal}'/>"/>
+                                    <c:if test="${not empty blankGroupName}">
+                                        <label class="hasError"><c:out value="${blankGroupName}"/></label>
+                                    </c:if>
+                                    <c:if test="${not empty notUniqueGroupName}">
+                                        <label class="hasError"><c:out value="${notUniqueGroupName}"/></label>
+                                    </c:if>
+                                    <c:if test="${not empty capacityExceededGroupName}">
+                                        <label class="hasError"><c:out value="${capacityExceededGroupName}"/></label>
+                                    </c:if>
+                                </label>
+
+                                <label>
+                                    <input type="submit" value="Save">
+                                </label>
+                            </form>
+                        </c:otherwise>
+                    </c:choose>
+                </div>
             </div>
+            <div class="backButton">
+                <button><a href="${contextPath}/adminGroups">Back</a></button>
+            </div>
+
+            <c:if test="${not empty isUpdated and isUpdated}">
+                <p class="feedback-text-submitted">Group updated.</p>
+            </c:if>
         </div>
 
-        <div class="backButton">
-            <button><a href="${contextPath}/adminGroups">Back</a></button>
-        </div>
-
-        <c:if test="${not empty isUpdated and isUpdated}">
-            <p class="feedback-text-submitted">Group updated.</p>
-        </c:if>
-
-    </div>
-
-</body>
+    </body>
 </html>
