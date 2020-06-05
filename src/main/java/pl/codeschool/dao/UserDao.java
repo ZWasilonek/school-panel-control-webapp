@@ -24,7 +24,9 @@ public class UserDao {
     private static final String FIND_ALL_USERS_QUERY =
         "SELECT * FROM users";
     private static final String FIND_ALL_USERS_BY_GROUP_QUERY =
-        "SELECT * FROM users u JOIN users_groups ug ON u.group_id = ug.id WHERE ug.id = ?;";
+        "SELECT * FROM users u JOIN users_groups ug ON u.group_id = ug.id WHERE ug.id = ?";
+    private static final String FIND_BY_EMAIL_QUERY =
+        "SELECT * FROM users WHERE email = ?";
 
     public static User create(User user) {
         try (Connection conn = DBUtil.getConnection()) {
@@ -89,11 +91,6 @@ public class UserDao {
         }
     }
 
-    private static List<User> addToArray(User u, List<User> users) {
-        users.add(u);
-        return users;
-    }
-
     public static List<User> findAll() {
         try (Connection conn = DBUtil.getConnection()) {
             List<User> users = new ArrayList<>();
@@ -135,5 +132,25 @@ public class UserDao {
             e.printStackTrace();
             return null;
         }
+    }
+
+    public static User findByEmail(String email) {
+        try (Connection conn = DBUtil.getConnection()) {
+            PreparedStatement statement = conn.prepareStatement(FIND_BY_EMAIL_QUERY);
+            statement.setString(1, email);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                User user = new User();
+                user.setId(resultSet.getInt("id"));
+                user.setUserName(resultSet.getString("username"));
+                user.setEmail(resultSet.getString("email"));
+                user.setPassword(resultSet.getString("password"));
+                user.setGroup(GroupDao.read(resultSet.getInt("group_id")));
+                return user;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }
