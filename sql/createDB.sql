@@ -2,7 +2,7 @@ CREATE DATABASE `codeschool` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unico
 
 CREATE TABLE users_groups(
      id INT AUTO_INCREMENT,
-     name VARCHAR(256),
+     name VARCHAR(256) UNIQUE,
      PRIMARY KEY (id)
 ) ENGINE=INNODB CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
