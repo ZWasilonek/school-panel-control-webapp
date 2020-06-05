@@ -20,7 +20,7 @@
         <div class="main-container-add">
             <div class="container-add">
 
-                <h2 class="text-breaker">EDIT EXERCISE <c:out value="${exercise.title}"/></h2>
+                <h2 class="text-breaker">EDIT EXERCISE <br> <c:out value="${exercise.title}"/></h2>
 
                 <div class="content-add">
                     <c:choose>

@@ -21,7 +21,7 @@
         <div class="main-container-add">
             <div class="container-add">
 
-                <h2 class="text-breaker">EDIT GROUP ${group.name}</h2>
+                <h2 class="text-breaker">EDIT GROUP <br> <c:out value="${group.name}"/></h2>
 
                 <div class="content-add">
                     <c:choose>

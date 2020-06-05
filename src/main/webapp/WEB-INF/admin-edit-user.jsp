@@ -20,7 +20,8 @@
 
         <div class="main-container-add">
             <div class="container-add">
-                <h1>EDIT USER <c:out value="${user.userName}"/></h1>
+
+                <h2 class="text-breaker">EDIT USER <br> <c:out value="${user.userName}"/></h2>
 
                 <div class="content-add">
                     <c:choose>
