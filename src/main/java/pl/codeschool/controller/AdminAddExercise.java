@@ -54,4 +54,5 @@ public class AdminAddExercise extends HttpServlet {
         request.getRequestDispatcher("/WEB-INF/admin-add-exercise.jsp")
             .forward(request,response);
     }
+
 }
