@@ -32,7 +32,7 @@ public class SolutionDao {
         "SELECT s.* FROM solutions s join users u on s.user_id = u.id where u.id = ?;";
     private static final String FIND_ALL_SOLUTIONS_BY_EXERCISE_QUERY =
         "SELECT s.* FROM solutions s join exercises e on s.exercise_id = e.id where e.id = ?;";
-    private static final String FIND_RECENT_SOLUTIONS =
+    private static final String FIND_RECENT_SOLUTIONS_QUERY =
         "SELECT * FROM solutions WHERE updated IS NOT NULL ORDER BY updated DESC LIMIT ?;";
 
     public static Solution create(Solution solution) {
@@ -193,7 +193,7 @@ public class SolutionDao {
     public static List<Solution> findRecent(int limit) {
         try (Connection conn = DBUtil.getConnection()) {
             List<Solution> solutions = new ArrayList<>();
-            PreparedStatement statement = conn.prepareStatement(FIND_RECENT_SOLUTIONS);
+            PreparedStatement statement = conn.prepareStatement(FIND_RECENT_SOLUTIONS_QUERY);
             statement.setInt(1, limit);
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
