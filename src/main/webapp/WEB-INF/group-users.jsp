@@ -22,7 +22,7 @@
         <table>
             <thead>
             <tr>
-                <th>Name</th>
+                <th>User name</th>
                 <th class="action-th">Actions</th>
             </tr>
             </thead>
@@ -30,10 +30,10 @@
                 <c:when test="${users.size() ne 0}">
                     <c:forEach items="${users}" var="user">
                         <tr>
-                            <td>
+                            <td class="text-breaker">
                                 <c:out value="${user.userName}"/>
                             </td>
-                            <td>
+                            <td class="td-action">
                                 <a href="${contextPath}/infoUser?userId=${user.id}">Details</a>
                             </td>
                         </tr>

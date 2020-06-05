@@ -33,16 +33,16 @@
                     <td class="text-breaker">
                         <c:out value="${group.name}"/>
                     </td>
-                    <td>
+                    <td class="td-action">
                         <a href="${contextPath}/infoGroupUsers?group=${group.name}&groupId=${group.id}">Show members</a>
                     </td>
-                    <td>
+                    <td class="td-action">
                         <a href="${contextPath}/adminAddUserToGroup?groupId=${group.id}">Assign member</a>
                     </td>
-                    <td>
+                    <td class="td-action">
                         <a href="${contextPath}/adminEditGroup?groupId=${group.id}">Edit</a>
                     </td>
-                    <td>
+                    <td class="td-action">
                         <a href="${contextPath}/adminDeleteGroup?groupId=${group.id}">Delete</a>
                     </td>
                 </tr>
