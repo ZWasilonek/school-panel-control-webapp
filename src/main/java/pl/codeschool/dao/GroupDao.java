@@ -17,7 +17,7 @@ public class GroupDao {
         "INSERT INTO users_groups(name) VALUES (?);";
     private static final String READ_GROUP_QUERY =
         "SELECT * FROM users_groups WHERE id = ?;";
-    private static final String READ_BY_NAME =
+    private static final String READ_BY_NAME_QUERY =
         "SELECT * FROM users_groups WHERE name =?;";
     private static final String UPDATE_GROUP_QUERY =
         "UPDATE users_groups SET name = ? WHERE id = ?;";
@@ -61,7 +61,7 @@ public class GroupDao {
 
     public static Group readByName(String groupName) {
         try (Connection conn = DBUtil.getConnection()) {
-            PreparedStatement statement = conn.prepareStatement(READ_BY_NAME);
+            PreparedStatement statement = conn.prepareStatement(READ_BY_NAME_QUERY);
             statement.setString(1, groupName);
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
