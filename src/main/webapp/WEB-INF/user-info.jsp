@@ -18,19 +18,20 @@
 
     <%@ include file="/WEB-INF/fragment/navbar.jsp" %>
 
-    <div class="container-user">
+    <div class="container-details">
 
-        <div class="user-details-content">
-            <h1><c:out value="${user.userName}"/> user details:</h1>
-            <p>Email: <c:out value="${user.email}"/></p>
-            <p>Group: <c:out value="${user.group.name}"/></p>
-            <p><strong>Added exercise solutions:</strong></p>
+        <div class="content-details">
+            <h1>USER DETAILS</h1>
+            <p><strong>NAME:</strong> <c:out value="${user.userName}"/></p>
+            <p><strong>EMAIL:</strong> <c:out value="${user.email}"/></p>
+            <p><strong>GROUP:</strong> <c:out value="${user.group.name}"/></p>
+            <p><strong>ADDED EXERCISE SOLUTIONS:</strong></p>
         </div>
 
         <table>
             <thead>
             <tr>
-                <th>Exercise name</th>
+                <th style="width: 60%">Exercise title</th>
                 <th>Creation date</th>
                 <th>Update date</th>
                 <th>Actions</th>
@@ -47,10 +48,10 @@
                             <c:when test="${userSolutions.size() ne 0}">
                                 <c:forEach items="${userSolutions}" var="solution">
                                     <tr>
-                                        <td><c:out value="${solution.exercise.title}"/></td>
+                                        <td class="text-breaker"><c:out value="${solution.exercise.title}"/></td>
                                         <td><c:out value="${solution.created}"/></td>
                                         <td><c:out value="${solution.updated}"/></td>
-                                        <td>
+                                        <td class="td-action">
                                             <a href="${contextPath}/infoSolution?solutionId=${solution.id}">Details</a>
                                         </td>
                                     </tr>
