@@ -77,7 +77,7 @@
                     <label class="selector-add-user">
                         <div>
                         <c:choose>
-                            <c:when test="${hasGroup eq false}">
+                            <c:when test="${not empty hasGroup and hasGroup eq false}">
                                 <span>register groups first before you start adding a user</span>
                             </c:when>
                             <c:otherwise>
