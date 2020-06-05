@@ -18,25 +18,94 @@
 
     <%@ include file="/WEB-INF/fragment/navbar.jsp" %>
 
-    <form action="${contextPath}/adminAddUser" method="post">
-        User name <input type="text" name="userName"><br>
-        User email <input type="text" name="userEmail"><br>
-        User password <input type="password" name="userPass"><br>
-        Repeat password <input type="password" name="rePass" placeholder="new password"><br>
+    <div class="main-container-add">
+        <div class="container-add">
+            <h1>ADD USER</h1>
 
-        User group
-        <select name="groupName">
-            <c:forEach var="group" items="${groups}">
-            <option>${group.name}</option>
-            </c:forEach>
-        </select><br>
+            <div class="content-add">
 
-        <input type="submit" value="Save"><br>
-    </form>
+                <form action="${contextPath}/adminAddUser" method="post">
+                    <label>
+                        <input type="text" name="userName" placeholder="name" value="<c:out value='${userNameVal}'/>"/>
+                        <c:if test="${not empty blankUserName}">
+                            <label class="hasError"><c:out value="${blankUserName}"/></label>
+                        </c:if>
+                        <c:if test="${not empty capacityExceededUserName}">
+                            <label class="hasError"><c:out value="${capacityExceededUserName}"/></label>
+                        </c:if>
+                    </label>
 
-    <c:if test="${userCreated eq true}">
-        <p class="feedback-text-submitted">New user created.</p>
-    </c:if>
+                    <label>
+                        <input type="email" name="userEmail" placeholder="email" value="<c:out value='${userEmailVal}'/>">
+                        <c:if test="${not empty blankUserEmail}">
+                            <label class="hasError"><c:out value="${blankUserEmail}"/></label>
+                        </c:if>
+                        <c:if test="${not empty notUniqueUserEmail}">
+                            <label class="hasError"><c:out value="${notUniqueUserEmail}"/></label>
+                        </c:if>
+                        <c:if test="${not empty capacityExceededUserEmail}">
+                            <label class="hasError"><c:out value="${capacityExceededUserEmaile}"/></label>
+                        </c:if>
+                    </label>
+
+                    <label>
+                        <input type="password" name="userPass" placeholder="password">
+                        <c:if test="${not empty blankUserPass}">
+                            <label class="hasError"><c:out value="${blankUserPass}"/></label>
+                        </c:if>
+                        <c:if test="${not empty capacityExceededUserPass}">
+                            <label class="hasError"><c:out value="${capacityExceededUserPass}"/></label>
+                        </c:if>
+                        <c:if test="${not empty passwordToShort}">
+                            <label class="hasError"><c:out value="${passwordToShort}"/></label>
+                        </c:if>
+                        <c:if test="${not empty passwordsNotMatch}">
+                            <label class="hasError"><c:out value="${passwordsNotMatch}"/></label>
+                        </c:if>
+                    </label>
+
+                    <label>
+                        <input type="password" name="rePass" placeholder="repeat password">
+                        <c:if test="${not empty blankRePass}">
+                            <label class="hasError"><c:out value="${blankRePass}"/></label>
+                        </c:if>
+                        <c:if test="${not empty passwordsNotMatch}">
+                            <label class="hasError"><c:out value="${passwordsNotMatch}"/></label>
+                        </c:if>
+                    </label>
+
+                    <label class="selector-add-user">
+                        <div>
+                        <c:choose>
+                            <c:when test="${hasGroup eq false}">
+                                <span>register groups first before you start adding a user</span>
+                            </c:when>
+                            <c:otherwise>
+                                <span>Select group: </span>
+                                <select name="groupName">
+                                    <c:forEach var="group" items="${groups}">
+                                        <option>${group.name}</option>
+                                    </c:forEach>
+                                </select>
+                            </c:otherwise>
+                        </c:choose>
+                        </div>
+                    </label>
+
+                    <label>
+                        <input type="submit" value="Save">
+                    </label>
+                </form>
+
+            </div>
+
+        </div>
+
+        <c:if test="${not empty userCreated and userCreated eq true}">
+            <p class="feedback-text-submitted">New user created.</p>
+        </c:if>
+
+    </div>
 
 </body>
 </html>

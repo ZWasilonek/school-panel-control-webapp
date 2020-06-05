@@ -77,6 +77,21 @@ a:hover {
     margin-bottom: 3em;
 }
 
+.selector-add-user {
+    margin: 0.8em 0 0 10%;
+    align-items: start !important;
+    font-size: 20px
+}
+
+.selector-add-user span {
+    margin-right: 0.5em;
+    font-size: 20px;
+}
+
+.selector-add-user select{
+    font-size: 18px;
+    text-transform: uppercase;
+}
 
 /*EXERCISE*/
 .addButton {
@@ -219,6 +234,10 @@ table thead th:first-child {
 
 .action-th {
     width: 25%;
+}
+
+.td-action {
+    text-align: center;
 }
 
 /*------------------------------*/
