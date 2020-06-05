@@ -101,6 +101,10 @@
 
         </div>
 
+        <div class="backButton">
+            <button><a href="${contextPath}/adminGroups">Back</a></button>
+        </div>
+
         <c:if test="${not empty userCreated and userCreated eq true}">
             <p class="feedback-text-submitted">New user created.</p>
         </c:if>
