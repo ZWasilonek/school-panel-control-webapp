@@ -32,13 +32,13 @@
                         <c:out value="${exercise.title}"/>
                     </td>
                     <td class="td-action">
+                        <a href="${contextPath}/infoSolutions?exerciseId=${exercise.id}">Solutions</a>
+                    </td>
+                    <td class="td-action">
                         <a href="${contextPath}/adminEditExercise?exerciseId=${exercise.id}">Edit</a>
                     </td>
                     <td class="td-action">
                         <a href="${contextPath}/adminDeleteExercise?exerciseId=${exercise.id}">Delete</a>
-                    </td>
-                    <td class="td-action">
-                        <a href="${contextPath}/infoSolutions?exerciseId=${exercise.id}">Solutions</a>
                     </td>
                 </tr>
             </c:forEach>
