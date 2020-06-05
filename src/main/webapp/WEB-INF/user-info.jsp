@@ -36,26 +36,37 @@
                 <th>Actions</th>
             </tr>
             </thead>
-            <c:choose>
-                <c:when test="${userSolutions.size() ne 0}">
-                    <c:forEach items="${userSolutions}" var="solution">
-                        <tr>
-                            <td><c:out value="${solution.exercise.title}"/></td>
-                            <td><c:out value="${solution.created}"/></td>
-                            <td><c:out value="${solution.updated}"/></td>
-                            <td>
-                                <a href="${contextPath}/infoSolution?solutionId=${solution.id}">Details</a>
-                            </td>
-                        </tr>
-                    </c:forEach>
-                </c:when>
+            <tbody>
+                <c:choose>
+                    <c:when test="${userNotExists eq true}">
+                        <th colspan="4" class="feedback-text-submitted">Such user is not registered.</th>
+                    </c:when>
 
-                <c:otherwise>
-                    <tr>
-                        <td colspan="4" class="feedback-text-submitted">The user has not solved any exercise yet</td>
-                    </tr>
-                </c:otherwise>
-            </c:choose>
+                    <c:otherwise>
+                        <c:choose>
+                            <c:when test="${userSolutions.size() ne 0}">
+                                <c:forEach items="${userSolutions}" var="solution">
+                                    <tr>
+                                        <td><c:out value="${solution.exercise.title}"/></td>
+                                        <td><c:out value="${solution.created}"/></td>
+                                        <td><c:out value="${solution.updated}"/></td>
+                                        <td>
+                                            <a href="${contextPath}/infoSolution?solutionId=${solution.id}">Details</a>
+                                        </td>
+                                    </tr>
+                                </c:forEach>
+                            </c:when>
+
+                            <c:otherwise>
+                                <tr>
+                                    <td colspan="4" class="feedback-text-submitted">The user has not solved any exercise yet</td>
+                                </tr>
+                            </c:otherwise>
+                        </c:choose>
+
+                    </c:otherwise>
+                </c:choose>
+            </tbody>
         </table>
     </div>
 

@@ -29,16 +29,16 @@ public class InfoUser extends HttpServlet {
 
                 if (user != null) {
                     request.setAttribute("user", user);
-
                     List<Solution> userSolutions = SolutionDao.findAllByUserId(userId);
                     request.setAttribute("userSolutions", userSolutions);
-                    request.getRequestDispatcher("/WEB-INF/user-info.jsp")
-                            .forward(request, response);
-                }
 
+                } else request.setAttribute("userNotExists", true);
             } catch (NumberFormatException e) {
                 e.printStackTrace();
             }
         }
+        request.getRequestDispatcher("/WEB-INF/user-info.jsp")
+                .forward(request, response);
     }
+
 }

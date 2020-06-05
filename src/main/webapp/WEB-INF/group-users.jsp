@@ -27,23 +27,32 @@
             </tr>
             </thead>
             <c:choose>
-                <c:when test="${users.size() ne 0}">
-                    <c:forEach items="${users}" var="user">
-                        <tr>
-                            <td class="text-breaker">
-                                <c:out value="${user.userName}"/>
-                            </td>
-                            <td class="td-action">
-                                <a href="${contextPath}/infoUser?userId=${user.id}">Details</a>
-                            </td>
-                        </tr>
-                    </c:forEach>
+                <c:when test="${groupNotExists eq true}">
+                    <td colspan="2" class="feedback-text-submitted">Such group is not registered.</td>
                 </c:when>
+
                 <c:otherwise>
-                    <tr>
-                        <td colspan="2" class="feedback-text-submitted">This group has no members yet</td>
-                    </tr>
+                    <c:choose>
+                        <c:when test="${users.size() ne 0}">
+                            <c:forEach items="${users}" var="user">
+                                <tr>
+                                    <td class="text-breaker">
+                                        <c:out value="${user.userName}"/>
+                                    </td>
+                                    <td class="td-action">
+                                        <a href="${contextPath}/infoUser?userId=${user.id}">Details</a>
+                                    </td>
+                                </tr>
+                            </c:forEach>
+                        </c:when>
+                        <c:otherwise>
+                            <tr>
+                                <td colspan="2" class="feedback-text-submitted">This group has no members yet</td>
+                            </tr>
+                        </c:otherwise>
+                    </c:choose>
                 </c:otherwise>
+
             </c:choose>
         </table>
     </div>
