@@ -18,7 +18,7 @@
 
     <%@ include file="/WEB-INF/fragment/navbar.jsp" %>
     <div class="container-group">
-        <h1>Users</h1>
+        <h1>USERS</h1>
 
         <table>
             <thead>
@@ -30,14 +30,18 @@
             </thead>
             <c:forEach items="${users}" var="user">
                 <tr>
-                    <td><c:out value="${user.userName}"/></td>
-                    <td><c:out value="${user.group.name}"/></td>
-                    <td>
+                    <td class="text-breaker">
+                        <c:out value="${user.userName}"/>
+                    </td>
+                    <td class="text-breaker">
+                        <c:out value="${user.group.name}"/>
+                    </td>
+                    <td class="td-action">
                         <c:if test="${user.group.name ne group.name}">
                             <a href="${contextPath}/adminAddUserToGroup?userId=${user.id}&groupId=${group.id}">Assign to group <c:out value="${group.name}"/></a>
                         </c:if>
                     </td>
-                    <td>
+                    <td class="td-action">
                         <a href="${contextPath}/infoUser?userId=${user.id}">User detail</a>
                     </td>
                 </tr>

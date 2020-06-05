@@ -20,7 +20,7 @@
 
     <div class="main-container-add">
         <div class="container-add">
-            <h1>Add Exercise</h1>
+            <h1>ADD EXERCISE</h1>
             <div class="content-add">
                 <form action="${contextPath}/adminAddExercise" method="post" accept-charset="UTF-8">
                     <label>

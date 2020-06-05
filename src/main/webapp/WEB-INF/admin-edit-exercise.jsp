@@ -20,7 +20,8 @@
 
     <div class="main-container-add">
         <div class="container-add">
-            <h2>Edit exercise ${exercise.title}</h2>
+
+            <h2 class="text-breaker">EDIT EXERCISE ${exercise.title}</h2>
 
             <div class="content-add">
                 <form action="${contextPath}/adminEditExercise" method="post">
