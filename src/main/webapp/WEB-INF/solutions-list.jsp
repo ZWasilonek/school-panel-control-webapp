@@ -19,6 +19,7 @@
         <%@ include file="/WEB-INF/fragment/navbar.jsp" %>
 
         <div class="container-exc-sol">
+
             <div class="left-exercise-description">
                 <h2>Exercise description:</h2>
                 <p><c:out value="${exercise.description}"/></p>
@@ -26,21 +27,27 @@
 
             <div class="center-info-table-sol">
 
-                <h1>EXERCISE SOLUTIONS</h1>
+                <div class="content-title">
+                    <h1>EXERCISE SOLUTIONS</h1>
+                    <c:if test="${!exerciseNotExists}">
+                        <button class="addButton">
+                            <a class="addButton" href="${contextPath}/addSolution">Add new</a>
+                        </button>
+                    </c:if>
+                </div>
 
                 <table>
                     <thead>
                     <tr>
-                        <th><c:out value="${exercise.title}"/></th>
-                        <th>Solved the exercise</th>
+                        <th class="text-breaker"><c:out value="${exercise.title}"/></th>
+                        <th style="width: 15%">Solved the exercise</th>
+                        <th style="width: 10%">Actions</th>
                     </tr>
                     </thead>
                     <tbody>
                     <c:choose>
                         <c:when test="${exerciseNotExists}">
-                            <tr>
-                                <td colspan="2" class="feedback-text-submitted">Such exercise is not registered.</td>
-                            </tr>
+                            <th colspan="3" class="feedback-text-submitted">Such exercise is not registered.</th>
                         </c:when>
 
                         <c:otherwise>
@@ -48,15 +55,18 @@
                                 <c:when test="${solutions.size() ne 0}">
                                     <c:forEach var="solution" items="${solutions}">
                                         <tr>
-                                            <td><c:out value="${solution.description}"/></td>
-                                            <td><c:out value="${solution.user.userName}"/></td>
+                                            <td class="text-breaker solution-break-space"><c:out value="${solution.description}"/></td>
+                                            <td class="td-action"><c:out value="${solution.user.userName}"/></td>
+                                            <td class="td-action">
+                                                <a href="${contextPath}/infoUser?userId=${solution.user.id}">User details</a>
+                                            </td>
                                         </tr>
                                     </c:forEach>
                                 </c:when>
 
                                 <c:otherwise>
                                     <tr>
-                                        <td colspan="2" class="feedback-text-submitted">There are no solutions for this exercise yet.</td>
+                                        <td colspan="3" class="feedback-text-submitted">There are no solutions for this exercise yet.</td>
                                     </tr>
                                 </c:otherwise>
                             </c:choose>
