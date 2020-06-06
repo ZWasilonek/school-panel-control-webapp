@@ -58,4 +58,5 @@ public class Exercise {
     public void setSolutions(List<Solution> solutions) {
         this.solutions = solutions;
     }
+
 }
