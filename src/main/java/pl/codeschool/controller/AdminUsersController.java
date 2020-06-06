@@ -12,18 +12,16 @@ import java.io.IOException;
 import java.util.List;
 
 @WebServlet("/adminUsers")
-public class AdminUsers extends HttpServlet {
+public class AdminUsersController extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.setCharacterEncoding("UTF-8");
         response.setContentType("text/html; charset=UTF-8");
 
         List<User> users = UserDao.findAll();
-        if (users != null) {
             request.setAttribute("users", users);
-        }
 
         request.getRequestDispatcher("/WEB-INF/admin-users.jsp")
                 .forward(request, response);
     }
+
 }

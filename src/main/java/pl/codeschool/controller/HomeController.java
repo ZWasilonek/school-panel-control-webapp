@@ -1,7 +1,7 @@
 package pl.codeschool.controller;
 
-import pl.codeschool.dao.ExerciseDao;
-import pl.codeschool.model.Exercise;
+import pl.codeschool.dao.SolutionDao;
+import pl.codeschool.model.Solution;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,19 +11,19 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet("/adminExercises")
-public class AdminExercises extends HttpServlet {
+@WebServlet("/")
+public class HomeController extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.setCharacterEncoding("UTF-8");
         response.setContentType("text/html; charset=UTF-8");
 
-        List<Exercise> exercises = ExerciseDao.findAll();
-        if (exercises != null) {
-            request.setAttribute("exercises", exercises);
-        }
+        int numberOfRows = Integer.parseInt(getServletContext().getInitParameter("numberOfRows"));
 
-        request.getRequestDispatcher("/WEB-INF/admin-exercises.jsp")
+        List<Solution> recentSolutions = SolutionDao.findRecent(numberOfRows);
+        request.setAttribute("solutions", recentSolutions);
+
+        request.getRequestDispatcher("/WEB-INF/index.jsp")
                 .forward(request, response);
     }
+
 }

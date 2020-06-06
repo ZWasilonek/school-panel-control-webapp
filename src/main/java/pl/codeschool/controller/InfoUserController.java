@@ -14,10 +14,9 @@ import java.io.IOException;
 import java.util.List;
 
 @WebServlet("/infoUser")
-public class InfoUser extends HttpServlet {
+public class InfoUserController extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.setCharacterEncoding("UTF-8");
         response.setContentType("text/html; charset=UTF-8");
 
         String paramUserId = request.getParameter("userId");

@@ -11,10 +11,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @WebServlet("/infoSolution")
-public class InfoSolution extends HttpServlet {
+public class InfoSolutionController extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.setCharacterEncoding("UTF-8");
         response.setContentType("text/html; charset=UTF-8");
 
         String paramSolutionId = request.getParameter("solutionId");
@@ -26,13 +25,14 @@ public class InfoSolution extends HttpServlet {
 
                 if (solution != null) {
                     request.setAttribute("solution", solution);
-                    request.getRequestDispatcher("/WEB-INF/solution-info.jsp")
-                            .forward(request, response);
-                } else response.getWriter().write("Nie ma jeszcze rozwiązania do tego zadania");
+                } else request.setAttribute("solutionNotExists", true);
 
             } catch (NumberFormatException e) {
                 e.printStackTrace();
             }
         }
+        request.getRequestDispatcher("/WEB-INF/solution-info.jsp")
+                .forward(request, response);
     }
+
 }

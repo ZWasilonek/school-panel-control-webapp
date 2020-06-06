@@ -15,10 +15,9 @@ import java.io.IOException;
 import java.util.Map;
 
 @WebServlet("/adminEditExercise")
-public class AdminEditExercise extends HttpServlet {
+public class AdminEditExerciseController extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.setCharacterEncoding("UTF-8");
         response.setContentType("text/html; charset=UTF-8");
 
         String paramTitle = request.getParameter("title");
@@ -43,7 +42,6 @@ public class AdminEditExercise extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.setCharacterEncoding("UTF-8");
         response.setContentType("text/html; charset=UTF-8");
 
         String paramTitle = request.getParameter("title");

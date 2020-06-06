@@ -12,30 +12,30 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet("/infoGroupUsers")
-public class infoGroupUsers extends HttpServlet {
+@WebServlet("/adminDeleteGroup")
+public class AdminDeleteGroupController extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.setCharacterEncoding("UTF-8");
         response.setContentType("text/html; charset=UTF-8");
 
-        String paramGroupName = request.getParameter("group");
         String paramGroupId = request.getParameter("groupId");
 
-        if (paramGroupId != null && !"".equals(paramGroupId) &&
-                paramGroupName != null && !"".equals(paramGroupName)) {
+        if (paramGroupId != null && !"".equals(paramGroupId)) {
             try {
                 int groupId = Integer.parseInt(paramGroupId);
-                if (GroupDao.read(groupId) != null) {
-                    List<User> users = UserDao.findAllByGroupId(groupId);
-                    request.setAttribute("groupName", paramGroupName);
-                    request.setAttribute("users", users);
-                } else request.setAttribute("groupNotExists", true);
+
+                List<User> foundedUsers = UserDao.findAllByGroupId(groupId);
+                if (foundedUsers.size() == 0) {
+                    GroupDao.delete(groupId);
+                } else {
+                    request.setAttribute("isEmpty", false);
+                }
+
             } catch (NumberFormatException e) {
                 e.printStackTrace();
             }
         }
-        request.getRequestDispatcher("/WEB-INF/group-users.jsp")
+        request.getRequestDispatcher("/adminGroups")
                 .forward(request, response);
     }
 

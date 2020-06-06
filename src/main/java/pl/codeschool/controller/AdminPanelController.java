@@ -8,13 +8,13 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @WebServlet("/panelAdmin")
-public class AdminPanel extends HttpServlet {
+public class AdminPanelController extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.setCharacterEncoding("UTF-8");
         response.setContentType("text/html; charset=UTF-8");
 
         request.getRequestDispatcher("/WEB-INF/admin.jsp")
                 .forward(request, response);
     }
+
 }

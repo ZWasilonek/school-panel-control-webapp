@@ -15,10 +15,9 @@ import java.io.IOException;
 import java.util.Map;
 
 @WebServlet("/adminAddGroup")
-public class AdminAddGroup extends HttpServlet {
+public class AdminAddGroupController extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.setCharacterEncoding("UTF-8");
         response.setContentType("text/html; charset=UTF-8");
 
         String groupName = request.getParameter("groupName");
@@ -41,7 +40,6 @@ public class AdminAddGroup extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.setCharacterEncoding("UTF-8");
         response.setContentType("text/html; charset=UTF-8");
 
         String groupName = request.getParameter("groupName");

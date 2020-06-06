@@ -1,6 +1,6 @@
 package pl.codeschool.controller;
 
-import pl.codeschool.dao.UserDao;
+import pl.codeschool.dao.ExerciseDao;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,27 +9,23 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet("/adminDeleteUser")
-public class AdminDeleteUser extends HttpServlet {
+@WebServlet("/adminDeleteExercise")
+public class AdminDeleteExerciseController extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.setCharacterEncoding("UTF-8");
         response.setContentType("text/html; charset=UTF-8");
 
-        String paramUserId = request.getParameter("userId");
+        String paramExerciseId = request.getParameter("exerciseId");
 
-        if (paramUserId != null && !"".equals(paramUserId)) {
+        if (paramExerciseId != null && !"".equals(paramExerciseId)) {
             try {
-                int userId = Integer.parseInt(paramUserId);
-                UserDao.delete(userId);
-                request.getRequestDispatcher("/adminUsers")
-                        .forward(request, response);
-
+                int exerciseId = Integer.parseInt(paramExerciseId);
+                ExerciseDao.delete(exerciseId);
             } catch (NumberFormatException e) {
                 e.printStackTrace();
             }
         }
-        request.getRequestDispatcher("/adminUsers")
-                .forward(request, response);
+        request.getRequestDispatcher("/adminExercises").forward(request, response);
     }
+
 }
