@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.Set;
 
 public class BlankValidation {
+
     private static final String EMPTY_FIELD = "this field cannot be empty";
 
     public static boolean hasBlankErrorsAttributes(Map<String,String> fieldNames, HttpServletRequest request) {
@@ -28,4 +29,5 @@ public class BlankValidation {
         }
         return blankFields;
     }
+
 }
