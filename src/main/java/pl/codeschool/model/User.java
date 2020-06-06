@@ -3,6 +3,7 @@ package pl.codeschool.model;
 import org.mindrot.jbcrypt.BCrypt;
 
 public class User {
+
     private int id;
     private String userName;
     private String email;
@@ -69,5 +70,6 @@ public class User {
     public void setGroup(Group group) {
         this.group = group;
     }
+
 }
 
