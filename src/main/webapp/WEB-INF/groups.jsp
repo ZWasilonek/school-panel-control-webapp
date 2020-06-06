@@ -6,6 +6,7 @@
 </style>
 <!DOCTYPE html>
 <html lang="en">
+
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -14,20 +15,31 @@
     </head>
 
     <body>
+
         <%@ include file="/WEB-INF/fragment/navbar.jsp" %>
+
         <div class="container-group">
             <table>
-                <c:forEach items="${groups}" var="group" varStatus="groupNumber">
-                    <tr>
-                        <td>
-                            <a href="${contextPath}/infoGroupUsers?group=${group.name}&groupId=${group.id}">
-                                <c:out value="${groupNumber.index + 1}"/> :
-                                <c:out value="${group.name }"/>
-                            </a>
-                        </td>
-                    </tr>
-                </c:forEach>
+                <c:choose>
+                    <c:when test="${groups.size() == 0}">
+                        <th class="feedback-text-submitted">No group found in the registry.</th>
+                    </c:when>
+
+                    <c:otherwise>
+                        <c:forEach items="${groups}" var="group" varStatus="groupNumber">
+                            <tr>
+                                <td class="index"><c:out value="${groupNumber.index + 1}"/></td>
+                                <td>
+                                    <a href="${contextPath}/infoGroupUsers?group=${group.name}&groupId=${group.id}">
+                                        <c:out value="${group.name}"/>
+                                    </a>
+                                </td>
+                            </tr>
+                        </c:forEach>
+                    </c:otherwise>
+                </c:choose>
             </table>
         </div>
+
     </body>
 </html>
