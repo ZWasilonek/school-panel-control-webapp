@@ -10,13 +10,17 @@
 }
 
 .container {
-    margin: 4em auto;
+    margin: 6em auto;
     width: 70%;
+}
+
+.container h1 {
+    color: #1C6EA4;
 }
 
 /*GROUP*/
 .container-group {
-    margin: 4em auto;
+    margin: 6em auto;
     width: 50%;
 }
 
@@ -28,6 +32,7 @@
     padding-left: 0 !important;
     color: #1C6EA4;
     text-transform: uppercase;
+    margin-top: -2em;
 }
 
 .text-breaker {
@@ -49,7 +54,7 @@ a:hover {
 
 /*SOLUTION*/
 .solution {
-    margin: 4em auto;
+    margin: 2em auto 0 auto;
     width: 50%;
     min-height: auto;
     background-color: #c7dffb;
@@ -63,8 +68,14 @@ a:hover {
     margin-bottom: 0;
 }
 
-.solution p {
+.solution-break-space {
     padding: 1em;
+    white-space: break-spaces;
+}
+
+.sol-detail div {
+    margin-left: 15%;
+    width: 70%;
 }
 
 .container-details-solution {
@@ -90,6 +101,12 @@ a:hover {
     font-size: 35px;
 }
 
+.content-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+}
+
 /*USER*/
 .content-details * {
     text-align: left;
@@ -100,6 +117,10 @@ a:hover {
 .content-details {
     margin-bottom: 1.5em;
     padding-left: 0 !important;
+}
+
+.container-group table thead tr th:first-child {
+    width: 60%;
 }
 
 .content-details p strong {
@@ -328,6 +349,11 @@ td, th {
 
 tr:nth-child(even) {
     background-color: #c7dffb;
+}
+
+td.index {
+    width: 5%;
+    text-align: center;
 }
 
 .feedback-text-submitted {
