@@ -14,11 +14,10 @@ import java.io.IOException;
 import java.util.List;
 
 @WebServlet("/adminAddUserToGroup")
-public class AdminAddUserToGroup extends HttpServlet {
+public class AdminAddUserToGroupController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.setCharacterEncoding("UTF-8");
         response.setContentType("text/html; charset=UTF-8");
 
         String paramGroupId = request.getParameter("groupId");
@@ -39,8 +38,10 @@ public class AdminAddUserToGroup extends HttpServlet {
             try {
                 int userId = Integer.parseInt(paramUserId);
                 User founded = UserDao.read(userId);
-                founded.setGroup(foundedGroup);
-                UserDao.update(founded);
+                if (founded != null) {
+                    founded.setGroup(foundedGroup);
+                    UserDao.update(founded);
+                }
             } catch (NumberFormatException e) {
                 e.printStackTrace();
             }
