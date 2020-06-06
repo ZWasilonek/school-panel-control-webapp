@@ -12,10 +12,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
-import java.util.Objects;
 
 @WebServlet("/infoSolutions")
-public class AdminExerciseSolutions extends HttpServlet {
+public class AdminExerciseSolutionsController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -23,16 +22,22 @@ public class AdminExerciseSolutions extends HttpServlet {
         response.setContentType("text/html; charset=UTF-8");
 
         String paramExerciseId = request.getParameter("exerciseId");
-        int exerciseId;
+
         if (paramExerciseId != null && !"".equals(paramExerciseId)) {
             try {
-                exerciseId = Integer.parseInt(paramExerciseId);
+                int exerciseId = Integer.parseInt(paramExerciseId);
+                Exercise foundedExercise = ExerciseDao.read(exerciseId);
+
+                if (foundedExercise == null) {
+                    request.setAttribute("exerciseNotExists", true);
+                } else {
+                    request.setAttribute("exercise", foundedExercise);
+                }
+
                 List<Solution> solutionsByExerciseId = SolutionDao.findAllByExerciseId(exerciseId);
                 if (solutionsByExerciseId != null) {
                     request.setAttribute("solutions", solutionsByExerciseId);
                 }
-                Exercise exercise = ExerciseDao.read(exerciseId);
-                request.setAttribute("exercise", exercise);
             } catch (NumberFormatException e) {
                 e.printStackTrace();
             }
@@ -40,4 +45,5 @@ public class AdminExerciseSolutions extends HttpServlet {
         request.getRequestDispatcher("/WEB-INF/solutions-list.jsp")
                 .forward(request, response);
     }
+
 }

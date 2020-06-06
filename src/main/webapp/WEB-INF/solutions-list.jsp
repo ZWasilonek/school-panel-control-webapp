@@ -7,53 +7,68 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Solution details</title>
-    <link href='<c:url value="/resources/css/styles.css"/>' rel="stylesheet" type="text/css">
-</head>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Solution details</title>
+        <link href='<c:url value="/resources/css/styles.css"/>' rel="stylesheet" type="text/css">
+    </head>
 
-<body>
+    <body>
 
-    <%@ include file="/WEB-INF/fragment/navbar.jsp" %>
+        <%@ include file="/WEB-INF/fragment/navbar.jsp" %>
 
-    <div class="container-exc-sol">
-        <div class="left-exercise-description">
-            <h2>Exercise description:</h2>
-            <p><c:out value="${exercise.description}"/></p>
-        </div>
+        <div class="container-exc-sol">
+            <div class="left-exercise-description">
+                <h2>Exercise description:</h2>
+                <p><c:out value="${exercise.description}"/></p>
+            </div>
 
-        <div class="center-info-table-sol">
-            <table>
-                <thead>
-                <tr>
-                    <th><c:out value="${exercise.title}"/> solution details</th>
-                    <th>Solved the exercise</th>
-                </tr>
-                </thead>
-                <tbody>
-                <c:choose>
-                    <c:when test="${solutions.size() ne 0}">
-                        <c:forEach var="solution" items="${solutions}">
+            <div class="center-info-table-sol">
+
+                <h1>EXERCISE SOLUTIONS</h1>
+
+                <table>
+                    <thead>
+                    <tr>
+                        <th><c:out value="${exercise.title}"/></th>
+                        <th>Solved the exercise</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <c:choose>
+                        <c:when test="${exerciseNotExists}">
                             <tr>
-                                <td><c:out value="${solution.description}"/></td>
-                                <td><c:out value="${solution.user.userName}"/></td>
+                                <td colspan="2" class="feedback-text-submitted">Such exercise is not registered.</td>
                             </tr>
-                        </c:forEach>
-                    </c:when>
-                    <c:otherwise>
-                        <tr>
-                            <td colspan="2" class="feedback-text-submitted">There are no solutions for this exercise yet</td>
-                        </tr>
-                    </c:otherwise>
-                </c:choose>
-                </tbody>
-            </table>
+                        </c:when>
+
+                        <c:otherwise>
+                            <c:choose>
+                                <c:when test="${solutions.size() ne 0}">
+                                    <c:forEach var="solution" items="${solutions}">
+                                        <tr>
+                                            <td><c:out value="${solution.description}"/></td>
+                                            <td><c:out value="${solution.user.userName}"/></td>
+                                        </tr>
+                                    </c:forEach>
+                                </c:when>
+
+                                <c:otherwise>
+                                    <tr>
+                                        <td colspan="2" class="feedback-text-submitted">There are no solutions for this exercise yet.</td>
+                                    </tr>
+                                </c:otherwise>
+                            </c:choose>
+                        </c:otherwise>
+
+                    </c:choose>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="rightContainer"></div>
         </div>
 
-        <div class="rightContainer"></div>
-    </div>
-
-</body>
+    </body>
 </html>
