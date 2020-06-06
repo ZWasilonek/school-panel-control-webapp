@@ -81,11 +81,6 @@ public class ExerciseDao {
         }
     }
 
-    private static List<Exercise> addToArray(Exercise e, List<Exercise> exercises) {
-        exercises.add(e);
-        return exercises;
-    }
-
     public static List<Exercise> findAll() {
         try (Connection conn = DBUtil.getConnection()) {
             List<Exercise> exercises = new ArrayList<>();
@@ -104,4 +99,5 @@ public class ExerciseDao {
             return null;
         }
     }
+
 }

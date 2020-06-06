@@ -97,11 +97,6 @@ public class GroupDao {
         }
     }
 
-    private static List<Group> addToArray(Group g, List<Group> groups) {
-        groups.add(g);
-        return groups;
-    }
-
     public static List<Group> findAll() {
         try (Connection conn = DBUtil.getConnection()) {
             List<Group> groups = new ArrayList<>();
@@ -119,4 +114,5 @@ public class GroupDao {
             return null;
         }
     }
+
 }
