@@ -10,7 +10,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,8 +17,6 @@ public class SolutionDao {
 
     private static final String CREATE_SOLUTION_QUERY =
         "INSERT INTO solutions(created, user_id, excercise_id) VALUES (?,?,?)";
-    private static final String READ_USER_SOLUTION_QUERY =
-        "SELECT * FROM solutions WHERE id = ? user_id = ?";
     private static final String READ_SOLUTION_QUERY =
         "SELECT * FROM solutions WHERE id = ?;";
     private static final String UPDATE_SOLUTION_QUERY =
@@ -74,28 +71,6 @@ public class SolutionDao {
         return null;
     }
 
-//    public static Solution read(int solutionId, int userId) {
-//        try (Connection conn = DBUtil.getConnection()) {
-//            PreparedStatement statement = conn.prepareStatement(READ_SOLUTION_QUERY);
-//            statement.setInt(1, solutionId);
-//            statement.setInt(2, userId);
-//            ResultSet resultSet = statement.executeQuery();
-//            if (resultSet.next()) {
-//                Solution solution = new Solution();
-//                solution.setId(resultSet.getInt("id"));
-//                solution.setCreated(resultSet.getTimestamp("created").toLocalDateTime());
-//                solution.setUpdated(resultSet.getTimestamp("updated") != null ? resultSet.getTimestamp("updated").toLocalDateTime() : null);
-//                solution.setDescription(resultSet.getString("description"));
-//                solution.setUser(UserDao.read(resultSet.getInt("user_id")));
-//                solution.setExercise(ExerciseDao.read(resultSet.getInt("exercise_id")));
-//                return solution;
-//            }
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//        return null;
-//    }
-
     public static void update(Solution solution) {
         try (Connection conn = DBUtil.getConnection()) {
             PreparedStatement statement = conn.prepareStatement(UPDATE_SOLUTION_QUERY);
@@ -117,11 +92,6 @@ public class SolutionDao {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-    }
-
-    private static List<Solution> addToArray(Solution s, List<Solution> solutions) {
-        solutions.add(s);
-        return solutions;
     }
 
     public static List<Solution> findAll() {
@@ -212,4 +182,5 @@ public class SolutionDao {
             return null;
         }
     }
+
 }
