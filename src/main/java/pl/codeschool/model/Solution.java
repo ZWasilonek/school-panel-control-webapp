@@ -1,5 +1,7 @@
 package pl.codeschool.model;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -45,9 +47,7 @@ public class Solution {
     }
 
     private String formatTime(LocalDateTime dateTime) {
-        String date = (DateTimeFormatter.ISO_DATE).format(dateTime);
-        String time = (DateTimeFormatter.ISO_LOCAL_TIME).format(dateTime);
-        return date + " " + time;
+        return dateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
     }
 
     public String getDescription() {
@@ -73,4 +73,5 @@ public class Solution {
     public void setUser(User user) {
         this.user = user;
     }
+
 }
