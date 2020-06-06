@@ -7,46 +7,57 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Admin users</title>
-    <link href='<c:url value="/resources/css/styles.css"/>' rel="stylesheet" type="text/css">
-</head>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Admin users</title>
+        <link href='<c:url value="/resources/css/styles.css"/>' rel="stylesheet" type="text/css">
+    </head>
 
-<body>
+    <body>
 
-    <%@ include file="/WEB-INF/fragment/navbar.jsp" %>
+        <%@ include file="/WEB-INF/fragment/navbar.jsp" %>
 
-    <div class="container-group">
-        <table>
-            <thead>
-            <tr>
-                <th>User name</th>
-                <th colspan="3" class="action-th">Actions</th>
-            </tr>
-            </thead>
-            <c:forEach items="${users}" var="user">
+        <div class="container-group">
+            <table>
+                <thead>
                 <tr>
-                    <td class="text-breaker">
-                        <c:out value="${user.userName}"/>
-                    </td>
-                    <td class="td-action">
-                        <a href="${contextPath}/infoUser?userId=${user.id}">Show</a>
-                    </td>
-                    <td class="td-action">
-                        <a href="${contextPath}/adminEditUser?userId=${user.id}">Edit</a>
-                    </td>
-                    <td class="td-action">
-                        <a href="${contextPath}/adminDeleteUser?userId=${user.id}">Delete</a>
-                    </td>
+                    <th>User name</th>
+                    <th colspan="3" class="action-th">Actions</th>
                 </tr>
-            </c:forEach>
-        </table>
+                </thead>
+                <c:choose>
+                    <c:when test="${users.size() == 0}">
+                        <tr>
+                            <td colspan="2" class="feedback-text-submitted">No user found in the registry.</td>
+                        </tr>
+                    </c:when>
 
-        <button class="addButton"><a class="addButton" href="${contextPath}/adminAddUser">Add new</a></button>
+                    <c:otherwise>
+                        <c:forEach items="${users}" var="user">
+                            <tr>
+                                <td class="text-breaker">
+                                    <c:out value="${user.userName}"/>
+                                </td>
+                                <td class="td-action">
+                                    <a href="${contextPath}/infoUser?userId=${user.id}">Show</a>
+                                </td>
+                                <td class="td-action">
+                                    <a href="${contextPath}/adminEditUser?userId=${user.id}">Edit</a>
+                                </td>
+                                <td class="td-action">
+                                    <a href="${contextPath}/adminDeleteUser?userId=${user.id}">Delete</a>
+                                </td>
+                            </tr>
+                        </c:forEach>
+                    </c:otherwise>
+                </c:choose>
+            </table>
 
-    </div>
+            <button class="addButton">
+                <a class="addButton" href="${contextPath}/adminAddUser">Add new</a>
+            </button>
+        </div>
 
-</body>
+    </body>
 </html>
