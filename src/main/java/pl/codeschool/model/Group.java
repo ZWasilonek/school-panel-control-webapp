@@ -1,6 +1,7 @@
 package pl.codeschool.model;
 
 public class Group {
+
     private int id;
     private String name;
 
@@ -30,4 +31,5 @@ public class Group {
     public void setName(String name) {
         this.name = name;
     }
+
 }
