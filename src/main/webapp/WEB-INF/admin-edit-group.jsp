@@ -26,7 +26,7 @@
                 <div class="content-add">
                     <c:choose>
 
-                        <c:when test="${groupNotExists eq true}">
+                        <c:when test="${groupNotExists}">
                             <p class="feedback-text-submitted">Such group is not registered.</p>
                         </c:when>
 
@@ -58,7 +58,7 @@
                 <button><a href="${contextPath}/adminGroups">Back</a></button>
             </div>
 
-            <c:if test="${not empty isUpdated and isUpdated}">
+            <c:if test="${isUpdated}">
                 <p class="feedback-text-submitted">Group updated.</p>
             </c:if>
         </div>

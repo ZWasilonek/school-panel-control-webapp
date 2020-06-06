@@ -25,7 +25,8 @@
 
                 <div class="content-add">
                     <c:choose>
-                        <c:when test="${userNotExists eq true}">
+
+                        <c:when test="${userNotExists}">
                             <p class="feedback-text-submitted">Such user is not registered.</p>
                         </c:when>
 
@@ -87,6 +88,7 @@
                                             <c:when test="${not empty hasGroup and hasGroup eq false}">
                                                 <span>register groups first before you start adding a user</span>
                                             </c:when>
+
                                             <c:otherwise>
                                                 <span>Select group: </span>
                                                 <select name="groupName">
@@ -104,6 +106,7 @@
                                 </label>
                             </form>
                         </c:otherwise>
+
                     </c:choose>
                 </div>
             </div>
@@ -111,7 +114,7 @@
                 <button><a href="${contextPath}/adminUsers">Back</a></button>
             </div>
 
-            <c:if test="${not empty isUpdated and isUpdated eq true}">
+            <c:if test="${isUpdated}">
                 <p class="feedback-text-submitted">User updated.</p>
             </c:if>
         </div>

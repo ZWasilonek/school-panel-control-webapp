@@ -28,25 +28,33 @@
                 <th colspan="4" class="action-th">Actions</th>
             </tr>
             </thead>
-            <c:forEach items="${groups}" var="group">
-                <tr>
-                    <td class="text-breaker">
-                        <c:out value="${group.name}"/>
-                    </td>
-                    <td class="td-action">
-                        <a href="${contextPath}/infoGroupUsers?group=${group.name}&groupId=${group.id}">Show members</a>
-                    </td>
-                    <td class="td-action">
-                        <a href="${contextPath}/adminAddUserToGroup?groupId=${group.id}">Assign member</a>
-                    </td>
-                    <td class="td-action">
-                        <a href="${contextPath}/adminEditGroup?groupId=${group.id}">Edit</a>
-                    </td>
-                    <td class="td-action">
-                        <a href="${contextPath}/adminDeleteGroup?groupId=${group.id}">Delete</a>
-                    </td>
-                </tr>
-            </c:forEach>
+            <c:choose>
+                <c:when test="${groupsNotFound}">
+                    <td colspan="2" class="feedback-text-submitted">No group found in the registry.</td>
+                </c:when>
+
+                <c:otherwise>
+                    <c:forEach items="${groups}" var="group">
+                        <tr>
+                            <td class="text-breaker">
+                                <c:out value="${group.name}"/>
+                            </td>
+                            <td class="td-action">
+                                <a href="${contextPath}/infoGroupUsers?group=${group.name}&groupId=${group.id}">Show members</a>
+                            </td>
+                            <td class="td-action">
+                                <a href="${contextPath}/adminAddUserToGroup?groupId=${group.id}">Assign member</a>
+                            </td>
+                            <td class="td-action">
+                                <a href="${contextPath}/adminEditGroup?groupId=${group.id}">Edit</a>
+                            </td>
+                            <td class="td-action">
+                                <a href="${contextPath}/adminDeleteGroup?groupId=${group.id}">Delete</a>
+                            </td>
+                        </tr>
+                    </c:forEach>
+                </c:otherwise>
+            </c:choose>
         </table>
 
         <button class="addButton"><a class="addButton" href="${contextPath}/adminAddGroup">Add new</a></button>

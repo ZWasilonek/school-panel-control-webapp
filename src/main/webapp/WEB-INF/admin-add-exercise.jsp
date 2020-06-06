@@ -54,7 +54,7 @@
                 <button><a href="${contextPath}/adminExercises">Back</a></button>
             </div>
 
-            <c:if test="${not empty exerciseCreated and exerciseCreated==true}">
+            <c:if test="${exerciseCreated}">
                 <p class="feedback-text-submitted">New exercise created.</p>
             </c:if>
         </div>

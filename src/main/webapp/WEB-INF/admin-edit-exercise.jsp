@@ -25,7 +25,7 @@
                 <div class="content-add">
                     <c:choose>
 
-                        <c:when test="${exerciseNotExists eq true}">
+                        <c:when test="${exerciseNotExists}">
                             <p class="feedback-text-submitted">Such exercise is not registered.</p>
                         </c:when>
 
@@ -60,6 +60,7 @@
 
                             </form>
                         </c:otherwise>
+
                     </c:choose>
                 </div>
             </div>
@@ -67,7 +68,7 @@
                 <button><a href="${contextPath}/adminExercises">Back</a></button>
             </div>
 
-            <c:if test="${not empty isUpdated and isUpdated eq true}">
+            <c:if test="${isUpdated}">
                 <p class="feedback-text-submitted">Exercise updated.</p>
             </c:if>
         </div>
