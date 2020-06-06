@@ -11,20 +11,19 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet("/groups")
-public class ReadAllGroups extends HttpServlet {
+@WebServlet("/groupsPanel")
+public class GroupsPanelController extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.setCharacterEncoding("UTF-8");
         response.setContentType("text/html; charset=UTF-8");
 
         List<Group> allGroups = GroupDao.findAll();
-        request.setAttribute("groups", allGroups);
+        if (allGroups != null && allGroups.size() != 0) {
+            request.setAttribute("groups", allGroups);
+        }
 
         request.getRequestDispatcher("WEB-INF/groups.jsp")
                 .forward(request, response);
-//        if (paramGroupId != null && !"".equals(paramGroupId)) {
-//        }
-
     }
+
 }
