@@ -13,7 +13,7 @@ import org.slf4j.LoggerFactory;
 public class DBUtil {
     private static DataSource dataSource;
 
-//    private static final Logger LOGGER = LoggerFactory.getLogger(DBUtil.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(DBUtil.class);
 
     public static Connection getConnection() throws SQLException {
         return getInstance().getConnection();
@@ -26,7 +26,7 @@ public class DBUtil {
                 Context envContext = (Context) initContext.lookup("java:/comp/env");
                 dataSource = (DataSource) envContext.lookup("jdbc/codeschool");
             } catch (NamingException e) {
-                e.printStackTrace();
+                LOGGER.debug(e.getMessage());
             }
         }
         return dataSource;
