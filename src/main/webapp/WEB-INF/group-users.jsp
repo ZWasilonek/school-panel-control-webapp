@@ -18,7 +18,17 @@
     <%@ include file="/WEB-INF/fragment/navbar.jsp" %>
 
     <div class="container-group">
-        <h1>${groupName} users:</h1>
+
+        <c:choose>
+            <c:when test="${groupNotExists}">
+                <h1>Unknown group</h1>
+            </c:when>
+
+            <c:otherwise>
+                <h1><c:out value="${groupName}"/></h1>
+            </c:otherwise>
+        </c:choose>
+
         <table>
             <thead>
             <tr>
@@ -27,7 +37,7 @@
             </tr>
             </thead>
             <c:choose>
-                <c:when test="${groupNotExists eq true}">
+                <c:when test="${groupNotExists}">
                     <td colspan="2" class="feedback-text-submitted">Such group is not registered.</td>
                 </c:when>
 
