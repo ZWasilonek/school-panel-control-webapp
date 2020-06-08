@@ -1,7 +1,5 @@
 package pl.codeschool.model;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -16,10 +14,10 @@ public class Solution {
 
     public Solution() {}
 
-    public Solution(User user, Exercise exercise) {
+    public Solution(User user, Exercise exercise, String description) {
         this.user = user;
         this.exercise = exercise;
-        this.created = LocalDateTime.now();
+        this.description = description;
     }
 
     public int getId() {
