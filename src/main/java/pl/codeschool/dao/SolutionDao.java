@@ -35,6 +35,7 @@ public class SolutionDao {
     public static Solution create(Solution solution) {
         try (Connection conn = DBUtil.getConnection()) {
             PreparedStatement statement = conn.prepareStatement(CREATE_SOLUTION_QUERY, Statement.RETURN_GENERATED_KEYS);
+            solution.setCreated(LocalDateTime.now());
             statement.setTimestamp(1, Timestamp.valueOf(solution.getCreated()));
             statement.setInt(2, solution.getUser().getId());
             statement.setInt(3, solution.getExercise().getId());
@@ -74,7 +75,8 @@ public class SolutionDao {
     public static void update(Solution solution) {
         try (Connection conn = DBUtil.getConnection()) {
             PreparedStatement statement = conn.prepareStatement(UPDATE_SOLUTION_QUERY);
-            statement.setTimestamp(1, Timestamp.valueOf(LocalDateTime.now()));
+            solution.setUpdated(LocalDateTime.now());
+            statement.setTimestamp(1, Timestamp.valueOf(solution.getUpdated()));
             statement.setString(2, solution.getDescription());
             statement.setInt(3, solution.getId());
             statement.executeUpdate();
