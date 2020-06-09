@@ -1,8 +1,10 @@
 package pl.codeschool.dao;
 
+import org.mindrot.jbcrypt.BCrypt;
 import pl.codeschool.model.User;
 import pl.codeschool.util.DBUtil;
 
+import javax.servlet.http.HttpServletRequest;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -14,19 +16,19 @@ import java.util.List;
 public class UserDao {
 
     private static final String CREATE_USER_QUERY =
-        "INSERT INTO users(username, email, password, group_id) VALUES (?, ?, ?, ?)";
+            "INSERT INTO users(username, email, password, group_id, is_admin) VALUES (?, ?, ?, ?, ?)";
     private static final String READ_USER_QUERY =
-        "SELECT * FROM users WHERE id = ?";
+            "SELECT * FROM users WHERE id = ?";
     private static final String UPDATE_USER_QUERY =
-        "UPDATE users SET username = ?, email = ?, password = ?, group_id = ? WHERE id = ?";
+            "UPDATE users SET username = ?, email = ?, password = ?, group_id = ? WHERE id = ?";
     private static final String DELETE_USER_QUERY =
-        "DELETE FROM users WHERE id = ?";
+            "DELETE FROM users WHERE id = ?";
     private static final String FIND_ALL_USERS_QUERY =
-        "SELECT * FROM users";
+            "SELECT * FROM users";
     private static final String FIND_ALL_USERS_BY_GROUP_QUERY =
-        "SELECT * FROM users u JOIN users_groups ug ON u.group_id = ug.id WHERE ug.id = ?";
+            "SELECT * FROM users u JOIN users_groups ug ON u.group_id = ug.id WHERE ug.id = ?";
     private static final String FIND_BY_EMAIL_QUERY =
-        "SELECT * FROM users WHERE email = ?";
+            "SELECT * FROM users WHERE email = ?";
 
     public static User create(User user) {
         try (Connection conn = DBUtil.getConnection()) {
@@ -35,6 +37,7 @@ public class UserDao {
             statement.setString(2, user.getEmail());
             statement.setString(3, user.getPassword());
             statement.setInt(4, user.getGroup().getId());
+            statement.setBoolean(5, user.isAdmin());
             statement.executeUpdate();
             ResultSet resultSet = statement.getGeneratedKeys();
             if (resultSet.next()) {
@@ -59,6 +62,7 @@ public class UserDao {
                 user.setEmail(resultSet.getString("email"));
                 user.setPassword(resultSet.getString("password"));
                 user.setGroup(GroupDao.read(resultSet.getInt("group_id")));
+                user.setAdmin(resultSet.getBoolean("is_admin"));
                 return user;
             }
         } catch (SQLException e) {
@@ -74,7 +78,8 @@ public class UserDao {
             statement.setString(2, user.getEmail());
             statement.setString(3, user.getPassword());
             statement.setInt(4, user.getGroup().getId());
-            statement.setInt(5, user.getId());
+            statement.setBoolean(5, user.isAdmin());
+            statement.setInt(6, user.getId());
             statement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -146,12 +151,26 @@ public class UserDao {
                 user.setEmail(resultSet.getString("email"));
                 user.setPassword(resultSet.getString("password"));
                 user.setGroup(GroupDao.read(resultSet.getInt("group_id")));
+                user.setAdmin(resultSet.getBoolean("is_admin"));
                 return user;
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public static boolean verifyUserPassword(User user, String password) {
+        return BCrypt.checkpw(password, user.getPassword());
+    }
+
+    public static void authorizeUser(User user, HttpServletRequest request) {
+        if (user != null) {
+            if (user.isAdmin())
+                request.getSession().setAttribute("adminId", user.getId());
+            else
+                request.getSession().setAttribute("userId", user.getId());
+        }
     }
 
 }
