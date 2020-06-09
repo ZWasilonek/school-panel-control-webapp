@@ -27,13 +27,13 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td><a href="${contextPath}/adminExercises">Exercises</a></td>
+                        <td><a href="${contextPath}/admin/exercises">Exercises</a></td>
                     </tr>
                     <tr>
-                        <td><a href="${contextPath}/adminGroups">Groups</a></td>
+                        <td><a href="${contextPath}/admin/groups">Groups</a></td>
                     </tr>
                     <tr>
-                        <td><a href="${contextPath}/adminUsers">Users</a></td>
+                        <td><a href="${contextPath}/admin/users">Users</a></td>
                     </tr>
                 </tbody>
             </table>
