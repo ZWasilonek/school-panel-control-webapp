@@ -34,7 +34,7 @@
                                     <c:out value="${exerciseNumber.index + 1}"/>
                                 </td>
                                 <td>
-                                    <a href="${contextPath}/infoExerciseSolutions?exerciseId=${exercise.id}">
+                                    <a href="${contextPath}/exercise/solutions/info?exerciseId=${exercise.id}">
                                         <c:out value="${exercise.title}"/>
                                     </a>
                                 </td>

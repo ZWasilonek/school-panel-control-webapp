@@ -31,7 +31,7 @@
                     <h1>EXERCISE SOLUTIONS</h1>
                     <c:if test="${!exerciseNotExists}">
                         <button class="addButton">
-                            <a class="addButton" href="${contextPath}/addSolution">Add new</a>
+                            <a class="addButton" href="${contextPath}/add/solution">Add new</a>
                         </button>
                     </c:if>
                 </div>
@@ -58,7 +58,7 @@
                                             <td class="text-breaker solution-break-space"><c:out value="${solution.description}"/></td>
                                             <td class="td-action"><c:out value="${solution.user.userName}"/></td>
                                             <td class="td-action">
-                                                <a href="${contextPath}/infoUser?userId=${solution.user.id}">User details</a>
+                                                <a href="${contextPath}/user/info?userId=${solution.user.id}">User details</a>
                                             </td>
                                         </tr>
                                     </c:forEach>

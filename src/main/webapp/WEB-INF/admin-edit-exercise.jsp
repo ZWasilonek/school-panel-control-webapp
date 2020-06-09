@@ -30,7 +30,7 @@
                         </c:when>
 
                         <c:otherwise>
-                            <form action="${contextPath}/adminEditExercise" method="post">
+                            <form action="${contextPath}/admin/edit/exercise" method="post">
                                 <input type="hidden" value="${exercise.id}" name="exerciseId">
                                 <label>
                                     <input type="text" name="title" placeholder="Exercise title" value="<c:out value='${titleVal}'/>">
@@ -65,7 +65,7 @@
                 </div>
             </div>
             <div class="backButton">
-                <button><a href="${contextPath}/adminExercises">Back</a></button>
+                <button><a href="${contextPath}/admin/exercises">Back</a></button>
             </div>
 
             <c:if test="${isUpdated}">

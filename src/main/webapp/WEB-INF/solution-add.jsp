@@ -23,7 +23,7 @@
                 <h1>ADD SOLUTION</h1>
 
                 <div class="content-add">
-                    <form action="${contextPath}/addSolution" method="post">
+                    <form action="${contextPath}/add/solution" method="post">
                         <input type="hidden" name="exercise.id"/>
                         <input type="hidden" name="user.id"/>
 
@@ -45,7 +45,7 @@
             </div>
 
             <div class="backButton">
-                <button><a href="${contextPath}/adminGroups">Back</a></button>
+                <button><a href="${contextPath}/admin/groups">Back</a></button>
             </div>
 
             <c:if test="${solutionCreated}">

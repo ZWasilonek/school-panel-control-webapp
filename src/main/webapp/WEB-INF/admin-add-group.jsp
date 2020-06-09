@@ -23,7 +23,7 @@
                 <h1>ADD GROUP</h1>
 
                 <div class="content-add">
-                    <form action="${contextPath}/adminAddGroup" method="post">
+                    <form action="${contextPath}/admin/add/group" method="post">
                         <label>
                             <input type="text" name="groupName" placeholder="group name" value="<c:out value='${groupNameVal}'/>"/>
                             <c:if test="${not empty blankGroupName}">
@@ -45,7 +45,7 @@
             </div>
 
             <div class="backButton">
-                <button><a href="${contextPath}/adminGroups">Back</a></button>
+                <button><a href="${contextPath}/admin/groups">Back</a></button>
             </div>
 
             <c:if test="${groupCreated}">

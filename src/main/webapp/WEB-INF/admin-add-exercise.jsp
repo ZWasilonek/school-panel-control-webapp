@@ -24,7 +24,7 @@
                 <h1>ADD EXERCISE</h1>
 
                 <div class="content-add">
-                    <form action="${contextPath}/adminAddExercise" method="post" accept-charset="UTF-8">
+                    <form action="${contextPath}/admin/add/exercise" method="post" accept-charset="UTF-8">
                         <label>
                             <input type="text" name="title" placeholder="title" value="<c:out value='${titleVal}'/>">
                             <c:if test="${not empty blankTitle}">
@@ -51,7 +51,7 @@
                 </div>
             </div>
             <div class="backButton">
-                <button><a href="${contextPath}/adminExercises">Back</a></button>
+                <button><a href="${contextPath}/admin/exercises">Back</a></button>
             </div>
 
             <c:if test="${exerciseCreated}">

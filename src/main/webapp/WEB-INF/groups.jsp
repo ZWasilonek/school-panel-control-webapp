@@ -30,7 +30,7 @@
                             <tr>
                                 <td class="index"><c:out value="${groupNumber.index + 1}"/></td>
                                 <td>
-                                    <a href="${contextPath}/infoGroupUsers?group=${group.name}&groupId=${group.id}">
+                                    <a href="${contextPath}/group/users/info?group=${group.name}&groupId=${group.id}">
                                         <c:out value="${group.name}"/>
                                     </a>
                                 </td>

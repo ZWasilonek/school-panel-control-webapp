@@ -40,13 +40,13 @@
                                     <c:out value="${exercise.title}"/>
                                 </td>
                                 <td class="td-action">
-                                    <a href="${contextPath}/infoExerciseSolutions?exerciseId=${exercise.id}">Solutions</a>
+                                    <a href="${contextPath}/exercise/solutions/info?exerciseId=${exercise.id}">Solutions</a>
                                 </td>
                                 <td class="td-action">
-                                    <a href="${contextPath}/adminEditExercise?exerciseId=${exercise.id}">Edit</a>
+                                    <a href="${contextPath}/admin/edit/exercise?exerciseId=${exercise.id}">Edit</a>
                                 </td>
                                 <td class="td-action">
-                                    <a href="${contextPath}/adminDeleteExercise?exerciseId=${exercise.id}">Delete</a>
+                                    <a href="${contextPath}/admin/delete/exercise?exerciseId=${exercise.id}">Delete</a>
                                 </td>
                             </tr>
                         </c:forEach>
@@ -55,7 +55,7 @@
 
             </table>
 
-            <button class="addButton"><a class="addButton" href="${contextPath}/adminAddExercise">Add new</a></button>
+            <button class="addButton"><a class="addButton" href="${contextPath}/admin/add/exercise">Add new</a></button>
 
         </div>
 

@@ -31,7 +31,7 @@
                         </c:when>
 
                         <c:otherwise>
-                            <form action="${contextPath}/adminEditGroup" method="post">
+                            <form action="${contextPath}/admin/edit/group" method="post">
                                 <input type="hidden" value="${group.id}" name="groupId">
                                 <label>
                                     <input type="text" name="groupName" placeholder="Group name" value="<c:out value='${groupNameVal}'/>"/>
@@ -55,7 +55,7 @@
                 </div>
             </div>
             <div class="backButton">
-                <button><a href="${contextPath}/adminGroups">Back</a></button>
+                <button><a href="${contextPath}/admin/groups">Back</a></button>
             </div>
 
             <c:if test="${isUpdated}">

@@ -24,7 +24,7 @@
 
                 <div class="content-add">
 
-                    <form action="${contextPath}/adminAddUser" method="post">
+                    <form action="${contextPath}/admin/add/user" method="post">
                         <label>
                             <input type="text" name="userName" placeholder="name" value="<c:out value='${userNameVal}'/>"/>
                             <c:if test="${not empty blankUserName}">
@@ -105,7 +105,7 @@
             </div>
 
             <div class="backButton">
-                <button><a href="${contextPath}/adminGroups">Back</a></button>
+                <button><a href="${contextPath}/admin/groups">Back</a></button>
             </div>
 
             <c:if test="${userCreated}">

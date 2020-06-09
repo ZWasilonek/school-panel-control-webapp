@@ -40,13 +40,13 @@
                                     <c:out value="${user.userName}"/>
                                 </td>
                                 <td class="td-action">
-                                    <a href="${contextPath}/infoUser?userId=${user.id}">Show</a>
+                                    <a href="${contextPath}/user/info?userId=${user.id}">Show</a>
                                 </td>
                                 <td class="td-action">
-                                    <a href="${contextPath}/adminEditUser?userId=${user.id}">Edit</a>
+                                    <a href="${contextPath}/admin/edit/user?userId=${user.id}">Edit</a>
                                 </td>
                                 <td class="td-action">
-                                    <a href="${contextPath}/adminDeleteUser?userId=${user.id}">Delete</a>
+                                    <a href="${contextPath}/admin/delete/user?userId=${user.id}">Delete</a>
                                 </td>
                             </tr>
                         </c:forEach>
@@ -55,7 +55,7 @@
             </table>
 
             <button class="addButton">
-                <a class="addButton" href="${contextPath}/adminAddUser">Add new</a>
+                <a class="addButton" href="${contextPath}/admin/add/user">Add new</a>
             </button>
         </div>
 
