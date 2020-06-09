@@ -9,6 +9,7 @@ public class User {
     private String email;
     private String password;
     private Group group;
+    private boolean isAdmin;
 
     public User() {}
 
@@ -25,6 +26,7 @@ public class User {
         this.email = email;
         this.hashPassword(password);
         this.group = group;
+        this.isAdmin = false;
     }
 
     public void hashPassword(String password) {
@@ -71,5 +73,12 @@ public class User {
         this.group = group;
     }
 
+    public boolean isAdmin() {
+        return isAdmin;
+    }
+
+    public void setAdmin(boolean admin) {
+        isAdmin = admin;
+    }
 }
 
