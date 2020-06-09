@@ -1,7 +1,12 @@
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <ul class="nav">
     <li><a class="active" href="${contextPath}/">Home</a></li>
-    <li><a href="${contextPath}/groupsPanel">Groups</a></li>
-    <li><a href="${contextPath}/exercisesPanel">Exercises</a> </li>
-    <li><a href="${contextPath}/panelAdmin">Admin panel</a></li>
+    <li><a href="${contextPath}/groups/panel">Groups</a></li>
+    <li><a href="${contextPath}/exercises/panel">Exercises</a></li>
+    <c:if test="${sessionScope.adminId != null}">
+        <li><a href="${contextPath}/admin/panel">Admin panel</a></li>
+    </c:if>
+    <li><a href="${contextPath}/login">Login</a></li>
 </ul>
