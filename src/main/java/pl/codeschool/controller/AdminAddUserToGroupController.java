@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet("/adminAddUserToGroup")
+@WebServlet("/admin/add/userToGroup")
 public class AdminAddUserToGroupController extends HttpServlet {
 
     @Override
