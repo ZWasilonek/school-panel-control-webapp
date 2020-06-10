@@ -1,5 +1,7 @@
 package pl.codeschool.model;
 
+import java.util.Objects;
+
 public class Group {
 
     private int id;
@@ -30,6 +32,20 @@ public class Group {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Group)) return false;
+        Group group = (Group) o;
+        return getId() == group.getId() &&
+                Objects.equals(getName(), group.getName());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId(), getName());
     }
 
 }
