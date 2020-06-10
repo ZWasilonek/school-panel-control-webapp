@@ -62,7 +62,7 @@ public class User {
     }
 
     public void setPassword(String password) {
-        this.hashPassword(password);
+        this.password = password;
     }
 
     public Group getGroup() {
