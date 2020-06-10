@@ -1,17 +1,15 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
-<style>
-    <%@ include file="/resources/css/styles.css"%>
-</style>
+
 <!DOCTYPE html>
 <html lang="en">
 
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <title>Admin add exercise</title>
         <link href="<c:url value='/resources/css/styles.css'/>" rel="stylesheet" type="text/css">
+        <title>Admin add exercise</title>
     </head>
 
     <body>
