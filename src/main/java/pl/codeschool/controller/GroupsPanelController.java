@@ -19,10 +19,16 @@ public class GroupsPanelController extends HttpServlet {
 
         List<Group> allGroups = GroupDao.findAll();
         if (allGroups != null && allGroups.size() != 0) {
+            allGroups.sort((g1, g2) -> g1.getName().compareToIgnoreCase(g2.getName()));
+            Integer adminId = (Integer) request.getSession().getAttribute("adminId");
+            if (adminId == null) {
+                String adminGroupName = "ADMIN Group";
+                allGroups.remove(GroupDao.readByName(adminGroupName));
+            }
             request.setAttribute("groups", allGroups);
         }
 
-        request.getRequestDispatcher("WEB-INF/groups.jsp")
+        request.getRequestDispatcher("/WEB-INF/groups.jsp")
                 .forward(request, response);
     }
 
