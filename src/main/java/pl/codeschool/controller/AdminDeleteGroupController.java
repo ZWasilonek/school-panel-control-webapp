@@ -25,7 +25,7 @@ public class AdminDeleteGroupController extends HttpServlet {
                 int groupId = Integer.parseInt(paramGroupId);
 
                 List<User> foundedUsers = UserDao.findAllByGroupId(groupId);
-                if (foundedUsers.size() == 0) {
+                if (foundedUsers != null && foundedUsers.size() == 0) {
                     GroupDao.delete(groupId);
                 } else {
                     request.setAttribute("isEmpty", false);
@@ -35,7 +35,7 @@ public class AdminDeleteGroupController extends HttpServlet {
                 e.printStackTrace();
             }
         }
-        request.getRequestDispatcher("/adminGroups")
+        request.getRequestDispatcher("/admin/groups")
                 .forward(request, response);
     }
 

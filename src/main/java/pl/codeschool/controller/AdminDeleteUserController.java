@@ -26,7 +26,7 @@ public class AdminDeleteUserController extends HttpServlet {
                 e.printStackTrace();
             }
         }
-        request.getRequestDispatcher("/adminUsers")
+        request.getRequestDispatcher("/admin/users")
                 .forward(request, response);
     }
 

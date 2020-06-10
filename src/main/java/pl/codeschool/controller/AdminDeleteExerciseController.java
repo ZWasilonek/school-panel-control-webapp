@@ -25,7 +25,7 @@ public class AdminDeleteExerciseController extends HttpServlet {
                 e.printStackTrace();
             }
         }
-        request.getRequestDispatcher("/adminExercises").forward(request, response);
+        request.getRequestDispatcher("/admin/exercises").forward(request, response);
     }
 
 }
