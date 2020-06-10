@@ -24,7 +24,7 @@ public class ExercisePanelController extends HttpServlet {
             request.setAttribute("exercisesNotFound", true);
         }
 
-        request.getRequestDispatcher("WEB-INF/exercises.jsp")
+        request.getRequestDispatcher("/WEB-INF/exercises.jsp")
                 .forward(request, response);
     }
 
