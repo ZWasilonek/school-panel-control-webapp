@@ -2,7 +2,7 @@ package pl.codeschool.model;
 
 import java.util.Objects;
 
-public class Group {
+public class Group implements Comparable<Group> {
 
     private int id;
     private String name;
@@ -46,6 +46,12 @@ public class Group {
     @Override
     public int hashCode() {
         return Objects.hash(getId(), getName());
+    }
+
+
+    @Override
+    public int compareTo(Group o) {
+        return this.getName().compareTo(o.getName());
     }
 
 }
