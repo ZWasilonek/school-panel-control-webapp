@@ -14,8 +14,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @WebServlet("/admin/edit/user")
 public class AdminEditUserController extends HttpServlet {
@@ -29,7 +28,11 @@ public class AdminEditUserController extends HttpServlet {
         String paramRePassword = request.getParameter("rePass");
         String paramGroupName = request.getParameter("groupName");
 
-        int userId = (int) request.getSession().getAttribute("userId");
+        Integer userId;
+        userId = (Integer) request.getSession().getAttribute("userId");
+        if (userId == null) {
+            userId = (Integer) request.getSession().getAttribute("adminId");
+        }
 
         Map<String, String> fieldNames = Map.of("userName", paramUserName, "userEmail", paramEmail,
                 "userPass", paramPassword, "rePass", paramRePassword, "groupName", paramGroupName);
@@ -44,48 +47,44 @@ public class AdminEditUserController extends HttpServlet {
 
         if (!hasBlankFields && isUniqueUserEmail && !hasCapacityExceededFields && isPasswordCorrect) {
             Group selectedGroup = GroupDao.readByName(paramGroupName);
-            User updatedUser = new User(userId, paramUserName, paramEmail, paramPassword, selectedGroup);
-            UserDao.update(updatedUser);
+            User foundedUser = UserDao.read(userId);
 
-            request.setAttribute("isUpdated", true);
+            if (foundedUser != null) {
+                User updatedUser = new User(userId, paramUserName, paramEmail, paramPassword, selectedGroup, foundedUser.isAdmin());
+                UserDao.update(updatedUser);
+                request.setAttribute("isUpdated", true);
+            }
+
             request.getRequestDispatcher("/WEB-INF/admin-edit-user.jsp")
-                    .forward(request,response);
+                    .forward(request, response);
         } else doGet(request, response);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html; charset=UTF-8");
 
-        getAllGroupsOrSetError(request, response);
-
         String paramUserName = request.getParameter("userName");
         String paramEmail = request.getParameter("userEmail");
 
-        String paramUserId = request.getParameter("userId");
-        if (paramUserId == null || paramUserId.equals("")) {
-            int userId = (int) request.getSession().getAttribute("exerciseId");
-            paramUserId = String.valueOf(userId);
+        Integer userId;
+        userId = (Integer) request.getSession().getAttribute("userId");
+        if (userId == null) {
+            userId = (Integer) request.getSession().getAttribute("adminId");
         }
 
-        fillInTheFieldsWithTheGivenData(request, paramUserName, paramEmail);
+        if (userId != null) {
+            User founded = UserDao.read(userId);
+            getAllGroupsOrSetError(founded, request, response);
 
-        if (!"".equals(paramUserId)) {
-            try {
-                int userId = Integer.parseInt(paramUserId);
-                User founded = UserDao.read(userId);
-                request.setAttribute("user", founded);
-                if (founded == null) {
-                    request.setAttribute("userNotExists", true);
-                } else if (paramUserName == null && paramEmail == null) {
-                    request.getSession().setAttribute("userId", userId);
-                    fillInTheFieldsWithTheGivenData(request, founded.getUserName(), founded.getEmail());
-                } else
-                    fillInTheFieldsWithTheGivenData(request, paramUserName, paramEmail);
-            } catch (NumberFormatException e) {
-                e.printStackTrace();
-            }
+            if (founded == null) {
+                request.setAttribute("userNotExists", true);
+            } else if (paramUserName == null && paramEmail == null) {
+                fillInTheFieldsWithTheGivenData(request, founded.getUserName(), founded.getEmail());
+            } else
+                fillInTheFieldsWithTheGivenData(request, paramUserName, paramEmail);
+
+            request.setAttribute("user", founded);
         }
-
         request.getRequestDispatcher("/WEB-INF/admin-edit-user.jsp")
                 .forward(request, response);
     }
@@ -97,9 +96,18 @@ public class AdminEditUserController extends HttpServlet {
         }
     }
 
-    private void getAllGroupsOrSetError(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    private void getAllGroupsOrSetError(User user, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<Group> groups = GroupDao.findAll();
-        if (groups != null) {
+        if (groups != null && groups.size() != 0) {
+            if (user != null) {
+                Group userGroup = user.getGroup();
+                groups.forEach(group -> {
+                    if (group.equals(userGroup)) {
+                        Collections.swap(groups, 0, groups.indexOf(group));
+                    }
+                });
+                Collections.sort(groups.subList(1, groups.size()));
+            }
             request.setAttribute("groups", groups);
         } else {
             request.setAttribute("hasGroups", false);

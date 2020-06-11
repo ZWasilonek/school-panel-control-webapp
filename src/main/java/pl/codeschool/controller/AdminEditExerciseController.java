@@ -46,33 +46,42 @@ public class AdminEditExerciseController extends HttpServlet {
 
         String paramTitle = request.getParameter("title");
         String paramDescription = request.getParameter("description");
-
         String paramExerciseId = request.getParameter("exerciseId");
-        if (paramExerciseId == null || paramExerciseId.equals("")) {
-            int exerciseId = (int) request.getSession().getAttribute("exerciseId");
-            paramExerciseId = String.valueOf(exerciseId);
-        }
 
-        if (paramExerciseId != null && !"".equals(paramExerciseId)) {
+        Integer exerciseId = getExerciseId(request, paramExerciseId);
+
+        if (exerciseId != null) {
+            Exercise founded = ExerciseDao.read(exerciseId);
+
+            if (founded == null) {
+                request.setAttribute("exerciseNotExists", true);
+            } else if (paramTitle == null && paramDescription == null) {
+                request.getSession().setAttribute("exerciseId", founded.getId());
+                DataFiller.modelAttributesFiller(
+                        Map.of("title", founded.getTitle(), "description", founded.getDescription()), request);
+            } else
+                DataFiller.modelAttributesFiller(
+                        Map.of("title", paramTitle, "description", paramDescription), request);
+
+            request.setAttribute("exercise", founded);
+        }
+        request.getRequestDispatcher("/WEB-INF/admin-edit-exercise.jsp")
+                .forward(request, response);
+    }
+
+    private Integer getExerciseId(HttpServletRequest request, String paramExerciseId) {
+        Integer exerciseId = null;
+
+        if (paramExerciseId == null || "".equals(paramExerciseId)) {
+            exerciseId = (Integer) request.getSession().getAttribute("exerciseId");
+        } else {
             try {
-                int exerciseId = Integer.parseInt(paramExerciseId);
-                Exercise founded = ExerciseDao.read(exerciseId);
-                request.setAttribute("exercise", founded);
-                if (founded == null) {
-                    request.setAttribute("exerciseNotExists", true);
-                } else if (paramTitle == null && paramDescription == null) {
-                    request.getSession().setAttribute("exerciseId", founded.getId());
-                    DataFiller.modelAttributesFiller(
-                            Map.of("title", founded.getTitle(), "description", founded.getDescription()), request);
-                } else
-                    DataFiller.modelAttributesFiller(
-                            Map.of("title", paramTitle, "description", paramDescription), request);
+                exerciseId = Integer.parseInt(paramExerciseId);
             } catch (NumberFormatException e) {
                 e.printStackTrace();
             }
         }
-        request.getRequestDispatcher("/WEB-INF/admin-edit-exercise.jsp")
-                .forward(request, response);
+        return exerciseId;
     }
 
 }

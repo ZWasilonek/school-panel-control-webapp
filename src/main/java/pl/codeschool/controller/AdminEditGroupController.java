@@ -27,7 +27,7 @@ public class AdminEditGroupController extends HttpServlet {
         boolean hasBlankFields = BlankValidation.hasBlankErrorsAttributes(fieldNames, request);
         boolean isUniqueGroupName = checkUniqueGroupName(paramGroupName, groupId, request);
 
-        Map<String,Map<Integer, String>> capacitiesOfFields = Map.of("groupName",Map.of(256,paramGroupName));
+        Map<String, Map<Integer, String>> capacitiesOfFields = Map.of("groupName", Map.of(256, paramGroupName));
         boolean hasCapacityExceededFields = CapacityValidation.hasCapacityErrorAttributes(capacitiesOfFields, request);
 
         if (!hasBlankFields && isUniqueGroupName && !hasCapacityExceededFields) {
@@ -45,28 +45,22 @@ public class AdminEditGroupController extends HttpServlet {
         response.setContentType("text/html; charset=UTF-8");
 
         String paramGroupName = request.getParameter("groupName");
-
         String paramGroupId = request.getParameter("groupId");
-        if (paramGroupId == null || paramGroupId.equals("")) {
-            int groupId = (int) request.getSession().getAttribute("exerciseId");
-            paramGroupId = String.valueOf(groupId);
-        }
 
-        if (!"".equals(paramGroupId)) {
-            try {
-                int groupId = Integer.parseInt(paramGroupId);
-                Group founded = GroupDao.read(groupId);
-                request.setAttribute("group", founded);
-                if (founded == null) {
-                    request.setAttribute("groupNotExists", true);
-                } else if (paramGroupName == null) {
-                    request.getSession().setAttribute("groupId", groupId);
-                    DataFiller.modelAttributesFiller(Map.of("groupName", founded.getName()), request);
-                } else
-                    DataFiller.modelAttributesFiller(Map.of("groupName", paramGroupName), request);
-            } catch (NumberFormatException e) {
-                e.printStackTrace();
-            }
+        Integer groupId = getGroupId(request, paramGroupId);
+
+        if (groupId != null) {
+            Group founded = GroupDao.read(groupId);
+
+            if (founded == null) {
+                request.setAttribute("groupNotExists", true);
+            } else if (paramGroupName == null) {
+                request.getSession().setAttribute("groupId", groupId);
+                DataFiller.modelAttributesFiller(Map.of("groupName", founded.getName()), request);
+            } else
+                DataFiller.modelAttributesFiller(Map.of("groupName", paramGroupName), request);
+
+            request.setAttribute("group", founded);
         }
         request.getRequestDispatcher("/WEB-INF/admin-edit-group.jsp")
                 .forward(request, response);
@@ -82,6 +76,21 @@ public class AdminEditGroupController extends HttpServlet {
             }
         }
         return true;
+    }
+
+    private Integer getGroupId(HttpServletRequest request, String paramGroupId) {
+        Integer groupId = null;
+
+        if (paramGroupId == null || "".equals(paramGroupId)) {
+            groupId = (Integer) request.getSession().getAttribute("groupId");
+        } else {
+            try {
+                groupId = Integer.parseInt(paramGroupId);
+            } catch (NumberFormatException e) {
+                e.printStackTrace();
+            }
+        }
+        return groupId;
     }
 
 }
