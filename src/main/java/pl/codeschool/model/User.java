@@ -18,15 +18,16 @@ public class User {
         this.email = email;
         this.hashPassword(password);
         this.group = group;
+        this.isAdmin = false;
     }
 
-    public User(int id, String userName, String email, String password, Group group) {
+    public User(int id, String userName, String email, String password, Group group, boolean isAdmin) {
         this.id = id;
         this.userName = userName;
         this.email = email;
         this.hashPassword(password);
         this.group = group;
-        this.isAdmin = false;
+        this.isAdmin = isAdmin;
     }
 
     public void hashPassword(String password) {
@@ -80,5 +81,5 @@ public class User {
     public void setAdmin(boolean admin) {
         isAdmin = admin;
     }
-}
 
+}
