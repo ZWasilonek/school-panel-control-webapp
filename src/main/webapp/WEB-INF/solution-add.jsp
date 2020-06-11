@@ -16,40 +16,53 @@
 
         <%@ include file="/WEB-INF/fragment/navbar.jsp" %>
 
-        <div class="main-container-add">
-            <div class="container-add">
-                <h1>ADD SOLUTION</h1>
+        <div class="container-exc-sol">
 
-                <div class="content-add">
-                    <form action="${contextPath}/add/solution" method="post">
-                        <input type="hidden" name="exercise.id"/>
-                        <input type="hidden" name="user.id"/>
+            <div class="left-exercise-description">
+                <h2>Exercise description:</h2>
+                <p><c:out value="${exercise.description}"/></p>
+            </div>
 
-                        <label>
-                            <textarea name="description" placeholder="description" rows="25"><c:out value="${descriptionVal}"/></textarea>
-                            <c:if test="${not empty blankDescription}">
-                                <label class="hasError"><c:out value="${blankDescription}"/></label>
-                            </c:if>
-                            <c:if test="${not empty capacityExceededDescription}">
-                                <label class="hasError"><c:out value="${capacityExceededDescription}"/></label>
-                            </c:if>
-                        </label>
+            <div class="center-info-table-sol">
+                <div class="container-add">
+                    <h1>ADD SOLUTION</h1>
 
-                        <label>
-                            <input type="submit" value="Save">
-                        </label>
-                    </form>
+                    <div class="content-add">
+                        <c:choose>
+
+                            <c:when test="${exerciseNotExists}">
+                                <p class="feedback-text-submitted">Such exercise is not registered.</p>
+                            </c:when>
+
+                            <c:otherwise>
+                                <form action="${contextPath}/add/solution" method="post">
+                                    <label>
+                                        <textarea name="description" placeholder="description" rows="25"><c:out value="${descriptionVal}"/></textarea>
+                                        <c:if test="${not empty blankDescription}">
+                                            <label class="hasError"><c:out value="${blankDescription}"/></label>
+                                        </c:if>
+                                        <c:if test="${not empty capacityExceededDescription}">
+                                            <label class="hasError"><c:out value="${capacityExceededDescription}"/></label>
+                                        </c:if>
+                                    </label>
+
+                                    <label>
+                                        <input type="submit" value="Save">
+                                    </label>
+                                </form>
+                            </c:otherwise>
+
+                        </c:choose>
+                    </div>
                 </div>
+
+                <c:if test="${solutionCreated}">
+                    <p class="feedback-text-submitted">New solution created.</p>
+                </c:if>
+
             </div>
 
-            <div class="backButton">
-                <button><a href="${contextPath}/admin/groups">Back</a></button>
-            </div>
-
-            <c:if test="${solutionCreated}">
-                <p class="feedback-text-submitted">New solution created.</p>
-            </c:if>
-
+            <div class="rightContainer"></div>
         </div>
 
     </body>
