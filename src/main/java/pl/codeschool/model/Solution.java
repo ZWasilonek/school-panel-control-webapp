@@ -32,6 +32,8 @@ public class Solution {
         return formatTime(created);
     }
 
+    public LocalDateTime getOriginCreated() { return created; }
+
     public void setCreated(LocalDateTime created) {
         this.created = created;
     }
@@ -40,12 +42,16 @@ public class Solution {
         return formatTime(updated);
     }
 
+    public LocalDateTime getOriginUpdated() { return updated; };
+
     public void setUpdated(LocalDateTime updated) {
         this.updated = updated;
     }
 
     private String formatTime(LocalDateTime dateTime) {
-        return dateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+        if (dateTime != null) {
+            return dateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+        } else return "";
     }
 
     public String getDescription() {
