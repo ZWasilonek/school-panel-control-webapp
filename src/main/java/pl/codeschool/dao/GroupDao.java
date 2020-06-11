@@ -1,5 +1,7 @@
 package pl.codeschool.dao;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import pl.codeschool.model.Group;
 import pl.codeschool.util.DBUtil;
 
@@ -12,6 +14,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GroupDao {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(GroupDao.class);
 
     private static final String CREATE_GROUP_QUERY =
         "INSERT INTO users_groups(name) VALUES (?);";
@@ -37,7 +41,7 @@ public class GroupDao {
             }
             return group;
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.debug(e.getMessage());
             return null;
         }
     }
@@ -54,7 +58,7 @@ public class GroupDao {
                 return group;
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.debug(e.getMessage());
         }
         return null;
     }
@@ -71,7 +75,7 @@ public class GroupDao {
                 return group;
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.debug(e.getMessage());
         }
         return null;
     }
@@ -83,7 +87,7 @@ public class GroupDao {
             statement.setInt(2, group.getId());
             statement.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.debug(e.getMessage());
         }
     }
 
@@ -93,7 +97,7 @@ public class GroupDao {
             statement.setInt(1, groupId);
             statement.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.debug(e.getMessage());
         }
     }
 
@@ -110,7 +114,7 @@ public class GroupDao {
             }
             return groups;
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.debug(e.getMessage());
             return null;
         }
     }

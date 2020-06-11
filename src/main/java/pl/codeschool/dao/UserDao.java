@@ -1,6 +1,8 @@
 package pl.codeschool.dao;
 
 import org.mindrot.jbcrypt.BCrypt;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import pl.codeschool.model.User;
 import pl.codeschool.util.DBUtil;
 
@@ -14,6 +16,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserDao {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(UserDao.class);
 
     private static final String CREATE_USER_QUERY =
             "INSERT INTO users(username, email, password, group_id, is_admin) VALUES (?, ?, ?, ?, ?)";
@@ -45,7 +49,7 @@ public class UserDao {
             }
             return user;
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.info(e.getMessage());
             return null;
         }
     }
@@ -66,7 +70,7 @@ public class UserDao {
                 return user;
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.info(e.getMessage());
         }
         return null;
     }
@@ -82,7 +86,7 @@ public class UserDao {
             statement.setInt(6, user.getId());
             statement.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.info(e.getMessage());
         }
     }
 
@@ -92,7 +96,7 @@ public class UserDao {
             statement.setInt(1, userId);
             statement.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.info(e.getMessage());
         }
     }
 
@@ -112,7 +116,7 @@ public class UserDao {
             }
             return users;
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.info(e.getMessage());
             return null;
         }
     }
@@ -134,7 +138,7 @@ public class UserDao {
             }
             return users;
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.info(e.getMessage());
             return null;
         }
     }
@@ -155,7 +159,7 @@ public class UserDao {
                 return user;
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.info(e.getMessage());
         }
         return null;
     }

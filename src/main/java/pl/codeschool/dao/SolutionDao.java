@@ -1,5 +1,7 @@
 package pl.codeschool.dao;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import pl.codeschool.model.Solution;
 import pl.codeschool.util.DBUtil;
 
@@ -15,8 +17,10 @@ import java.util.List;
 
 public class SolutionDao {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(SolutionDao.class);
+
     private static final String CREATE_SOLUTION_QUERY =
-        "INSERT INTO solutions(created, user_id, excercise_id) VALUES (?,?,?)";
+        "INSERT INTO solutions(created, user_id, exercise_id, description) VALUES (?,?,?,?)";
     private static final String READ_SOLUTION_QUERY =
         "SELECT * FROM solutions WHERE id = ?;";
     private static final String UPDATE_SOLUTION_QUERY =
@@ -36,9 +40,10 @@ public class SolutionDao {
         try (Connection conn = DBUtil.getConnection()) {
             PreparedStatement statement = conn.prepareStatement(CREATE_SOLUTION_QUERY, Statement.RETURN_GENERATED_KEYS);
             solution.setCreated(LocalDateTime.now());
-            statement.setTimestamp(1, Timestamp.valueOf(solution.getCreated()));
+            statement.setTimestamp(1, Timestamp.valueOf(solution.getOriginCreated()));
             statement.setInt(2, solution.getUser().getId());
             statement.setInt(3, solution.getExercise().getId());
+            statement.setString(4, solution.getDescription());
             statement.executeUpdate();
             ResultSet resultSet = statement.getGeneratedKeys();
             if (resultSet.next()) {
@@ -46,9 +51,9 @@ public class SolutionDao {
             }
             return solution;
         } catch (SQLException e) {
-            e.printStackTrace();
-            return null;
+            LOGGER.info(e.getMessage());
         }
+        return null;
     }
 
     public static Solution read(int solutionId) {
@@ -67,7 +72,7 @@ public class SolutionDao {
                 return solution;
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.info(e.getMessage());
         }
         return null;
     }
@@ -76,23 +81,22 @@ public class SolutionDao {
         try (Connection conn = DBUtil.getConnection()) {
             PreparedStatement statement = conn.prepareStatement(UPDATE_SOLUTION_QUERY);
             solution.setUpdated(LocalDateTime.now());
-            statement.setTimestamp(1, Timestamp.valueOf(solution.getUpdated()));
+            statement.setTimestamp(1, Timestamp.valueOf(solution.getOriginUpdated()));
             statement.setString(2, solution.getDescription());
             statement.setInt(3, solution.getId());
             statement.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.info(e.getMessage());
         }
     }
 
-    public static void delete(int solutionId, int userId) {
+    public static void delete(int solutionId) {
         try (Connection conn = DBUtil.getConnection();
             PreparedStatement statement = conn.prepareStatement(DELETE_SOLUTION_QUERY)) {
             statement.setInt(1, solutionId);
-            statement.setInt(2, userId);
             statement.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.info(e.getMessage());
         }
     }
 
@@ -111,7 +115,7 @@ public class SolutionDao {
             }
             return solutions;
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.info(e.getMessage());
             return null;
         }
     }
@@ -134,7 +138,7 @@ public class SolutionDao {
             }
             return solutions;
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.info(e.getMessage());
             return null;
         }
     }
@@ -149,7 +153,7 @@ public class SolutionDao {
                 Solution solution = new Solution();
                 solution.setId(resultSet.getInt("id"));
                 solution.setCreated(resultSet.getTimestamp("created").toLocalDateTime());
-                solution.setUpdated(resultSet.getTimestamp("updated").toLocalDateTime());
+                solution.setUpdated(resultSet.getTimestamp("updated") != null ? resultSet.getTimestamp("updated").toLocalDateTime() : null);
                 solution.setDescription(resultSet.getString("description"));
                 solution.setUser(UserDao.read(resultSet.getInt("user_id")));
                 solution.setExercise(ExerciseDao.read(resultSet.getInt("exercise_id")));
@@ -157,7 +161,7 @@ public class SolutionDao {
             }
             return solutions;
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.info(e.getMessage());
             return null;
         }
     }
@@ -180,7 +184,7 @@ public class SolutionDao {
             }
             return solutions;
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.info(e.getMessage());
             return null;
         }
     }

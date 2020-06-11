@@ -1,5 +1,7 @@
 package pl.codeschool.dao;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import pl.codeschool.model.Exercise;
 import pl.codeschool.util.DBUtil;
 
@@ -12,6 +14,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ExerciseDao {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(ExerciseDao.class);
 
     private static final String CREATE_EXERCISE_QUERY =
         "INSERT INTO exercises(title, description) VALUES (?,?);";
@@ -36,7 +40,7 @@ public class ExerciseDao {
             }
             return exercise;
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.info(e.getMessage());
             return null;
         }
     }
@@ -54,7 +58,7 @@ public class ExerciseDao {
                 return exercise;
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.info(e.getMessage());
         }
         return null;
     }
@@ -67,7 +71,7 @@ public class ExerciseDao {
             statement.setInt(3, exercise.getId());
             statement.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.info(e.getMessage());
         }
     }
 
@@ -77,7 +81,7 @@ public class ExerciseDao {
             statement.setInt(1, exerciseId);
             statement.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.info(e.getMessage());
         }
     }
 
@@ -95,7 +99,7 @@ public class ExerciseDao {
             }
             return exercises;
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.info(e.getMessage());
             return null;
         }
     }
