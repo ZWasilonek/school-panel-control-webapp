@@ -107,6 +107,10 @@ a:hover {
     align-items: baseline;
 }
 
+.container-add h1 {
+    color: black !important;
+}
+
 /*USER*/
 .content-details * {
     text-align: left;
@@ -220,6 +224,7 @@ a:hover {
 
 .content-add input[type=submit] {
     margin-top: 3em;
+    margin-bottom: 2em;
     padding: 4px 5px 4px 5px;
 }
 
