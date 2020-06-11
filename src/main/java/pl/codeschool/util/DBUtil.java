@@ -25,9 +25,10 @@ public class DBUtil {
                 Context envContext = (Context) initContext.lookup("java:/comp/env");
                 dataSource = (DataSource) envContext.lookup("jdbc/codeschool");
             } catch (NamingException e) {
-                LOGGER.debug(e.getMessage());
+                LOGGER.info(e.getMessage());
             }
         }
         return dataSource;
     }
+
 }
