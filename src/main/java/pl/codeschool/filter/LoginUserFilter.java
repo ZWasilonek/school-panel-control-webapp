@@ -9,7 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebFilter(filterName="loginUserFilter", urlPatterns = {"/groups*", "/groups/*", "/exercises*", "/exercises/*", "/add*", "/add/*"})
+@WebFilter(filterName="loginUserFilter", urlPatterns =
+        {"/groups*", "/groups/*", "/exercises*", "/exercises/*", "/add*", "/add/*", "/solution*", "/solution/*"})
 public class LoginUserFilter implements Filter {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(LoginUserFilter.class);
