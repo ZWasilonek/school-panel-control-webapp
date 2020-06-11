@@ -31,21 +31,24 @@
                 <c:choose>
                     <c:when test="${solutions.size() == 0}">
                         <th colspan="5" class="feedback-text-submitted">
-                            Welcome, there are no solutions for exercises in the system yet.
+                            Welcome, there are no solutions for the exercises in the system yet.
                         </th>
                     </c:when>
+
+                    <c:otherwise>
+                        <c:forEach items="${solutions}" var="solution">
+                            <tr>
+                                <td><c:out value="${solution.exercise.title}"/></td>
+                                <td class="td-action"><c:out value="${solution.user.userName}"/></td>
+                                <td class="td-action"><c:out value="${solution.created}"/></td>
+                                <td class="td-action"><c:out value="${solution.updated}"/></td>
+                                <td class="td-action">
+                                    <a href="${contextPath}/solution/info?solutionId=${solution.id}">Details</a>
+                                </td>
+                            </tr>
+                        </c:forEach>
+                    </c:otherwise>
                 </c:choose>
-                <c:forEach items="${solutions}" var="solution">
-                    <tr>
-                        <td><c:out value="${solution.exercise.title}"/></td>
-                        <td class="td-action"><c:out value="${solution.user.userName}"/></td>
-                        <td class="td-action"><c:out value="${solution.created}"/></td>
-                        <td class="td-action"><c:out value="${solution.updated}"/></td>
-                        <td class="td-action">
-                            <a href="${contextPath}/solution/info?solutionId=${solution.id}">Details</a>
-                        </td>
-                    </tr>
-                </c:forEach>
             </table>
         </div>
 

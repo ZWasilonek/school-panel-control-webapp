@@ -29,7 +29,6 @@
 
                         <c:otherwise>
                             <form action="${contextPath}/admin/edit/exercise" method="post">
-                                <input type="hidden" value="${exercise.id}" name="exerciseId">
                                 <label>
                                     <input type="text" name="title" placeholder="Exercise title" value="<c:out value='${titleVal}'/>">
                                     <c:if test="${not empty blankTitle}">

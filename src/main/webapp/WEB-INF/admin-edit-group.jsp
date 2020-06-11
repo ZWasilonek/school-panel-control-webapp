@@ -30,7 +30,6 @@
 
                         <c:otherwise>
                             <form action="${contextPath}/admin/edit/group" method="post">
-                                <input type="hidden" value="${group.id}" name="groupId">
                                 <label>
                                     <input type="text" name="groupName" placeholder="Group name" value="<c:out value='${groupNameVal}'/>"/>
                                     <c:if test="${not empty blankGroupName}">

@@ -30,7 +30,6 @@
 
                         <c:otherwise>
                             <form action="${contextPath}/admin/edit/user" method="post">
-                                <input type="hidden" value="${user.id}" name="userId">
                                 <label>
                                     <input type="text" name="userName" placeholder="name" value="<c:out value='${userNameVal}'/>"/>
                                     <c:if test="${not empty blankUserName}">
@@ -91,7 +90,9 @@
                                                 <span>Select group: </span>
                                                 <select name="groupName">
                                                     <c:forEach var="group" items="${groups}">
-                                                        <option>${group.name}</option>
+                                                        <option>
+                                                            <c:out value="${group.name}"/>
+                                                        </option>
                                                     </c:forEach>
                                                 </select>
                                             </c:otherwise>

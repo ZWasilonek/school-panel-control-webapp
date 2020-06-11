@@ -58,7 +58,7 @@
 
                                 <c:otherwise>
                                     <tr>
-                                        <td colspan="4" class="feedback-text-submitted">The user has not solved any exercise yet</td>
+                                        <td colspan="4" class="feedback-text-submitted">The user has not solved any exercise yet.</td>
                                     </tr>
                                 </c:otherwise>
                             </c:choose>
