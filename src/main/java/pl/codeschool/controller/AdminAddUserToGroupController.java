@@ -39,6 +39,11 @@ public class AdminAddUserToGroupController extends HttpServlet {
                 int userId = Integer.parseInt(paramUserId);
                 User founded = UserDao.read(userId);
                 if (founded != null) {
+                    Integer adminId = (Integer) request.getSession().getAttribute("adminId");
+                    if (adminId != null) {
+                        //If admin is moved to a group other than the ADMIN group, it will lose its administrative privileges
+                        founded.setAdmin(foundedGroup.getName().equals(UserDao.read(adminId).getGroup().getName()));
+                    }
                     founded.setGroup(foundedGroup);
                     UserDao.update(founded);
                 }
