@@ -7,6 +7,7 @@ import pl.codeschool.model.Group;
 import pl.codeschool.model.User;
 import pl.codeschool.validation.BlankValidation;
 import pl.codeschool.validation.CapacityValidation;
+import pl.codeschool.validation.UserRegistrationValidation;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -32,17 +33,19 @@ public class AdminAddUserController extends HttpServlet {
         Map<String, String> fieldNames = Map.of("userName", paramUserName, "userEmail", paramEmail,
                 "userPass", paramPassword, "rePass", paramRePassword, "groupName", paramGroupName);
         boolean hasBlankFields = BlankValidation.hasBlankErrorsAttributes(fieldNames, request);
-        boolean isUniqueUserEmail = checkUniqueUserEmail(paramEmail, request);
+        boolean isUniqueUserEmail = UserRegistrationValidation.checkUniqueUserEmail(paramEmail, request);
 
         Map<String, Map<Integer, String>> capacitiesOfFields = Map.of("userName", Map.of(256, paramUserName),
                 "userEmail", Map.of(256, paramEmail), "userPass", Map.of(256, paramPassword));
         boolean hasCapacityExceededFields = CapacityValidation.hasCapacityErrorAttributes(capacitiesOfFields, request);
 
         if (!hasBlankFields && isUniqueUserEmail && !hasCapacityExceededFields
-                && checkPasswordEquality(paramPassword, paramRePassword, request)) {
+                && UserRegistrationValidation.isUserNameNotADMIN(paramUserName, request)
+                && UserRegistrationValidation.checkPasswordEquality(paramPassword, paramRePassword, request))
+        {
             Group selectedGroup = GroupDao.readByName(paramGroupName);
             if (selectedGroup != null) {
-                User newUser = new User(paramUserName, paramEmail, paramPassword, selectedGroup);
+                User newUser = new User(paramUserName.trim(), paramEmail.trim(), paramPassword, selectedGroup);
                 UserDao.create(newUser);
                 request.setAttribute("userCreated", true);
             } else {
@@ -76,31 +79,6 @@ public class AdminAddUserController extends HttpServlet {
 
         request.getRequestDispatcher("/WEB-INF/admin-add-user.jsp")
                 .forward(request, response);
-    }
-
-    private boolean checkUniqueUserEmail(String email, HttpServletRequest request) {
-        final String NOT_UNIQUE = "email already taken";
-        if (email != null && !"".equals(email)) {
-            User founded = UserDao.findByEmail(email);
-            if (founded != null) {
-                request.setAttribute("notUniqueUserEmail", NOT_UNIQUE);
-                return false;
-            }
-        }
-        return true;
-    }
-
-    private boolean checkPasswordEquality(String password, String rePassword, HttpServletRequest request) {
-        final String PASSWORDS_NOT_MATCH = "passwords must be identical";
-        final String TOO_SHORT_PASSWORD = "password must be at least 8 characters";
-        if (password.length() < 8) {
-            request.setAttribute("passwordToShort", TOO_SHORT_PASSWORD);
-            return false;
-        } else if (!password.equals(rePassword)) {
-            request.setAttribute("passwordsNotMatch", PASSWORDS_NOT_MATCH);
-            return false;
-        }
-        return true;
     }
 
 }

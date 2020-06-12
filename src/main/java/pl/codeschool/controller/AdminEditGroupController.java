@@ -1,7 +1,10 @@
 package pl.codeschool.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import pl.codeschool.dao.GroupDao;
 import pl.codeschool.mapper.DataFiller;
+import pl.codeschool.model.Admin;
 import pl.codeschool.model.Group;
 import pl.codeschool.validation.BlankValidation;
 import pl.codeschool.validation.CapacityValidation;
@@ -16,6 +19,10 @@ import java.util.Map;
 
 @WebServlet("/admin/edit/group")
 public class AdminEditGroupController extends HttpServlet {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(AdminEditGroupController.class);
+    private static final String CHANGE_ADMIN_GROUP_NAME_ERROR = "you cannot change the ADMIN group name";
+    private static final String NOT_UNIQUE_ERROR = "a group with this name already exists";
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html; charset=UTF-8");
@@ -67,11 +74,15 @@ public class AdminEditGroupController extends HttpServlet {
     }
 
     private boolean checkUniqueGroupName(String groupName, int groupId, HttpServletRequest request) {
-        final String NOT_UNIQUE = "a group with this name already exists";
         if (groupName != null && !"".equals(groupName)) {
             Group foundedByName = GroupDao.readByName(groupName);
+            Group foundedById = GroupDao.read(groupId);
             if (foundedByName != null && foundedByName.getId() != groupId) {
-                request.setAttribute("notUniqueGroupName", NOT_UNIQUE);
+                request.setAttribute("notUniqueGroupName", NOT_UNIQUE_ERROR);
+                return false;
+            }
+            if (foundedById != null && foundedById.getName().equals(Admin.getAdminUsername())) {
+                request.setAttribute("tryingAdminGroupNameChange", CHANGE_ADMIN_GROUP_NAME_ERROR);
                 return false;
             }
         }
@@ -87,7 +98,7 @@ public class AdminEditGroupController extends HttpServlet {
             try {
                 groupId = Integer.parseInt(paramGroupId);
             } catch (NumberFormatException e) {
-                e.printStackTrace();
+                LOGGER.info(e.getMessage());
             }
         }
         return groupId;

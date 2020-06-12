@@ -1,6 +1,7 @@
 package pl.codeschool.controller;
 
 import pl.codeschool.dao.GroupDao;
+import pl.codeschool.model.Admin;
 import pl.codeschool.model.Group;
 
 import javax.servlet.ServletException;
@@ -20,6 +21,7 @@ public class AdminGroupsController extends HttpServlet {
         List<Group> groups = GroupDao.findAll();
         if (groups != null && groups.size() != 0) {
             request.setAttribute("groups", groups);
+            request.setAttribute("ADMIN_GROUP", Admin.getAdminGroup());
         } else request.setAttribute("groupsNotFound", true);
 
         request.getRequestDispatcher("/WEB-INF/admin-groups.jsp")

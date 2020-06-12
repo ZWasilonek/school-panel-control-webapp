@@ -1,6 +1,7 @@
 package pl.codeschool.controller;
 
 import pl.codeschool.dao.UserDao;
+import pl.codeschool.model.Admin;
 import pl.codeschool.model.User;
 
 import javax.servlet.ServletException;
@@ -19,6 +20,7 @@ public class AdminUsersController extends HttpServlet {
 
         List<User> users = UserDao.findAll();
             request.setAttribute("users", users);
+            request.setAttribute("ADMIN_USERNAME", Admin.getAdminUsername());
 
         request.getRequestDispatcher("/WEB-INF/admin-users.jsp")
                 .forward(request, response);

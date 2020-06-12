@@ -1,7 +1,11 @@
 package pl.codeschool.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import pl.codeschool.dao.GroupDao;
 import pl.codeschool.dao.UserDao;
+import pl.codeschool.model.Admin;
+import pl.codeschool.model.Group;
 import pl.codeschool.model.User;
 
 import javax.servlet.ServletException;
@@ -15,6 +19,8 @@ import java.util.List;
 @WebServlet("/admin/delete/group")
 public class AdminDeleteGroupController extends HttpServlet {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(AdminDeleteGroupController.class);
+
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html; charset=UTF-8");
 
@@ -23,16 +29,18 @@ public class AdminDeleteGroupController extends HttpServlet {
         if (paramGroupId != null && !"".equals(paramGroupId)) {
             try {
                 int groupId = Integer.parseInt(paramGroupId);
+                Group foundedGroup = GroupDao.read(groupId);
 
                 List<User> foundedUsers = UserDao.findAllByGroupId(groupId);
-                if (foundedUsers != null && foundedUsers.size() == 0) {
-                    GroupDao.delete(groupId);
-                } else {
+                if (foundedGroup != null && foundedGroup.getName().equals(Admin.getAdminGroup()))
+                    request.setAttribute("tryingAdminGroupNameDelete", true);
+                else if (foundedUsers == null || foundedUsers.size() != 0)
                     request.setAttribute("isEmpty", false);
-                }
+
+                else GroupDao.delete(groupId);
 
             } catch (NumberFormatException e) {
-                e.printStackTrace();
+                LOGGER.info(e.getMessage());
             }
         }
         request.getRequestDispatcher("/admin/groups")

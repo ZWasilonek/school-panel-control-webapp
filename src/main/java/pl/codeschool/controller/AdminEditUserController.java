@@ -1,12 +1,16 @@
 package pl.codeschool.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import pl.codeschool.dao.GroupDao;
 import pl.codeschool.dao.UserDao;
 import pl.codeschool.mapper.DataFiller;
+import pl.codeschool.model.Admin;
 import pl.codeschool.model.Group;
 import pl.codeschool.model.User;
 import pl.codeschool.validation.BlankValidation;
 import pl.codeschool.validation.CapacityValidation;
+import pl.codeschool.validation.UserRegistrationValidation;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -19,6 +23,8 @@ import java.util.*;
 @WebServlet("/admin/edit/user")
 public class AdminEditUserController extends HttpServlet {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(AdminEditUserController.class);
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html; charset=UTF-8");
 
@@ -28,11 +34,7 @@ public class AdminEditUserController extends HttpServlet {
         String paramRePassword = request.getParameter("rePass");
         String paramGroupName = request.getParameter("groupName");
 
-        Integer userId;
-        userId = (Integer) request.getSession().getAttribute("userId");
-        if (userId == null) {
-            userId = (Integer) request.getSession().getAttribute("adminId");
-        }
+        int userId = (int) request.getSession().getAttribute("userId");
 
         Map<String, String> fieldNames = Map.of("userName", paramUserName, "userEmail", paramEmail,
                 "userPass", paramPassword, "rePass", paramRePassword, "groupName", paramGroupName);
@@ -50,9 +52,13 @@ public class AdminEditUserController extends HttpServlet {
             User foundedUser = UserDao.read(userId);
 
             if (foundedUser != null) {
-                User updatedUser = new User(userId, paramUserName, paramEmail, paramPassword, selectedGroup, foundedUser.isAdmin());
-                UserDao.update(updatedUser);
-                request.setAttribute("isUpdated", true);
+            //Is the customer cheating with the admin user name?
+                boolean isAdminUsernameSecured = UserRegistrationValidation.checkIfAdminUsernameIsSecured(request, paramUserName, foundedUser);
+                if (isAdminUsernameSecured) {
+                    User updatedUser = new User(userId, paramUserName, paramEmail, paramPassword, selectedGroup, foundedUser.isAdmin());
+                    UserDao.update(updatedUser);
+                    request.setAttribute("isUpdated", true);
+                }
             }
 
             request.getRequestDispatcher("/WEB-INF/admin-edit-user.jsp")
@@ -65,25 +71,32 @@ public class AdminEditUserController extends HttpServlet {
 
         String paramUserName = request.getParameter("userName");
         String paramEmail = request.getParameter("userEmail");
+        String paramUserId = request.getParameter("userId");
 
-        Integer userId;
-        userId = (Integer) request.getSession().getAttribute("userId");
-        if (userId == null) {
-            userId = (Integer) request.getSession().getAttribute("adminId");
-        }
+        if (!"".equals(paramUserId)) {
+            try {
+                int userId = Integer.parseInt(paramUserId);
+                User founded = UserDao.read(userId);
 
-        if (userId != null) {
-            User founded = UserDao.read(userId);
-            getAllGroupsOrSetError(founded, request, response);
+                if (founded != null && founded.getUserName().equals(Admin.getAdminUsername())) {
+                    request.setAttribute("ADMIN_USERNAME", Admin.getAdminUsername());
+                    request.setAttribute("groups", List.of(founded.getGroup()));
+                } else if (founded != null)
+                    getAllGroupsOrSetError(founded, request, response);
 
-            if (founded == null) {
-                request.setAttribute("userNotExists", true);
-            } else if (paramUserName == null && paramEmail == null) {
-                fillInTheFieldsWithTheGivenData(request, founded.getUserName(), founded.getEmail());
-            } else
-                fillInTheFieldsWithTheGivenData(request, paramUserName, paramEmail);
+                if (founded == null) {
+                    request.setAttribute("userNotExists", true);
+                } else if (paramUserName == null && paramEmail == null) {
+                    request.getSession().setAttribute("userId", userId);
+                    fillInTheFieldsWithTheGivenData(request, founded.getUserName(), founded.getEmail());
+                } else {
+                    fillInTheFieldsWithTheGivenData(request, paramUserName, paramEmail);
+                }
+                request.setAttribute("user", founded);
 
-            request.setAttribute("user", founded);
+            } catch (NumberFormatException e) {
+                LOGGER.info(e.getMessage());
+            }
         }
         request.getRequestDispatcher("/WEB-INF/admin-edit-user.jsp")
                 .forward(request, response);
