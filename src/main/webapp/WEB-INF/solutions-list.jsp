@@ -29,7 +29,7 @@
                     <h1>EXERCISE SOLUTIONS</h1>
                     <c:if test="${!exerciseNotExists}">
                         <button class="addButton">
-                            <a class="addButton" href="${contextPath}/add/solution?exerciseId=${exercise.id}">Add new</a>
+                            <a class="addButton" href="${contextPath}/solution/add?exerciseId=${exercise.id}">Add new</a>
                         </button>
                     </c:if>
                 </div>
@@ -39,13 +39,13 @@
                     <tr>
                         <th colspan="2" class="text-breaker"><c:out value="${exercise.title}"/></th>
                         <th style="width: 15%">Solved the exercise</th>
-                        <th colspan="2" style="width: 10%">Actions</th>
+                        <th colspan="3" style="width: 10%">Actions</th>
                     </tr>
                     </thead>
                     <tbody>
                     <c:choose>
                         <c:when test="${exerciseNotExists}">
-                            <th colspan="5" class="feedback-text-submitted">Such exercise is not registered.</th>
+                            <th colspan="6" class="feedback-text-submitted">Such exercise is not registered.</th>
                         </c:when>
 
                         <c:otherwise>
@@ -55,22 +55,27 @@
                                         <tr>
                                             <td class="index"><c:out value="${counter.index + 1}"/></td>
                                             <td class="text-breaker solution-break-space"><c:out value="${solution.description}"/></td>
-                                            <td class="td-action"><c:out value="${solution.user.userName}"/></td>
+                                            <td class="td-action text-breaker"><c:out value="${solution.user.userName}"/></td>
                                             <td class="td-action">
                                                 <a href="${contextPath}/user/info?userId=${solution.user.id}">User details</a>
                                             </td>
-                                            <c:if test="${sessionScope.adminId != null or solution.user.id == sessionScope.userId}">
-                                                <td>
+                                            <td>
+                                                <c:if test="${sessionScope.adminId != null or solution.user.id == sessionScope.userId}">
+                                                    <a href="${contextPath}/solution/edit?solutionId=${solution.id}&exerciseId=${exercise.id}">Edit</a>
+                                                </c:if>
+                                            </td>
+                                            <td>
+                                                <c:if test="${sessionScope.adminId != null or solution.user.id == sessionScope.userId}">
                                                     <a href="${contextPath}/solution/delete?solutionId=${solution.id}">Delete</a>
-                                                </td>
-                                            </c:if>
+                                                </c:if>
+                                            </td>
                                         </tr>
                                     </c:forEach>
                                 </c:when>
 
                                 <c:otherwise>
                                     <tr>
-                                        <td colspan="5" class="feedback-text-submitted">There are no solutions for this exercise yet.</td>
+                                        <td colspan="6" class="feedback-text-submitted">There are no solutions for this exercise yet.</td>
                                     </tr>
                                 </c:otherwise>
                             </c:choose>
@@ -79,6 +84,11 @@
                     </c:choose>
                     </tbody>
                 </table>
+
+                <c:if test="${not empty hasPermissionToDelete and !hasPermissionToDelete}">
+                    <p class="feedback-text-submitted">You do not have permission to remove this solution.</p>
+                </c:if>
+
             </div>
 
             <div class="rightContainer"></div>
