@@ -20,6 +20,13 @@ public class Solution {
         this.description = description;
     }
 
+    public Solution(int id, User user, Exercise exercise, String description) {
+        this.id = id;
+        this.user = user;
+        this.exercise = exercise;
+        this.description = description;
+    }
+
     public int getId() {
         return id;
     }
