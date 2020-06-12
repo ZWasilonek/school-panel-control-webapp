@@ -52,5 +52,7 @@
             </table>
         </div>
 
+        <div class="footer">Zofia Wasilonek - First Java EE project</div>
+
     </body>
 </html>
