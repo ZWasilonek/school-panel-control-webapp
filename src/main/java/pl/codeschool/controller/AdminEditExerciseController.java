@@ -1,5 +1,7 @@
 package pl.codeschool.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import pl.codeschool.dao.ExerciseDao;
 import pl.codeschool.mapper.DataFiller;
 import pl.codeschool.model.Exercise;
@@ -16,6 +18,8 @@ import java.util.Map;
 
 @WebServlet("/admin/edit/exercise")
 public class AdminEditExerciseController extends HttpServlet {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(AdminEditExerciseController.class);
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html; charset=UTF-8");
@@ -78,7 +82,7 @@ public class AdminEditExerciseController extends HttpServlet {
             try {
                 exerciseId = Integer.parseInt(paramExerciseId);
             } catch (NumberFormatException e) {
-                e.printStackTrace();
+                LOGGER.info(e.getMessage());
             }
         }
         return exerciseId;

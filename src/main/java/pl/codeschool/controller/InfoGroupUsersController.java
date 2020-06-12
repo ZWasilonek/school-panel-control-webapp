@@ -1,5 +1,7 @@
 package pl.codeschool.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import pl.codeschool.dao.GroupDao;
 import pl.codeschool.dao.UserDao;
 import pl.codeschool.model.User;
@@ -14,6 +16,8 @@ import java.util.List;
 
 @WebServlet("/group/users/info")
 public class InfoGroupUsersController extends HttpServlet {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(InfoGroupUsersController.class);
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html; charset=UTF-8");
@@ -31,7 +35,7 @@ public class InfoGroupUsersController extends HttpServlet {
                     request.setAttribute("users", users);
                 } else request.setAttribute("groupNotExists", true);
             } catch (NumberFormatException e) {
-                e.printStackTrace();
+                LOGGER.info(e.getMessage());
             }
         }
         request.getRequestDispatcher("/WEB-INF/group-users.jsp")

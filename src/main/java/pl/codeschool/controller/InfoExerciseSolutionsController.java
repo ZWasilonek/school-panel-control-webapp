@@ -1,5 +1,7 @@
 package pl.codeschool.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import pl.codeschool.dao.ExerciseDao;
 import pl.codeschool.dao.SolutionDao;
 import pl.codeschool.model.Exercise;
@@ -15,6 +17,8 @@ import java.util.List;
 
 @WebServlet("/exercise/solutions/info")
 public class InfoExerciseSolutionsController extends HttpServlet {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(InfoExerciseSolutionsController.class);
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -38,7 +42,7 @@ public class InfoExerciseSolutionsController extends HttpServlet {
                     request.setAttribute("solutions", solutionsByExerciseId);
                 }
             } catch (NumberFormatException e) {
-                e.printStackTrace();
+                LOGGER.info(e.getMessage());
             }
         }
         request.getRequestDispatcher("/WEB-INF/solutions-list.jsp")

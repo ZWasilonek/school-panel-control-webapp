@@ -1,5 +1,7 @@
 package pl.codeschool.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import pl.codeschool.dao.SolutionDao;
 import pl.codeschool.dao.UserDao;
 import pl.codeschool.model.Solution;
@@ -15,6 +17,8 @@ import java.util.List;
 
 @WebServlet("/user/info")
 public class InfoUserController extends HttpServlet {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(InfoUserController.class);
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html; charset=UTF-8");
@@ -33,7 +37,7 @@ public class InfoUserController extends HttpServlet {
 
                 } else request.setAttribute("userNotExists", true);
             } catch (NumberFormatException e) {
-                e.printStackTrace();
+                LOGGER.info(e.getMessage());
             }
         }
         request.getRequestDispatcher("/WEB-INF/user-info.jsp")

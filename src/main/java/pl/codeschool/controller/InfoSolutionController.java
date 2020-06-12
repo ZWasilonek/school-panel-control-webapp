@@ -1,5 +1,7 @@
 package pl.codeschool.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import pl.codeschool.dao.SolutionDao;
 import pl.codeschool.model.Solution;
 
@@ -12,6 +14,8 @@ import java.io.IOException;
 
 @WebServlet("/solution/info")
 public class InfoSolutionController extends HttpServlet {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(InfoSolutionController.class);
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html; charset=UTF-8");
@@ -28,7 +32,7 @@ public class InfoSolutionController extends HttpServlet {
                 } else request.setAttribute("solutionNotExists", true);
 
             } catch (NumberFormatException e) {
-                e.printStackTrace();
+                LOGGER.info(e.getMessage());
             }
         }
         request.getRequestDispatcher("/WEB-INF/solution-info.jsp")
