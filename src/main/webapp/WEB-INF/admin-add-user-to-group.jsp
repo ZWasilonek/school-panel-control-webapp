@@ -27,24 +27,34 @@
                     <th colspan="2" class="action-th">Actions</th>
                 </tr>
                 </thead>
-                <c:forEach items="${users}" var="user">
-                    <tr>
-                        <td class="text-breaker">
-                            <c:out value="${user.userName}"/>
-                        </td>
-                        <td class="text-breaker">
-                            <c:out value="${user.group.name}"/>
-                        </td>
-                        <td class="td-action">
-                            <c:if test="${user.group.name ne group.name}">
-                                <a href="${contextPath}/admin/add/userToGroup?userId=${user.id}&groupId=${group.id}">Assign to group <c:out value="${group.name}"/></a>
-                            </c:if>
-                        </td>
-                        <td class="td-action">
-                            <a href="${contextPath}/user/info?userId=${user.id}">User detail</a>
-                        </td>
-                    </tr>
-                </c:forEach>
+                <c:choose>
+                    <c:when test="${groupNotExists}">
+                        <th colspan="4" class="feedback-text-submitted">Such group is not registered.</th>
+                    </c:when>
+
+                    <c:otherwise>
+                        <c:forEach items="${users}" var="user">
+                            <tr>
+                                <td class="text-breaker">
+                                    <c:out value="${user.userName}"/>
+                                </td>
+                                <td class="text-breaker">
+                                    <c:out value="${user.group.name}"/>
+                                </td>
+                                <td class="td-action">
+                                    <c:if test="${user.group.name ne group.name and user.userName ne ADMIN_USERNAME}">
+                                        <a href="${contextPath}/admin/add/userToGroup?userId=${user.id}&groupId=${group.id}">
+                                            Assign to group <c:out value="${group.name}"/>
+                                        </a>
+                                    </c:if>
+                                </td>
+                                <td class="td-action">
+                                    <a href="${contextPath}/user/info?userId=${user.id}">User detail</a>
+                                </td>
+                            </tr>
+                        </c:forEach>
+                    </c:otherwise>
+                </c:choose>
             </table>
 
         </div>

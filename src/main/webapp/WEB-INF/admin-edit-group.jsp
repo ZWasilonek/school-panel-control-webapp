@@ -41,6 +41,9 @@
                                     <c:if test="${not empty capacityExceededGroupName}">
                                         <label class="hasError"><c:out value="${capacityExceededGroupName}"/></label>
                                     </c:if>
+                                    <c:if test="${not empty tryingAdminGroupNameChange}">
+                                        <label class="hasError"><c:out value="${tryingAdminGroupNameChange}"/></label>
+                                    </c:if>
                                 </label>
 
                                 <label>

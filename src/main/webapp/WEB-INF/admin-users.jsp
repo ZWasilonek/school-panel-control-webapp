@@ -44,7 +44,9 @@
                                     <a href="${contextPath}/admin/edit/user?userId=${user.id}">Edit</a>
                                 </td>
                                 <td class="td-action">
-                                    <a href="${contextPath}/admin/delete/user?userId=${user.id}">Delete</a>
+                                    <c:if test="${user.userName != ADMIN_USERNAME}">
+                                        <a href="${contextPath}/admin/delete/user?userId=${user.id}">Delete</a>
+                                    </c:if>
                                 </td>
                             </tr>
                         </c:forEach>
@@ -55,6 +57,11 @@
             <button class="addButton">
                 <a class="addButton" href="${contextPath}/admin/add/user">Add new</a>
             </button>
+
+            <c:if test="${tryingDeleteSuperAdmin}">
+                <p class="feedback-text-submitted">You cannot delete super ADMIN.</p>
+            </c:if>
+
         </div>
 
     </body>

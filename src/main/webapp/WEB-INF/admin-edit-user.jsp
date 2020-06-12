@@ -30,13 +30,17 @@
 
                         <c:otherwise>
                             <form action="${contextPath}/admin/edit/user" method="post">
+                                <input type="hidden" name="userId" value="<c:out value='${user.id}'/>">
                                 <label>
-                                    <input type="text" name="userName" placeholder="name" value="<c:out value='${userNameVal}'/>"/>
+                                    <input type="text" <c:if test="${user.userName eq ADMIN_USERNAME and empty adminNameWasUsed}">disabled</c:if> name="userName" placeholder="name" value="<c:out value='${userNameVal}'/>"/>
                                     <c:if test="${not empty blankUserName}">
                                         <label class="hasError"><c:out value="${blankUserName}"/></label>
                                     </c:if>
                                     <c:if test="${not empty capacityExceededUserName}">
                                         <label class="hasError"><c:out value="${capacityExceededUserName}"/></label>
+                                    </c:if>
+                                    <c:if test="${not empty adminNameWasUsed}">
+                                        <label class="hasError"><c:out value="${adminNameWasUsed}"/></label>
                                     </c:if>
                                 </label>
 

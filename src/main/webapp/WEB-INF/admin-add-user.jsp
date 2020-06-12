@@ -31,6 +31,9 @@
                             <c:if test="${not empty capacityExceededUserName}">
                                 <label class="hasError"><c:out value="${capacityExceededUserName}"/></label>
                             </c:if>
+                            <c:if test="${not empty adminNameWasUsed}">
+                                <label class="hasError"><c:out value="${adminNameWasUsed}"/></label>
+                            </c:if>
                         </label>
 
                         <label>

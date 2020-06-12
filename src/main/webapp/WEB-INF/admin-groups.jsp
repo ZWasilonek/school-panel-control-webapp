@@ -44,10 +44,14 @@
                                     <a href="${contextPath}/admin/add/userToGroup?groupId=${group.id}">Assign member</a>
                                 </td>
                                 <td class="td-action">
-                                    <a href="${contextPath}/admin/edit/group?groupId=${group.id}">Edit</a>
+                                    <c:if test="${group.name != ADMIN_GROUP}">
+                                        <a href="${contextPath}/admin/edit/group?groupId=${group.id}">Edit</a>
+                                    </c:if>
                                 </td>
                                 <td class="td-action">
-                                    <a href="${contextPath}/admin/delete/group?groupId=${group.id}">Delete</a>
+                                    <c:if test="${group.name != ADMIN_GROUP}">
+                                        <a href="${contextPath}/admin/delete/group?groupId=${group.id}">Delete</a>
+                                    </c:if>
                                 </td>
                             </tr>
                         </c:forEach>
@@ -57,8 +61,12 @@
 
             <button class="addButton"><a class="addButton" href="${contextPath}/admin/add/group">Add new</a></button>
 
-            <c:if test="${not empty isEmpty and !isEmpty}">
-                <p class="feedback-text-submitted">You can delete only empty group</p>
+            <c:if test="${not empty isEmpty and !isEmpty and !tryingAdminGroupNameDelete}">
+                <p class="feedback-text-submitted">You can delete only empty group.</p>
+            </c:if>
+
+            <c:if test="${tryingAdminGroupNameDelete}">
+                <p class="feedback-text-submitted">You cannot delete the ADMIN group.</p>
             </c:if>
 
         </div>
