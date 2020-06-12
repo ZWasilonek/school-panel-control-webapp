@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebFilter(filterName = "loginAdminFilter", urlPatterns = {"/admin*", "/admin/*", "/admin/*/*"})
+@WebFilter(filterName = "loginAdminFilter", urlPatterns = {"/admin/*"})
 public class LoginAdminFilter implements Filter {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(LoginAdminFilter.class);
@@ -24,7 +24,7 @@ public class LoginAdminFilter implements Filter {
         HttpServletRequest httpServletRequest = (HttpServletRequest) request;
 
         boolean isAdminAuthenticated = httpServletRequest.getSession().getAttribute("adminId") != null;
-        System.out.println("testsout adminLogin - income: " + httpServletRequest.getContextPath() + " / " + httpServletRequest.getServletPath());
+        System.out.println("testsout adminLogin - income: " + httpServletRequest.getContextPath() + httpServletRequest.getServletPath());
 
         if (isAdminAuthenticated) {
             filterChain.doFilter(request, response);
