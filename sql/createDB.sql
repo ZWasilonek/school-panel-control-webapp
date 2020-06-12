@@ -7,7 +7,7 @@ CREATE TABLE users_groups(
 ) ENGINE=INNODB CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 INSERT INTO users_groups (id, name) VALUES
-    (1, 'Group ADMIN'),
+    (1, 'ADMIN Group'),
     (2, 'Group A'),
     (3, 'Group B');
 
@@ -23,10 +23,10 @@ CREATE TABLE users(
 ) ENGINE=INNODB CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 INSERT INTO users (username, email, password, group_id, is_admin) VALUES
-    ('ADMIN', 'admin@gmail.com', 'adminpass', 1, true),
-    ('Marcin Cieszkowski', 'marcin.cieszkowski@gmail.com', 'password', 2, false),
-    ('Janusz Kowalski', 'jan.kowalski@wp.pl', 'password', 2, false),
-    ('Anna Nowak', 'anna.nowak@o2.pl', 'password', 3, false);
+    ('ADMIN', 'admin@gmail.com', '$2a$10$1FchTNOoF6gS9v.s7GkNmujcqscQkMvSkWgi3..vEv9Z9l3X49BNq', 1, true),
+    ('Marcin Cieszkowski', 'marcin.cieszkowski@gmail.com', '$2a$10$J/GMBBC.lNrYU3W4pUbDQe2LlTWajV45.Io04tlk8H.lq0su7k.yi', 2, false),
+    ('Janusz Kowalski', 'jan.kowalski@wp.pl', '$2a$10$J/GMBBC.lNrYU3W4pUbDQe2LlTWajV45.Io04tlk8H.lq0su7k.yi', 2, false),
+    ('Anna Nowak', 'anna.nowak@o2.pl', '$2a$10$J/GMBBC.lNrYU3W4pUbDQe2LlTWajV45.Io04tlk8H.lq0su7k.yi', 3, false);
 
 CREATE TABLE exercises(
       id INT AUTO_INCREMENT,
@@ -44,7 +44,7 @@ CREATE TABLE solutions(
       user_id INT NOT NULL,
       exercise_id INT NOT NULL,
       created DATETIME,
-      updated DATETIME,
+      updated DATETIME DEFAULT NULL,
       description TEXT,
       PRIMARY KEY (id),
       FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
@@ -69,7 +69,7 @@ INSERT INTO solutions (user_id, exercise_id, created, updated, description) VALU
     (2, 2, '2020-06-01', NOW() - INTERVAL 2 HOUR, 'I don''t even know how to start, I give up'),
     (3, 1, '2020-05-20', NOW() - INTERVAL 2 DAY, 'I don''t know how to solve this exercise'),
     (3, 2, '2020-06-03', NOW() - INTERVAL 2 DAY,
-            'A(-7;7)
+    '    A(-7;7)
     B(11,1)
     *we use the formula for the middle of the episode : S=[ ( x1+x2)/2 ; (y1+y2)/2]
 
@@ -93,7 +93,7 @@ INSERT INTO solutions (user_id, exercise_id, created, updated, description) VALU
     AB=2V5'
     ),
     (4, 1, '2020-04-28', NOW() - INTERVAL 1 DAY,
-     '  h=a√3/2
+     '    h=a√3/2
     h=4cm
     4=a√3/2 /·2
     8=a√3/:√3
