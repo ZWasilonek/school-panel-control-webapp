@@ -21,7 +21,7 @@ public class BlankValidation {
     private static Set<String> getBlankFieldNames(Map<String,String> fieldNames) {
         Set<String> blankFields = new HashSet<>();
         for (Map.Entry<String, String> entry : fieldNames.entrySet()) {
-            if (entry.getValue().equals("")) {
+            if (entry.getValue().trim().equals("")) {
                 String originFieldName = entry.getKey();
                 String blankFieldName = "blank" + originFieldName.substring(0, 1).toUpperCase() + originFieldName.substring(1);
                 blankFields.add(blankFieldName);
