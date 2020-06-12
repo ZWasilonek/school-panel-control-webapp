@@ -24,7 +24,7 @@
             </div>
 
             <div class="center-info-table-sol">
-                <div class="container-add">
+                <div class="container-add sol-center">
                     <h1>ADD SOLUTION</h1>
 
                     <div class="content-add">
@@ -35,7 +35,7 @@
                             </c:when>
 
                             <c:otherwise>
-                                <form action="${contextPath}/add/solution" method="post">
+                                <form action="${contextPath}/solution/add" method="post">
                                     <label>
                                         <textarea name="description" placeholder="description" rows="25"><c:out value="${descriptionVal}"/></textarea>
                                         <c:if test="${not empty blankDescription}">
