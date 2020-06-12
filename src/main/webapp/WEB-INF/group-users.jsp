@@ -37,7 +37,7 @@
                 </thead>
                 <c:choose>
                     <c:when test="${groupNotExists}">
-                        <td colspan="2" class="feedback-text-submitted">Such group is not registered.</td>
+                        <th colspan="2" class="feedback-text-submitted">Such group is not registered.</th>
                     </c:when>
 
                     <c:otherwise>
