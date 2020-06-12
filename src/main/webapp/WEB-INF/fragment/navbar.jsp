@@ -8,5 +8,8 @@
     <c:if test="${sessionScope.adminId != null}">
         <li><a href="${contextPath}/admin/panel">Admin panel</a></li>
     </c:if>
-    <li><a href="${contextPath}/login">Login</a></li>
+    <c:if test="${sessionScope.userId != null or sessionScope.adminId != null}">
+        <li style="float: right"><a href="${contextPath}/logout">Logout</a></li>
+    </c:if>
+    <li style="float: right"><a href="${contextPath}/login">Login</a></li>
 </ul>
