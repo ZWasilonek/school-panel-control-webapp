@@ -1,12 +1,13 @@
-/*------------------------------*/
-/*---- Main style ----*/
-/*------------------------------*/
 .body * {
     box-sizing: border-box;
 }
 
 :root {
     font-size: 16px;
+}
+
+html {
+    min-height: 100%;
 }
 
 .container {
@@ -18,7 +19,39 @@
     color: #1C6EA4;
 }
 
-/*GROUP*/
+.text-breaker {
+    word-break: break-word;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+a:hover {
+    color: #1C6EA4;
+}
+
+label .hasError {
+    font-size: 15px;
+    color: #c60b0b;
+}
+
+.feedback-text-submitted {
+    text-align: center;
+    font-size: larger;
+    padding-top: 2em;
+    padding-bottom: 2em;
+}
+
+.footer {
+    text-align: center;
+    margin-top: 20%;
+}
+
+/*------------------------------*/
+/*---- GROUP ----*/
+/*------------------------------*/
 .container-group {
     margin: 6em auto;
     width: 50%;
@@ -35,24 +68,13 @@
     margin-top: -2em;
 }
 
-.text-breaker {
-    word-break: break-word;
-}
-
-a {
-    text-decoration: none;
-    color: black;
-}
-
-a:hover {
-    color: #1C6EA4;
-}
-
 .container-group tbody td a {
     padding: 0;
 }
 
-/*SOLUTION*/
+/*------------------------------*/
+/*---- SOLUTION ----*/
+/*------------------------------*/
 .solution {
     margin: 2em auto 0 auto;
     width: 50%;
@@ -107,42 +129,58 @@ a:hover {
     align-items: baseline;
 }
 
-.container-add h1 {
-    color: black !important;
+.sol-center {
+    margin-top: 2em !important;
 }
 
-/*USER*/
-.content-details * {
-    text-align: left;
-    margin: 10px 0 10px 0;
-    padding: 0;
+.left-exercise-description {
+    width: 250px;
+    flex:1;
+    position: relative;
+    margin-left: 2em;
+    margin-top: 0.3em;
 }
 
-.content-details {
-    margin-bottom: 1.5em;
-    padding-left: 0 !important;
+.container-exc-sol {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin: 4em auto;
 }
 
-.container-group table thead tr th:first-child {
-    width: 60%;
+.center-info-table-sol {
+    flex: 4;
+    width: 50%;
+    justify-content: center;
+    margin: 0 3em 0 3em;
 }
 
-.content-details p strong {
-    margin-right: 5px;
-}
-
-.content-details p {
-    font-size: 18px;
-}
-
-.content-details p:last-child {
-    margin-top: 40px;
-}
-
-.content-details h1 {
+.center-info-table-sol h1 {
     color: #1C6EA4;
-    font-size: 35px;
 }
+
+.rightContainer {
+    flex: 1;
+}
+
+/*------------------------------*/
+/*---- ADD SECTION ----*/
+/*------------------------------*/
+.addButton {
+    margin-top: 1em;
+    padding: 5px;
+}
+
+.addButton:hover {
+    background-color: #1C6EA4;
+    color: white;
+}
+
+.main-container-add {
+    margin: 4em auto 0 auto;
+    width: 30%;
+}
+
 
 .selector-add-user {
     margin: 0.8em 0 0 10%;
@@ -160,21 +198,8 @@ a:hover {
     text-transform: uppercase;
 }
 
-/*EXERCISE*/
-.addButton {
-    margin-top: 1em;
-    padding: 5px;
-}
-
-.addButton:hover {
-    background-color: #1C6EA4;
-    color: white;
-}
-
-/*ADD EXERCISE*/
-.main-container-add {
-    margin: 4em auto 0 auto;
-    width: 30%;
+.container-add h1 {
+    color: black !important;
 }
 
 .container-add {
@@ -233,6 +258,38 @@ a:hover {
     color: white;
 }
 
+.content-details * {
+    text-align: left;
+    margin: 10px 0 10px 0;
+    padding: 0;
+}
+
+.content-details {
+    margin-bottom: 1.5em;
+    padding-left: 0 !important;
+}
+
+.container-group table thead tr th:first-child {
+    width: 60%;
+}
+
+.content-details p strong {
+    margin-right: 5px;
+}
+
+.content-details p {
+    font-size: 18px;
+}
+
+.content-details p:last-child {
+    margin-top: 40px;
+}
+
+.content-details h1 {
+    color: #1C6EA4;
+    font-size: 35px;
+}
+
 .backButton button {
     display: inline-block;
     align-items: center;
@@ -252,21 +309,9 @@ a:hover {
     background: #1C6EA4;
 }
 
-
-
-label .hasError {
-    font-size: 15px;
-    color: #c60b0b;
-}
-
-html {
-    min-height: 100%;
-}
-
 /*------------------------------*/
-/*---- Main table - solutions ----*/
+/*---- TABLE STYLE ----*/
 /*------------------------------*/
-
 table {
     border: 1px solid #1C6EA4;
     background-color: #EEEEEE;
@@ -274,6 +319,7 @@ table {
     text-align: left;
     border-collapse: collapse;
 }
+
 table td, table.solutionTable th {
     border: 1px solid #AAAAAA;
     padding: 10px 5px;
@@ -300,6 +346,25 @@ table thead th:first-child {
     border-left: none;
 }
 
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td, th {
+    text-align: left;
+    padding: 18px;
+}
+
+tr:nth-child(even) {
+    background-color: #c7dffb;
+}
+
+td.index {
+    width: 5%;
+    text-align: center;
+}
+
 .action-th {
     width: 25%;
 }
@@ -309,9 +374,8 @@ table thead th:first-child {
 }
 
 /*------------------------------*/
-/*---- Main navigation ----*/
+/*---- NAVIGATION SECTION ----*/
 /*------------------------------*/
-
 ul.nav {
     list-style-type: none;
     margin: 0;
@@ -338,62 +402,4 @@ ul.nav li a:hover:not(.active) {
 
 .active {
     background-color: #1C6EA4;
-}
-
-/*TABLE*/
-table {
-    /*border: 1px solid #c7dffb;*/
-    border-collapse: collapse;
-    width: 100%;
-}
-
-td, th {
-    text-align: left;
-    padding: 18px;
-}
-
-tr:nth-child(even) {
-    background-color: #c7dffb;
-}
-
-td.index {
-    width: 5%;
-    text-align: center;
-}
-
-.feedback-text-submitted {
-    text-align: center;
-    font-size: larger;
-    padding-top: 2em;
-    padding-bottom: 2em;
-}
-
-.left-exercise-description {
-    width: 250px;
-    flex:1;
-    position: relative;
-    margin-left: 2em;
-    margin-top: 0.3em;
-}
-
-.container-exc-sol {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    margin: 4em auto;
-}
-
-.center-info-table-sol {
-    flex: 4;
-    width: 50%;
-    justify-content: center;
-    margin: 0 3em 0 3em;
-}
-
-.center-info-table-sol h1 {
-    color: #1C6EA4;
-}
-
-.rightContainer {
-    flex: 1;
 }
