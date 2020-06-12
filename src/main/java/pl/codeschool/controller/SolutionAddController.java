@@ -1,5 +1,7 @@
 package pl.codeschool.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import pl.codeschool.dao.ExerciseDao;
 import pl.codeschool.dao.SolutionDao;
 import pl.codeschool.dao.UserDao;
@@ -18,8 +20,10 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Map;
 
-@WebServlet("/add/solution")
+@WebServlet("/solution/add")
 public class SolutionAddController extends HttpServlet {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(SolutionAddController.class);
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -27,12 +31,7 @@ public class SolutionAddController extends HttpServlet {
 
         String paramDescription = request.getParameter("description");
         int exerciseId = (int) request.getSession().getAttribute("exerciseId");
-
-        Integer userId;
-        userId = (Integer) request.getSession().getAttribute("userId");
-        if (userId == null) {
-            userId = (Integer) request.getSession().getAttribute("adminId");
-        }
+        Integer userId = getUserId(request);
 
         Map<String, String> fieldNames = Map.of("description", paramDescription);
         boolean hasBlankField = BlankValidation.hasBlankErrorsAttributes(fieldNames, request);
@@ -59,13 +58,7 @@ public class SolutionAddController extends HttpServlet {
 
         String paramDescription = request.getParameter("description");
         String paramExerciseId = request.getParameter("exerciseId");
-
-        Integer userId;
-        userId = (Integer) request.getSession().getAttribute("userId");
-        if (userId == null) {
-            userId = (Integer) request.getSession().getAttribute("adminId");
-        }
-
+        Integer userId = getUserId(request);
         Integer exerciseId = geExerciseId(request, paramExerciseId);
 
         if (exerciseId != null && userId != null) {
@@ -79,9 +72,18 @@ public class SolutionAddController extends HttpServlet {
                 }
                 request.getSession().setAttribute("exerciseId", foundedExercise.getId());
                 request.setAttribute("exercise", foundedExercise);
-            }
+            } else request.setAttribute("exerciseNotExists", true);
         }
         request.getRequestDispatcher("/WEB-INF/solution-add.jsp").forward(request,response);
+    }
+
+    private Integer getUserId(HttpServletRequest request) {
+        Integer userId;
+        userId = (Integer) request.getSession().getAttribute("userId");
+        if (userId == null) {
+            userId = (Integer) request.getSession().getAttribute("adminId");
+        }
+        return userId;
     }
 
     private Integer geExerciseId(HttpServletRequest request, String paramExerciseId) {
@@ -93,7 +95,7 @@ public class SolutionAddController extends HttpServlet {
             try {
                 exerciseId = Integer.parseInt(paramExerciseId);
             } catch (NumberFormatException e) {
-                e.printStackTrace();
+                LOGGER.info(e.getMessage());
             }
         }
         return exerciseId;
