@@ -1,7 +1,11 @@
 package pl.codeschool.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import pl.codeschool.dao.SolutionDao;
+import pl.codeschool.dao.UserDao;
 import pl.codeschool.model.Solution;
+import pl.codeschool.model.User;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,6 +17,8 @@ import java.io.IOException;
 @WebServlet("/solution/delete")
 public class SolutionDeleteController extends HttpServlet {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(SolutionDeleteController.class);
+
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html; charset=UTF-8");
 
@@ -23,16 +29,30 @@ public class SolutionDeleteController extends HttpServlet {
         if (paramSolutionId != null && !"".equals(paramSolutionId)) {
             try {
                 int solutionId = Integer.parseInt(paramSolutionId);
-                Solution founded = SolutionDao.read(solutionId);
-                if (founded != null) {
-                    SolutionDao.delete(solutionId);
-                    exerciseId = founded.getExercise().getId();
+                Solution foundedSolution = SolutionDao.read(solutionId);
+                Integer userId = getUserId(request);
+                User foundedUser = UserDao.read(userId);
+
+                if (foundedSolution != null && foundedUser != null) {
+                    if (foundedUser.getId() == foundedSolution.getUser().getId() || foundedUser.isAdmin()) {
+                        SolutionDao.delete(solutionId);
+                        exerciseId = foundedSolution.getExercise().getId();
+                    } else request.setAttribute("hasPermissionToDelete", false);
                 }
             } catch (NumberFormatException e) {
-                e.printStackTrace();
+                LOGGER.info(e.getMessage());
             }
         }
         request.getRequestDispatcher("/exercise/solutions/info?exerciseId=" + exerciseId).forward(request, response);
+    }
+
+    private Integer getUserId(HttpServletRequest request) {
+        Integer userId;
+        userId = (Integer) request.getSession().getAttribute("userId");
+        if (userId == null) {
+            userId = (Integer) request.getSession().getAttribute("adminId");
+        }
+        return userId;
     }
 
 }
