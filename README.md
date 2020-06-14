@@ -16,10 +16,11 @@ It is a school web application based on Java EE technologies.
   - like any logged in user, he can add solutions to exercise, but additionally has the privileges to edit and delete each of the solutions.
   
   
-##Technologies:
+## Technologies:
 * JSTL
 * JSP
 * MySQL
+
 
 ## Running the app
 To run the application, insert in the context.xml file located in src/main/webapp/META-INF:
@@ -40,8 +41,10 @@ If you use a different port then change it. I use the default 3306 for MySQL:
 url="jdbc:mysql://localhost:3306/codeschool"
 ```
 
+
 ## Run the application
 Tomcat 
+
 
 ## Project presentation
 There is a codeschool.sql file prepared for loading in the directory src/main/webapp/META-INF/sql.
