@@ -41,7 +41,9 @@
                                     <a href="${contextPath}/group/users/info?group=${group.name}&groupId=${group.id}">Show members</a>
                                 </td>
                                 <td class="td-action">
-                                    <a href="${contextPath}/admin/add/userToGroup?groupId=${group.id}">Assign member</a>
+                                    <c:if test="${empty ADMIN_USERNAME and group.name != ADMIN_GROUP or ADMIN_USERNAME == true}">
+                                        <a href="${contextPath}/admin/add/userToGroup?groupId=${group.id}">Assign member</a>
+                                    </c:if>
                                 </td>
                                 <td class="td-action">
                                     <c:if test="${group.name != ADMIN_GROUP}">
