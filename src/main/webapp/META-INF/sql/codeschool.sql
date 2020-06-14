@@ -9,7 +9,8 @@ CREATE TABLE users_groups(
 INSERT INTO users_groups (id, name) VALUES
     (1, 'ADMIN Group'),
     (2, 'Group A'),
-    (3, 'Group B');
+    (3, 'Group B'),
+    (4, 'Group C');
 
 CREATE TABLE users(
       id INT AUTO_INCREMENT,
@@ -37,7 +38,8 @@ CREATE TABLE exercises(
 
 INSERT INTO exercises (title, description) VALUES
     ('Geometry - calculate the area of the triangle.', 'Calculate the area of​an equilateral triangle whose height is 4 cm.'),
-    ('Vectors', 'Calculate the distance of the center of the segment AB from the beginning of the coordinate system: A (-7.7), B (11.1)');
+    ('Vectors', 'Calculate the distance of the center of the segment AB from the beginning of the coordinate system: A (-7.7), B (11.1)'),
+    ('Political systems', 'Characterize the political system of the monarchy and republic.');
 
 CREATE TABLE solutions(
       id INT AUTO_INCREMENT,
@@ -104,4 +106,24 @@ INSERT INTO solutions (user_id, exercise_id, created, updated, description) VALU
     P={ (8√3/3)² ·√3} /4
     P={64·3/9) ·√3} :4= 16√3/3
     P=16√3/3 cm²'
-    );
+    ),
+    (1, 3, '2020-06-01', NOW() - INTERVAL 10 HOUR,
+     'Monarchy is a political system based on the authority of one person. It can be emperor,
+king, sultan, caliph etc. In today''s world there are practically no absolute monarchs,
+although there are countries where the monarch''s power is very large (Saudi Arabia, Brunei).
+The most common form of monarchy is constitutional or parliamentary monarchy. In this system,
+the monarch is the head of state, but has rather representative functions and is a symbol of political unity and independence.
+His place in the system of power is determined by the constitution. Examples of such countries can be: Great Britain, Spain, Sweden.
+
+Republic - a political system in which authorities come from democratic elections. There is a clear separation of powers.
+The head of state is usually the president. The legislative power is one or two bicameral parliament.
+The executive branch is headed by the prime minister or president, and the judiciary is independent.
+This type of political system occurs, among others. in Poland.'),
+    (3, 3, '2020-05-04', NOW() - INTERVAL 5 HOUR,
+     'Monarchy is a political system based on the authority of one person. It can be emperor, king, sultan, caliph etc.
+In today''s world there are practically no absolute monarchs, although there are countries where the monarch''s power is very large (Saudi Arabia, Brunei).
+The most common form of monarchy is constitutional or parliamentary monarchy. In this system, the monarch is the head of state, but has rather representative functions and is a symbol of political unity and independence.
+His place in the system of power is determined by the constitution. Examples of such countries can be: Great Britain, Spain, Sweden.
+
+Monarchy (Latin monarchy, from the Greek word μοναρχία, monarchy "monarchy", from μόναρχος "the sole ruler", from μόνος monos "one" and ἀρχός archós "the beginning" [1]) - a political system or form of government where not chosen the republican head of state is one person, called the monarch. At present, the monarch usually holds power for life (except Andorra, Malaysia and the United Arab Emirates). His function is often hereditary (except for elective monarchies) and usually his position is indelible. Currently, in many countries with such a political system, the monarch has only representative functions. His policy control is scarce or nonexistent.
+Republic - ???');
