@@ -9,7 +9,7 @@ It is a school web application based on Java EE technologies.
   - has access to the exercises list
   - can add new solutions to prepare exercises, edit them and remove solutions that he previously added
 
-* "Super admin", after authorization, has access to the admin panel, which allows him to:
+* "Super" admin, after authorization, has access to the admin panel, which allows him to:
   - access to user groups that he can manage, i.e. add (groups have a unique name), edit and delete groups to which there are no users assigned.<br>
   The "ADMIN group" is a special group that cannot be deleted or renamed. Membership in this group gives administrative privileges to users who belong to it, and "super" admin decides who it will be.
   - manage users who can add, edit, delete and assign to groups
@@ -24,7 +24,7 @@ It is a school web application based on Java EE technologies.
 
 
 ## Running the app
-To run the application, insert in the context.xml file located in src/main/webapp/META-INF:
+To run the application, insert in the context.xml file located in the directory src/main/webapp/META-INF:
 
 database connection details
 ```
@@ -48,7 +48,7 @@ Tomcat
 
 
 ## Project presentation
-There is a codeschool.sql file prepared for loading in the directory src/main/webapp/META-INF/sql.
+There is a codeschool.sql file prepared for loading in the directory src/main/webapp/META-INF/sql <br>
 After loading the template into the database, we will be able to log in as:
 
 * ordinary user without additional privileges:
