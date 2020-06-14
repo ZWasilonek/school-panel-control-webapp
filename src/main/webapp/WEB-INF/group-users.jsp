@@ -55,9 +55,7 @@
                                 </c:forEach>
                             </c:when>
                             <c:otherwise>
-                                <tr>
-                                    <td colspan="2" class="feedback-text-submitted">This group has no members yet</td>
-                                </tr>
+                                <th colspan="2" class="feedback-text-submitted">This group has no members yet.</th>
                             </c:otherwise>
                         </c:choose>
                     </c:otherwise>
