@@ -168,4 +168,4 @@ local.properties
 
 *.iml
 
-webapp/META-INF/context.xml
+!/src/main/webapp/META-INF/context.xml
