@@ -17,6 +17,7 @@ It is a school web application based on Java EE technologies.
   
   
 ## Technologies:
+* Servlets
 * JSTL
 * JSP
 * MySQL
