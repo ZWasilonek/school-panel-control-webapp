@@ -14,8 +14,6 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
-    <packaging>war</packaging>
-
     <dependencies>
         <dependency>
             <groupId>javax.servlet</groupId>
@@ -61,33 +59,29 @@
                         <configuration>
                             <artifactItems>
                                 <artifactItem>
-                                    <groupId>com.github.jsimone</groupId>
-                                    <artifactId>webapp-runner</artifactId>
-                                    <version>9.0.8.0</version>
-                                    <destFileName>webapp-runner.jar</destFileName>
+                                    <groupId>${project.groupId}</groupId>
+                                    <artifactId>${project.artifactId}</artifactId>
+                                    <version>${project.version}</version>
+                                    <destFileName>${project.build.finalName}.war</destFileName>
                                 </artifactItem>
                             </artifactItems>
                         </configuration>
                     </execution>
                 </executions>
             </plugin>
+
+            <plugin>
+                <groupId>com.heroku.sdk</groupId>
+                <artifactId>heroku-maven-plugin</artifactId>
+                <version>3.0.2</version>
+                <configuration>
+                    <appName>school-panel-control-webapp</appName>
+                    <processTypes>
+                        <web>java -jar -Dserver.port=$PORT target/${project.build.finalName}.war</web>
+                    </processTypes>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
-
-        <!--    <build>-->
-<!--        <plugins>-->
-<!--            <plugin>-->
-<!--                <groupId>com.heroku.sdk</groupId>-->
-<!--                <artifactId>heroku-maven-plugin</artifactId>-->
-<!--                <version>3.0.2</version>-->
-<!--                <configuration>-->
-<!--                    <appName>school-panel-control-webapp</appName>-->
-<!--                    <processTypes>-->
-<!--                        <web>java -jar -Dserver.port=$PORT target/${project.build.finalName}.jar</web>-->
-<!--                    </processTypes>-->
-<!--                </configuration>-->
-<!--            </plugin>-->
-<!--        </plugins>-->
-<!--    </build>-->
 
 </project>
