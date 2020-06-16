@@ -127,3 +127,5 @@ His place in the system of power is determined by the constitution. Examples of 
 
 Monarchy (Latin monarchy, from the Greek word μοναρχία, monarchy "monarchy", from μόναρχος "the sole ruler", from μόνος monos "one" and ἀρχός archós "the beginning" [1]) - a political system or form of government where not chosen the republican head of state is one person, called the monarch. At present, the monarch usually holds power for life (except Andorra, Malaysia and the United Arab Emirates). His function is often hereditary (except for elective monarchies) and usually his position is indelible. Currently, in many countries with such a political system, the monarch has only representative functions. His policy control is scarce or nonexistent.
 Republic - ???');
+
+SET GLOBAL innodb_default_row_format = 'DYNAMIC';
