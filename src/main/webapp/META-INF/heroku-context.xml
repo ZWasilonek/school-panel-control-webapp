@@ -7,7 +7,7 @@
               password="5c4fd548"
               driverClassName="com.mysql.cj.jdbc.Driver"
               connectionProperties="useSSL=false;useLegacyDatetimeCode=false;serverTimezone=UTC;useUnicode=true;characterEncoding=utf8;"
-              url="jdbc:mysql://eu-cdbr-west-03.cleardb.net/3306/codeschool-heroku"
+              url="jdbc:mysql://eu-cdbr-west-03.cleardb.net:3306/codeschool-heroku"
               maxTotal="100"
               maxIdle="30"
               maxWaitMillis="10000"
