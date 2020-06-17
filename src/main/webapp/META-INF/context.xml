@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Context>
-    <Resource name="jdbc/heroku_766108dfa8cc9a3"
+    <Resource name="jdbc/codeschool"
               auth="Container"
               type="javax.sql.DataSource"
               username="b470c751ec4e8e"
               password="5c4fd548"
               driverClassName="com.mysql.cj.jdbc.Driver"
               connectionProperties="useSSL=false;useLegacyDatetimeCode=false;serverTimezone=UTC;useUnicode=true;characterEncoding=utf8;"
-              url="jdbc:mysql://localhost:3306/heroku_766108dfa8cc9a3"
+              url="${DB_URL}"
               maxTotal="100"
               maxIdle="30"
               maxWaitMillis="10000"
