@@ -7,9 +7,10 @@
               password="5c4fd548"
               driverClassName="com.mysql.cj.jdbc.Driver"
               connectionProperties="useSSL=false;useLegacyDatetimeCode=false;serverTimezone=UTC;useUnicode=true;characterEncoding=utf8;"
-              url="${JDBC_DATABASE_URL}"
+              url="jdbc:mysql://eu-cdbr-west-03.cleardb.net/heroku_766108dfa8cc9a3"
               maxTotal="100"
               maxIdle="30"
               maxWaitMillis="10000"
     />
+    mysql://b470c751ec4e8e:5c4fd548@eu-cdbr-west-03.cleardb.net/heroku_766108dfa8cc9a3?reconnect=true
 </Context>
