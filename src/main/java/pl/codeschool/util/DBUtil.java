@@ -23,7 +23,7 @@ public class DBUtil {
             try {
                 Context initContext = new InitialContext();
                 Context envContext = (Context) initContext.lookup("java:/comp/env");
-                dataSource = (DataSource) envContext.lookup("jdbc/codeschool");
+                dataSource = (DataSource) envContext.lookup("jdbc/heroku_766108dfa8cc9a3");
             } catch (NamingException e) {
                 LOGGER.info(e.getMessage());
             }
