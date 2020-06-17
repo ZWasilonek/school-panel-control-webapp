@@ -6,12 +6,15 @@
     <groupId>pl.codeschool</groupId>
     <artifactId>school-panel-control-webapp</artifactId>
     <version>1.0-SNAPSHOT</version>
+
     <packaging>war</packaging>
+
     <properties>
         <maven.compiler.source>13</maven.compiler.source>
         <maven.compiler.target>13</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
+
     <dependencies>
         <dependency>
             <groupId>javax.servlet</groupId>
@@ -19,6 +22,7 @@
             <version>4.0.1</version>
             <scope>provided</scope>
         </dependency>
+
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>jstl</artifactId>
@@ -29,19 +33,21 @@
             <artifactId>mysql-connector-java</artifactId>
             <version>8.0.19</version>
         </dependency>
+
         <dependency>
             <groupId>org.mindrot</groupId>
             <artifactId>jbcrypt</artifactId>
             <version>0.4</version>
         </dependency>
+
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
             <version>1.2.3</version>
         </dependency>
     </dependencies>
+
     <build>
-        <finalName>school-panel-control-webapp</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -63,17 +69,7 @@
                     </execution>
                 </executions>
             </plugin>
-            <plugin>
-                <groupId>com.heroku.sdk</groupId>
-                <artifactId>heroku-maven-plugin</artifactId>
-                <version>3.0.2</version>
-                <configuration>
-                    <appName>school-panel-control-webapp</appName>
-                    <processTypes>
-                        <web>java -jar -Dserver.port=$PORT target/${project.build.finalName}.war</web>
-                    </processTypes>
-                </configuration>
-            </plugin>
         </plugins>
     </build>
+
 </project>
