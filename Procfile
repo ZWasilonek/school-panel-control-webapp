@@ -1,1 +1,1 @@
-web: java -cp target/dependency/webapp-runner.jar:target/dependency/tomcat-dbcp-9.0.30.jar webapp.runner.launch.Main -DDATA_USER -DDATA_PASS --enable-naming --port $PORT target/*.war
+web: java -cp target/dependency/webapp-runner.jar:target/dependency/tomcat-dbcp-9.0.30.jar webapp.runner.launch.Main -D DATA_USER -D DATA_PASS --enable-naming --port $PORT target/*.war
