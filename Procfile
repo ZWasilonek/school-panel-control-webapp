@@ -1,1 +1,1 @@
-web: java $JAVA_OPTS -jar target/dependency/webapp-runner.jar $WEBAPP_RUNNER_OPTS --port $PORT target/*.war
+web: java -cp target/dependency/webapp-runner.jar:target/dependency/tomcat-dbcp-9.0.30.jar webapp.runner.launch.Main --enable-naming target/*.war
