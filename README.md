@@ -23,7 +23,11 @@ It is a school web application based on Java EE technologies.
 * MySQL
 
 
-## Running the app
+## See the application
+https://school-panel-control-webapp.herokuapp.com/
+
+
+## Running the application locally
 To run the application, insert in the context.xml file located in the directory src/main/webapp/META-INF:
 
 database connection details
@@ -42,14 +46,14 @@ If you use a different port then change it. I use the default 3306 for MySQL:
 url="jdbc:mysql://localhost:3306/codeschool"
 ```
 
+There is a codeschool.sql file prepared for loading in the directory src/main/webapp/META-INF/sql <br>
+After loading the template into the database, we will be able to log in as: -> see "Project presentation" section
 
-## Run the application
-Tomcat 
+Add server
 
 
 ## Project presentation
-There is a codeschool.sql file prepared for loading in the directory src/main/webapp/META-INF/sql <br>
-After loading the template into the database, we will be able to log in as:
+You already have users at your disposal in the database:
 
 * ordinary user without additional privileges:
 ```
