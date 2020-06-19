@@ -1,5 +1,6 @@
 # School-panel-control-with-interface
 
+
 It is a school web application based on Java EE technologies. 
 * Not logged in to the user: <br>
     - has access only to the start page, which will display the last solutions added to the exercise
