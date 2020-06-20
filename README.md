@@ -3,7 +3,7 @@
 ### See the application on HEROKU
 https://school-panel-control-webapp.herokuapp.com/
 
-
+![alt text](https://user-images.githubusercontent.com/59224048/85195743-5ad66680-b2d5-11ea-90d6-51881252fd66.png)
 
 It is a school web application based on Java EE technologies. 
 * Not logged in to the user: <br>
