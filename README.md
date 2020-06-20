@@ -1,5 +1,9 @@
 # School-panel-control-with-interface
 
+### See the application on HEROKU
+https://school-panel-control-webapp.herokuapp.com/
+
+
 
 It is a school web application based on Java EE technologies. 
 * Not logged in to the user: <br>
@@ -18,14 +22,12 @@ It is a school web application based on Java EE technologies.
   
   
 ## Technologies:
-* Servlets
+* Javax Servlet
 * JSTL
 * JSP
 * MySQL
-
-
-## See the application
-https://school-panel-control-webapp.herokuapp.com/
+* HTML
+* CSS 
 
 
 ## Running the application locally
