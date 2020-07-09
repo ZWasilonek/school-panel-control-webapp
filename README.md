@@ -73,3 +73,8 @@ password: (the same for everyone) password
 email: admin@gmail.com
 password: adminpass
 ```
+
+
+## Contact 
+zofiawasilonek@.gmail.com<br>
+<a href="https://www.linkedin.com/in/zofia-wasilonek/">Linkedin</a>
