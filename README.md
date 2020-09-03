@@ -76,5 +76,5 @@ password: adminpass
 
 
 ## Contact 
-zofiawasilonek@.gmail.com<br>
+zofiawasilonek@gmail.com<br>
 <a href="https://www.linkedin.com/in/zofia-wasilonek/">Linkedin</a>
